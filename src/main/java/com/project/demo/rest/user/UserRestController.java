@@ -2,6 +2,11 @@ package com.project.demo.rest.user;
 
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
+import com.project.demo.logic.entity.rol.Role;
+import com.project.demo.logic.entity.rol.RoleEnum;
+import com.project.demo.logic.entity.rol.RoleRepository;
+import com.project.demo.logic.entity.school.School;
+import com.project.demo.logic.entity.school.SchoolRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +31,12 @@ public class UserRestController {
     private UserRepository userRepository;
 
     @Autowired
+    private SchoolRepository schoolRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping
@@ -36,16 +47,49 @@ public class UserRestController {
             HttpServletRequest request) {
 
         Pageable pageable = PageRequest.of(page-1, size);
-        Page<User> ordersPage = userRepository.findAll(pageable);
+        Page<User> userPage = userRepository.findAll(pageable);
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
-        meta.setTotalPages(ordersPage.getTotalPages());
-        meta.setTotalElements(ordersPage.getTotalElements());
-        meta.setPageNumber(ordersPage.getNumber() + 1);
-        meta.setPageSize(ordersPage.getSize());
+        meta.setTotalPages(userPage.getTotalPages());
+        meta.setTotalElements(userPage.getTotalElements());
+        meta.setPageNumber(userPage.getNumber() + 1);
+        meta.setPageSize(userPage.getSize());
 
         return new GlobalResponseHandler().handleResponse("Users retrieved successfully",
-                ordersPage.getContent(), HttpStatus.OK, meta);
+                userPage.getContent(), HttpStatus.OK, meta);
     }
+
+    @GetMapping("/school/{schoolId}/teachers")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
+    public ResponseEntity<?> getTeachersBySchoolId(@PathVariable Long schoolId,
+                                                   @RequestParam(defaultValue = "1") int page,
+                                                   @RequestParam(defaultValue = "10") int size,
+                                                   HttpServletRequest request) {
+
+        Optional<School> foundSchool = schoolRepository.findById(schoolId);
+        if (foundSchool.isPresent()) {
+            Optional<Role> foundRole = roleRepository.findByName(RoleEnum.valueOf("TEACHER"));
+            if (foundRole.isPresent()) {
+
+                Pageable pageable = PageRequest.of(page-1, size);
+                Page<User> userPage = userRepository.findBySchoolIdAndRoleId(schoolId, foundRole.get().getId(), pageable);
+                Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+                meta.setTotalPages(userPage.getTotalPages());
+                meta.setTotalElements(userPage.getTotalElements());
+                meta.setPageNumber(userPage.getNumber() + 1);
+                meta.setPageSize(userPage.getSize());
+
+                return new GlobalResponseHandler().handleResponse("Teachers retrieved successfully by school id",
+                        userPage.getContent(), HttpStatus.OK, meta);
+            } else {
+                return new GlobalResponseHandler().handleResponse("Role TEACHER not found",
+                        HttpStatus.NOT_FOUND, request);
+            }
+        } else {
+            return new GlobalResponseHandler().handleResponse("School id " + schoolId + " not found",
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
 
     @PostMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
