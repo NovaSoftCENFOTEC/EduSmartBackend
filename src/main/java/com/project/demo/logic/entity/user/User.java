@@ -1,5 +1,6 @@
 package com.project.demo.logic.entity.user;
 import com.project.demo.logic.entity.rol.Role;
+import com.project.demo.logic.entity.school.School;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -33,6 +34,9 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "profile_picture")
+    private String profilePic;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());
@@ -42,6 +46,10 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
+    private School school;
 
     // Constructors
     public User() {}
@@ -129,6 +137,14 @@ public class User implements UserDetails {
         this.updatedAt = updatedAt;
     }
 
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -137,5 +153,13 @@ public class User implements UserDetails {
         this.role = role;
 
         return this;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
