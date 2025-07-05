@@ -1,5 +1,7 @@
 package com.project.demo.logic.entity.user;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long>  {
     Optional<User> findByLastname(String lastname);
 
     Optional<User> findByEmail(String email);
+
+    Page<User> getUsersBySchoolId(Long schoolId, Pageable pageable);
+
+    Page<User> findBySchoolIdAndRoleId(Long schoolId, int roleId, Pageable pageable);
 }

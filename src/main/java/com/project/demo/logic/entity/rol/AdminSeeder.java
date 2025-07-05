@@ -1,5 +1,7 @@
 package com.project.demo.logic.entity.rol;
 
+import com.project.demo.logic.entity.school.School;
+import com.project.demo.logic.entity.school.SchoolRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
 import org.springframework.context.ApplicationListener;
@@ -10,11 +12,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Order(2)
+@Order(3)
 @Component
 public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final SchoolRepository schoolRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -22,10 +25,12 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
     public AdminSeeder(
             RoleRepository roleRepository,
             UserRepository  userRepository,
+            SchoolRepository schoolRepository,
             PasswordEncoder passwordEncoder
     ) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
+        this.schoolRepository = schoolRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -43,8 +48,9 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.SUPER_ADMIN);
         Optional<User> optionalUser = userRepository.findByEmail(superAdmin.getEmail());
+        Optional<School> optionalSchool = schoolRepository.findByDomain("DEFAULT");
 
-        if (optionalRole.isEmpty() || optionalUser.isPresent()) {
+        if (optionalRole.isEmpty() || optionalUser.isPresent() || optionalSchool.isEmpty()) {
             return;
         }
 
@@ -54,6 +60,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
         user.setEmail(superAdmin.getEmail());
         user.setPassword(passwordEncoder.encode(superAdmin.getPassword()));
         user.setRole(optionalRole.get());
+        user.setSchool(optionalSchool.get());
 
         userRepository.save(user);
     }
