@@ -42,6 +42,25 @@ public class SchoolRestController {
                 schoolPage.getContent(), HttpStatus.OK, meta);
     }
 
+    @GetMapping("/{schoolId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> getSchoolById(@PathVariable Long schoolId, HttpServletRequest request) {
+        Optional<School> foundSchool = schoolRepository.findById(schoolId);
+        if (foundSchool.isPresent()) {
+            return new GlobalResponseHandler().handleResponse(
+                    "School retrieved successfully",
+                    foundSchool.get(),
+                    HttpStatus.OK,
+                    request);
+        } else {
+            return new GlobalResponseHandler().handleResponse(
+                    "School with ID " + schoolId + " not found",
+                    HttpStatus.NOT_FOUND,
+                    request);
+        }
+    }
+
+
     @PostMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> addSchool(@RequestBody School school, HttpServletRequest request) {
@@ -55,9 +74,12 @@ public class SchoolRestController {
     public ResponseEntity<?> updateSchool(@PathVariable Long schoolId, @RequestBody School school, HttpServletRequest request) {
         Optional<School> foundSchool = schoolRepository.findById(schoolId);
         if (foundSchool.isPresent()) {
-            School schoolUpdated = schoolRepository.save(school);
+            School updatedSchool = foundSchool.get();
+            updatedSchool.setName(school.getName());
+            updatedSchool.setDomain(school.getDomain());
+            schoolRepository.save(updatedSchool);
             return new GlobalResponseHandler().handleResponse("School updated sucessfully",
-                    schoolUpdated, HttpStatus.OK, request);
+                    school, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("School id " + schoolId + " not found",
                     HttpStatus.NOT_FOUND, request);
