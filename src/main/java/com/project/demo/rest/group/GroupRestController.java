@@ -116,6 +116,8 @@ public class GroupRestController {
         if (foundGroup.isPresent()) {
             Group updatedGroup = foundGroup.get();
             updatedGroup.setName(group.getName());
+            updatedGroup.setCourse(group.getCourse());
+            updatedGroup.setTeacher(group.getTeacher());
             groupRepository.save(updatedGroup);
 
             return new GlobalResponseHandler().handleResponse("Grupo actualizado con exito",
@@ -131,9 +133,9 @@ public class GroupRestController {
     public ResponseEntity<?> deleteGroup(@PathVariable Long groupId, HttpServletRequest request) {
         Optional<Group> foundGroup = groupRepository.findById(groupId);
         if (foundGroup.isPresent()) {
-            groupRepository.deleteById(groupId);
+            groupRepository.delete(foundGroup.get());
             return new GlobalResponseHandler().handleResponse("Grupo eliminado con exito",
-                    foundGroup.get(), HttpStatus.OK, request);
+                    null, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
