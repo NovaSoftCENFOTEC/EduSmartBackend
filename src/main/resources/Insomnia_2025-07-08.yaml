@@ -315,40 +315,20 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}groups"
+      - url: "{{ _.base_url }}groups/course/1/teacher/4"
         name: Create Group
         meta:
           id: req_f2481ded3dcd4f398121092eb1e43e8f
           created: 1751854136765
-          modified: 1751862391747
+          modified: 1752009447456
           isPrivate: false
           sortKey: -1751853795643
         method: POST
         body:
           mimeType: application/json
-          text: >-
+          text: |-
             {
-            	"name": "G2",
-            	"course": {
-            		"id": 1
-            	},
-            	"teacher": {
-            		"id": 4,
-            		"name": "Olman",
-            		"lastname": "Santamaria",
-            		"email": "olmans@ucenfotec.ac.cr",
-            		"password": "$2a$10$MHilSNtmhKlmrhf2hNfYN.45gQGBJ8UuUNv6T4XGsmSrByVyIRrY.",
-            		"createdAt": "2025-07-07T01:56:25.502+00:00",
-            		"updatedAt": "2025-07-07T01:56:25.502+00:00",
-            		"profilePic": null,
-            		"role": {
-            			"id": 2,
-            			"name": "TEACHER",
-            			"description": "Teacher role",
-            			"createdAt": "2025-07-05T02:11:05.150+00:00",
-            			"updatedAt": "2025-07-05T02:11:05.150+00:00"
-            		}
-            	}
+            	"name": "G2"
             }
         headers:
           - name: Content-Type

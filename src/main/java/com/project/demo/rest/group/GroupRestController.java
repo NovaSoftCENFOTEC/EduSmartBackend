@@ -101,10 +101,29 @@ public class GroupRestController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/course/{courseId}/teacher/{teacherId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> addGroup(@RequestBody Group group, HttpServletRequest request) {
-        groupRepository.save(group);
+    public ResponseEntity<?> addGroup(@PathVariable Long courseId,
+                                      @PathVariable Long teacherId,
+                                      @RequestBody Group group,
+                                      HttpServletRequest request) {
+        Optional<Course> foundCourse = courseRepository.findById(courseId);
+        if (foundCourse.isPresent()) {
+            group.setCourse(foundCourse.get());
+
+            Optional<User> foundTeacher = userRepository.findById(teacherId);
+            if (foundTeacher.isPresent()) {
+                group.setTeacher(foundTeacher.get());
+
+                groupRepository.save(group);
+            } else {
+                return new GlobalResponseHandler().handleResponse("Docente " + teacherId + " no encontrado",
+                        HttpStatus.NOT_FOUND, request);
+            }
+        } else {
+            return new GlobalResponseHandler().handleResponse("Curso " + courseId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
         return new GlobalResponseHandler().handleResponse("Grupo creado con exito",
                 group, HttpStatus.OK, request);
     }
