@@ -33,6 +33,11 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
+    env:  # 👈 global env for all steps
+      SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
+      SPRING_DATASOURCE_USERNAME: testuser
+      SPRING_DATASOURCE_PASSWORD: testpass
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -64,21 +69,15 @@ jobs:
             sleep 2
           done
 
-      - name: Verify DB environment variables
+      - name: Test MariaDB connection
+        run: |
+          mysql -h 127.0.0.1 -P 3306 -u $SPRING_DATASOURCE_USERNAME -p$SPRING_DATASOURCE_PASSWORD -e "SHOW DATABASES;"
+
+      - name: Print environment variables
         run: |
           echo "SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL"
           echo "SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME"
-        env:
-          SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
-          SPRING_DATASOURCE_USERNAME: testuser
-
-      - name: Test MariaDB connection
-        run: |
-          mysql -h 127.0.0.1 -P 3306 -u testuser -ptestpass -e "SHOW DATABASES;"
+          echo "SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD"
 
       - name: Build and test with Gradle
-        env:
-          SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
-          SPRING_DATASOURCE_USERNAME: testuser
-          SPRING_DATASOURCE_PASSWORD: testpass
-        run: ./gradlew test --no-daemon -Dspring.profiles.active=test
+        run: ./gradlew test --no-daemon -Dspring.profiles.active=test --stacktrace --info
