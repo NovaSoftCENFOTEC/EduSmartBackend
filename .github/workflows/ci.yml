@@ -17,6 +17,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mariadb:
+        image: mariadb:10.11
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: testdb
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpass
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,5 +56,17 @@ jobs:
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
 
+      - name: Wait for MariaDB to be ready
+        run: |
+          for i in {1..30}; do
+            mysqladmin ping -h 127.0.0.1 -P 3306 --silent && break
+            echo "Waiting for MariaDB..."
+            sleep 2
+          done
+
       - name: Build and test with Gradle
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
+          SPRING_DATASOURCE_USERNAME: testuser
+          SPRING_DATASOURCE_PASSWORD: testpass
         run: ./gradlew build --no-daemon
