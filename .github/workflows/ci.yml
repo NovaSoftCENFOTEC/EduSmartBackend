@@ -64,6 +64,14 @@ jobs:
             sleep 2
           done
 
+      - name: Verify DB environment variables
+        run: |
+          echo "SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL"
+          echo "SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME"
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
+          SPRING_DATASOURCE_USERNAME: testuser
+
       - name: Test MariaDB connection
         run: |
           mysql -h 127.0.0.1 -P 3306 -u testuser -ptestpass -e "SHOW DATABASES;"
