@@ -64,10 +64,13 @@ jobs:
             sleep 2
           done
 
+      - name: Test MariaDB connection
+        run: |
+          mysql -h 127.0.0.1 -P 3306 -u testuser -ptestpass -e "SHOW DATABASES;"
+
       - name: Build and test with Gradle
         env:
           SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
           SPRING_DATASOURCE_USERNAME: testuser
           SPRING_DATASOURCE_PASSWORD: testpass
         run: ./gradlew test --no-daemon -Dspring.profiles.active=test
-
