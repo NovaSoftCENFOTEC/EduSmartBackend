@@ -33,7 +33,7 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
-    env:  # 👈 global env for all steps
+    env:
       SPRING_DATASOURCE_URL: jdbc:mariadb://127.0.0.1:3306/testdb
       SPRING_DATASOURCE_USERNAME: testuser
       SPRING_DATASOURCE_PASSWORD: testpass
@@ -45,8 +45,8 @@ jobs:
       - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
+          distribution: temurin
+          java-version: 21
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -73,11 +73,19 @@ jobs:
         run: |
           mysql -h 127.0.0.1 -P 3306 -u $SPRING_DATASOURCE_USERNAME -p$SPRING_DATASOURCE_PASSWORD -e "SHOW DATABASES;"
 
-      - name: Print environment variables
+      - name: Print environment variables (masked)
         run: |
           echo "SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL"
           echo "SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME"
-          echo "SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD"
+          # No imprimas la contraseña en logs
 
       - name: Build and test with Gradle
         run: ./gradlew test --no-daemon -Dspring.profiles.active=test --stacktrace --info
+
+      - name: Upload test reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: build/reports/tests/test
+
