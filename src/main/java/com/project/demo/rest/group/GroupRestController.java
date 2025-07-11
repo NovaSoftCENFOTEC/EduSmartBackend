@@ -128,6 +128,32 @@ public class GroupRestController {
                 group, HttpStatus.OK, request);
     }
 
+    @PostMapping("/{groupId}/students/{studentId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> addStudentToGroup(@PathVariable Long groupId,
+                                               @PathVariable Long studentId,
+                                               HttpServletRequest request) {
+        Optional<Group> foundGroup = groupRepository.findById(groupId);
+        if (foundGroup.isPresent()) {
+            Optional<User> foundStudent = userRepository.findById(studentId);
+            if (foundStudent.isPresent()) {
+                Group group = foundGroup.get();
+                group.getStudents().add(foundStudent.get());
+                groupRepository.save(group);
+
+                return new GlobalResponseHandler().handleResponse("Estudiante añadido al grupo con éxito",
+                        group, HttpStatus.OK, request);
+            } else {
+                return new GlobalResponseHandler().handleResponse("Estudiante " + studentId + " no encontrado",
+                        HttpStatus.NOT_FOUND, request);
+            }
+        } else {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+
     @PutMapping("/{groupId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateGroup(@PathVariable Long groupId, @RequestBody Group group, HttpServletRequest request) {
@@ -161,4 +187,28 @@ public class GroupRestController {
         }
     }
 
+    @DeleteMapping("/{groupId}/students/{studentId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> removeStudentFromGroup(@PathVariable Long groupId,
+                                                    @PathVariable Long studentId,
+                                                    HttpServletRequest request) {
+        Optional<Group> foundGroup = groupRepository.findById(groupId);
+        if (foundGroup.isPresent()) {
+            Group group = foundGroup.get();
+            Optional<User> foundStudent = userRepository.findById(studentId);
+            if (foundStudent.isPresent()) {
+                group.getStudents().remove(foundStudent.get());
+                groupRepository.save(group);
+
+                return new GlobalResponseHandler().handleResponse("Estudiante eliminado del grupo con éxito",
+                        group, HttpStatus.OK, request);
+            } else {
+                return new GlobalResponseHandler().handleResponse("Estudiante " + studentId + " no encontrado",
+                        HttpStatus.NOT_FOUND, request);
+            }
+        } else {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
 }
