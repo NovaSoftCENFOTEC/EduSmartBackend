@@ -116,6 +116,7 @@ public class MaterialRestController {
         Optional<Material> foundMaterial = materialRepository.findById(materialId);
         if (foundMaterial.isPresent()) {
             Material updatedMaterial = foundMaterial.get();
+            updatedMaterial.setName(material.getName());
             updatedMaterial.setFileUrl(material.getFileUrl());
             updatedMaterial.setUploadedAt(material.getUploadedAt());
             updatedMaterial.setCourse(material.getCourse());
