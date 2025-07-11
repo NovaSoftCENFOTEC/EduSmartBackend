@@ -98,7 +98,7 @@ public class StudentRestController {
             newStudentUser.setSchool(foundSchool.get());
             userRepository.save(newStudentUser);
             return new GlobalResponseHandler().handleResponse("Estudiante creado con exito",
-                    newStudentUser, HttpStatus.OK, request);
+                    randomPassword, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Escuela " + schoolId + " no encontrada",
                     HttpStatus.NOT_FOUND, request);
