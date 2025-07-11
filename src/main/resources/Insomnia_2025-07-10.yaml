@@ -176,7 +176,7 @@ collection:
         meta:
           id: req_671db0756acf4c8ca8b41d9ff7d50ef2
           created: 1751688007043
-          modified: 1751853063343
+          modified: 1752196368983
           isPrivate: false
           sortKey: -1751686233947
         method: GET
@@ -258,7 +258,7 @@ collection:
         meta:
           id: req_167ab354f6a8453c97811aab2b58634d
           created: 1751853490794
-          modified: 1751853572397
+          modified: 1752193647335
           isPrivate: false
           sortKey: -1751853421724
         method: POST
@@ -268,8 +268,8 @@ collection:
             {
             	"name": "Fabian",
             	"lastname": "Chacon",
-            	"email": "fchaconb@ucenfotec.ac.cr",
-            	"password": "123"
+            	"email": "ff@ucenfotec.ac.cr",
+            	"password": "123456"
             }
         headers:
           - name: Content-Type
@@ -315,12 +315,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}groups/course/1/teacher/4"
+      - url: "{{ _.base_url }}groups/course/1/teacher/7"
         name: Create Group
         meta:
           id: req_f2481ded3dcd4f398121092eb1e43e8f
           created: 1751854136765
-          modified: 1752009447456
+          modified: 1752196379009
           isPrivate: false
           sortKey: -1751853795643
         method: POST
@@ -328,7 +328,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name": "G2"
+            	"name": "G3"
             }
         headers:
           - name: Content-Type
@@ -343,12 +343,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}groups/2"
+      - url: "{{ _.base_url }}groups/7"
         name: Update Group
         meta:
           id: req_35356164ccf24f5d90b71b35265f8e22
           created: 1751862273279
-          modified: 1751862520537
+          modified: 1752196442031
           isPrivate: false
           sortKey: -1751853795543
         method: PUT
@@ -356,7 +356,7 @@ collection:
           mimeType: application/json
           text: >-
             {
-            	"name": "G2",
+            	"name": "G33",
             	"course": {
             		"id": 1
             	},
@@ -391,14 +391,54 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}groups/5"
+      - url: "{{ _.base_url }}groups/7"
         name: Delete Group
         meta:
           id: req_0f2c952633c840b1a927b1e455774a5a
           created: 1751862613009
-          modified: 1751863253569
+          modified: 1752196658317
           isPrivate: false
           sortKey: -1751853795443
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/1/students/5"
+        name: Add Student to Group
+        meta:
+          id: req_e13c5a20ad5d4c1494ba2a1c4663462a
+          created: 1752196471966
+          modified: 1752196641704
+          isPrivate: false
+          sortKey: -1751853795343
+        method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/1/students/5"
+        name: Remove Student from Group
+        meta:
+          id: req_b9dcf5ca8bf24cbead9377829b9b1d28
+          created: 1752196596199
+          modified: 1752196635889
+          isPrivate: false
+          sortKey: -1751853795243
         method: DELETE
         headers:
           - name: User-Agent
