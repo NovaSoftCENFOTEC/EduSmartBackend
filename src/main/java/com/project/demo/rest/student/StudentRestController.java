@@ -43,7 +43,7 @@ public class StudentRestController {
     private PasswordGenerator passwordGenerator;
 
     @GetMapping("/school/{schoolId}/students")
-    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> getStudentsBySchoolId(@PathVariable Long schoolId,
                                                    @RequestParam(defaultValue = "1") int page,
                                                    @RequestParam(defaultValue = "10") int size,
@@ -75,7 +75,7 @@ public class StudentRestController {
     }
 
     @PostMapping("/school/{schoolId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> createStudent(@PathVariable Long schoolId, @RequestBody User newStudentUser, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findByEmail(newStudentUser.getEmail());
 

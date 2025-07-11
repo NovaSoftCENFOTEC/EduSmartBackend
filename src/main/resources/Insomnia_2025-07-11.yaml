@@ -725,12 +725,12 @@ collection:
       modified: 1752263988421
       sortKey: -1751681760043.875
     children:
-      - url: "{{ _.base_url }}users/12"
-        name: Update User
+      - url: "{{ _.base_url }}users/administrative/12"
+        name: Administrative Update of User
         meta:
           id: req_251aedc537bf4da694cf3461368f4fa8
           created: 1752263975273
-          modified: 1752264648006
+          modified: 1752271405647
           isPrivate: false
           sortKey: -1752263975273
         method: PUT
@@ -739,23 +739,35 @@ collection:
           text: |-
             {
             	"name": "Fabian",
-            	"lastname": "Santos",
-            	"email": "ff@ucenfotec.ac.cr",
-            	"password": "siuu123",
-            	"profilePic": "https://pic1.com",
-            	"role": {
-            		"id": 1,
-            		"name": "STUDENT",
-            		"description": "Student role",
-            		"createdAt": "2025-07-05T02:11:05.136+00:00",
-            		"updatedAt": "2025-07-05T02:11:05.136+00:00"
-            	},
-            	"school": {
-            		"id": 2,
-            		"name": "Cenfotec",
-            		"domain": "cenfotec.ac.cr",
-            		"createdAt": "2025-07-05T02:33:43.054+00:00"
-            	}
+            	"lastname": "Santosssss"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}users/password/12"
+        name: Update User Password
+        meta:
+          id: req_03ffcfdd2e59494e98c10a62aa0f31ac
+          created: 1752271432366
+          modified: 1752271488068
+          isPrivate: false
+          sortKey: -1752271432366
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"password": "prueba123"
             }
         headers:
           - name: Content-Type
@@ -1145,7 +1157,7 @@ collection:
     meta:
       id: req_2f9480da2c0c4d77b496be91dbdb7a08
       created: 1751681760047
-      modified: 1752264680675
+      modified: 1752271514397
       isPrivate: false
       sortKey: -1751681760047
     method: POST
