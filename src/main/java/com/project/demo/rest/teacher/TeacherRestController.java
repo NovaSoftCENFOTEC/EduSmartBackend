@@ -92,7 +92,7 @@ public class TeacherRestController {
         Optional<School> foundSchool = schoolRepository.findById(schoolId);
 
         if (foundSchool.isPresent()) {
-            String randomPassword = passwordGenerator.generatePassword(8);
+            String randomPassword = passwordGenerator.generatePassword(12);
             newTeacherUser.setPassword(passwordEncoder.encode(randomPassword));
             newTeacherUser.setRole(optionalRole.get());
             newTeacherUser.setSchool(foundSchool.get());
