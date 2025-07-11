@@ -61,10 +61,18 @@ public class UserRestController {
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundOrder = userRepository.findById(userId);
         if(foundOrder.isPresent()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+            User updatedUser = foundOrder.get();
+            updatedUser.setName(user.getName());
+            updatedUser.setLastname(user.getLastname());
+            updatedUser.setEmail(user.getEmail());
+            updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            updatedUser.setProfilePic(user.getProfilePic());
+            updatedUser.setRole(user.getRole());
+            updatedUser.setSchool(user.getSchool());
+
+            userRepository.save(updatedUser);
             return new GlobalResponseHandler().handleResponse("Usuario actualizado con exito",
-                    user, HttpStatus.OK, request);
+                    updatedUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
                     HttpStatus.NOT_FOUND, request);
