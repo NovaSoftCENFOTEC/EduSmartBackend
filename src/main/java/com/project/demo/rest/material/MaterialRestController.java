@@ -2,7 +2,6 @@ package com.project.demo.rest.material;
 
 import com.project.demo.logic.entity.course.Course;
 import com.project.demo.logic.entity.course.CourseRepository;
-import com.project.demo.logic.entity.group.Group;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.material.Material;
