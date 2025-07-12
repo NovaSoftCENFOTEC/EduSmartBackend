@@ -10,8 +10,4 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
     List<Submission> findByQuizId(Integer quizId);
 
     List<Submission> findByStudentId(Integer studentId);
-
-
-    // Si tienes submissions → quiz → story → course → group
-    List<Submission> findByQuiz_Story_Course_Groups_Id(Integer groupId);
 }
