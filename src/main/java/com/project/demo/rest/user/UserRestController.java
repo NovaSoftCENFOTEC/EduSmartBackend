@@ -56,15 +56,33 @@ public class UserRestController {
                 user, HttpStatus.OK, request);
     }
 
-    @PutMapping("/{userId}")
-    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
+    @PutMapping("/administrative/{userId}")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundOrder = userRepository.findById(userId);
         if(foundOrder.isPresent()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+            User updatedUser = foundOrder.get();
+            updatedUser.setName(user.getName());
+            updatedUser.setLastname(user.getLastname());
+            userRepository.save(updatedUser);
             return new GlobalResponseHandler().handleResponse("Usuario actualizado con exito",
-                    user, HttpStatus.OK, request);
+                    updatedUser, HttpStatus.OK, request);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+    @PutMapping("/password/{userId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> updatePassword(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
+        Optional<User> foundOrder = userRepository.findById(userId);
+        if(foundOrder.isPresent()) {
+            User updatedUser = foundOrder.get();
+            updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(updatedUser);
+            return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
+                    updatedUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
                     HttpStatus.NOT_FOUND, request);
