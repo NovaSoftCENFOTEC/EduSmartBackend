@@ -1,9 +1,11 @@
 package com.project.demo.logic.entity.answer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.demo.logic.entity.option.Option;
 import com.project.demo.logic.entity.question.Question;
 import com.project.demo.logic.entity.submission.Submission;
 import jakarta.persistence.*;
 
+@JsonIgnoreProperties({"submission", "question", "selectedOption"})
 @Entity
 @Table(name = "answer")
 public class Answer {

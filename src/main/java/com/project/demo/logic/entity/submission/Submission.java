@@ -1,4 +1,5 @@
 package com.project.demo.logic.entity.submission;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.demo.logic.entity.answer.Answer;
 import com.project.demo.logic.entity.quiz.Quiz;
 import com.project.demo.logic.entity.user.User;
@@ -6,6 +7,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+@JsonIgnoreProperties({"answers"})
 @Entity
 @Table(name = "submission")
 public class Submission {
