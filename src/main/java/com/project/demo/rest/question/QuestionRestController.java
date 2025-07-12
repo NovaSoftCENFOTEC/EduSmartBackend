@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/questions")
-public class QuestionController {
+public class QuestionRestController {
 
     @Autowired
     private QuestionRepository questionRepository;

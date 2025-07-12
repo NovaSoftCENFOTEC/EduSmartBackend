@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/options")
-public class OptionController {
+public class OptionRestController {
 
     @Autowired
     private OptionRepository optionRepository;
