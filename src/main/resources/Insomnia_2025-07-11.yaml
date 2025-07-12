@@ -1,0 +1,1198 @@
+type: collection.insomnia.rest/5.0
+name: Proyecto 3
+meta:
+  id: wrk_eca5abd49a0946c6a95257d9508becfd
+  created: 1751681748695
+  modified: 1751681748695
+collection:
+  - name: Schools
+    meta:
+      id: fld_df6c18a8dc314f2084799227b1571618
+      created: 1751682170153
+      modified: 1751686431393
+      sortKey: -1751681760040.75
+    children:
+      - url: "{{ _.base_url }}schools"
+        name: Get All Schools
+        meta:
+          id: req_d6906e83483542b5bba7f7f450ea0f60
+          created: 1751681959439
+          modified: 1751682247075
+          isPrivate: false
+          sortKey: -1751682176887
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}schools/1"
+        name: Get School By ID
+        meta:
+          id: req_b2b5c9d201ec4d75b64677407832471d
+          created: 1751682644256
+          modified: 1751682699223
+          isPrivate: false
+          sortKey: -1751682176787
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}schools"
+        name: Create School
+        meta:
+          id: req_f68f880e96344c098ce7c99c80757653
+          created: 1751682711001
+          modified: 1751682829462
+          isPrivate: false
+          sortKey: -1751682176687
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Cenfotec",
+            	"domain": "ucenfotec.ac.cr"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}schools/2"
+        name: Update School
+        meta:
+          id: req_fbd7c258dc2d4421a046c6fc21d66fc7
+          created: 1751682837030
+          modified: 1751683285571
+          isPrivate: false
+          sortKey: -1751682176587
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Cenfotec",
+            	"domain": "cenfotec.ac.cr"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}schools/3"
+        name: Delete School
+        meta:
+          id: req_a2ff1c39d5b946ba9f901f092c25cff7
+          created: 1751683217690
+          modified: 1751683244530
+          isPrivate: false
+          sortKey: -1751682176487
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Teachers
+    meta:
+      id: fld_7133c68963c44ac18c2fd7d5917601cf
+      created: 1751686174130
+      modified: 1751686435440
+      sortKey: -1751681760037.625
+    children:
+      - url: "{{ _.base_url }}teachers/school/2"
+        name: Create Teacher By School ID
+        meta:
+          id: req_acc20d9fb86444ff94d7f7d323bff01d
+          created: 1751686233847
+          modified: 1751862443512
+          isPrivate: false
+          sortKey: -1751686233847
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Pedro",
+            	"lastname": "Pica Piedra",
+            	"email": "pppiedra@ucenfotec.ac.cr"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}teachers/school/2/teachers"
+        name: Get All Teachers By School ID
+        meta:
+          id: req_671db0756acf4c8ca8b41d9ff7d50ef2
+          created: 1751688007043
+          modified: 1752196368983
+          isPrivate: false
+          sortKey: -1751686233947
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Users
+    meta:
+      id: fld_77db9249d7394fc3b94754c131ac0282
+      created: 1751686425784
+      modified: 1751853778371
+      sortKey: -1751681760036.8438
+    children:
+      - url: "{{ _.base_url }}users"
+        name: Get All Users
+        meta:
+          id: req_1a7b3e6165ef4c4eb83d37819a7e941f
+          created: 1751686442480
+          modified: 1751686461831
+          isPrivate: false
+          sortKey: -1751686442480
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Students
+    meta:
+      id: fld_9dcd86b00f8e4285b5ad6cece7068602
+      created: 1751853410120
+      modified: 1751853439670
+      sortKey: -1751681760039.1875
+    children:
+      - url: "{{ _.base_url }}students/school/2/students"
+        name: Get All Students By School ID
+        meta:
+          id: req_3b9fc3f9f3e34b89b05f5b40d2f98d52
+          created: 1751853421824
+          modified: 1751853473514
+          isPrivate: false
+          sortKey: -1751853421824
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}students/school/2"
+        name: Create Student By School ID
+        meta:
+          id: req_167ab354f6a8453c97811aab2b58634d
+          created: 1751853490794
+          modified: 1752270088812
+          isPrivate: false
+          sortKey: -1751853421724
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Abigail",
+            	"lastname": "Guzman",
+            	"email": "aguzman@ucenfotec.ac.cr"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Groups
+    meta:
+      id: fld_6d7b6065becf49e0b3fe22ef7eccb1b7
+      created: 1751853763196
+      modified: 1752263007314
+      sortKey: -1751681760036.3555
+    children:
+      - url: "{{ _.base_url }}groups"
+        name: Get All Groups
+        meta:
+          id: req_5de7b2f139b44e6394e64377246ea484
+          created: 1751853795743
+          modified: 1751853902154
+          isPrivate: false
+          sortKey: -1751853795743
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/course/1/teacher/7"
+        name: Create Group
+        meta:
+          id: req_f2481ded3dcd4f398121092eb1e43e8f
+          created: 1751854136765
+          modified: 1752196379009
+          isPrivate: false
+          sortKey: -1751853795643
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "G3"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/7"
+        name: Update Group
+        meta:
+          id: req_35356164ccf24f5d90b71b35265f8e22
+          created: 1751862273279
+          modified: 1752196442031
+          isPrivate: false
+          sortKey: -1751853795543
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+            	"name": "G33",
+            	"course": {
+            		"id": 1
+            	},
+            	"teacher": {
+            		"id": 6,
+            		"name": "Pedro",
+            		"lastname": "Pica Piedra",
+            		"email": "pppiedra@ucenfotec.ac.cr",
+            		"password": "$2a$10$NHkw6lZFwqLk3rclmFkQxu/gSQzK7KK.cgzzJ94DmItwdj./80GSm",
+            		"createdAt": "2025-07-07T04:27:31.720+00:00",
+            		"updatedAt": "2025-07-07T04:27:31.720+00:00",
+            		"profilePic": null,
+            		"role": {
+            			"id": 2,
+            			"name": "TEACHER",
+            			"description": "Teacher role",
+            			"createdAt": "2025-07-05T02:11:05.150+00:00",
+            			"updatedAt": "2025-07-05T02:11:05.150+00:00"
+            		}
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/7"
+        name: Delete Group
+        meta:
+          id: req_0f2c952633c840b1a927b1e455774a5a
+          created: 1751862613009
+          modified: 1752196658317
+          isPrivate: false
+          sortKey: -1751853795443
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/1/students/5"
+        name: Add Student to Group
+        meta:
+          id: req_e13c5a20ad5d4c1494ba2a1c4663462a
+          created: 1752196471966
+          modified: 1752196641704
+          isPrivate: false
+          sortKey: -1751853795343
+        method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}groups/1/students/5"
+        name: Remove Student from Group
+        meta:
+          id: req_b9dcf5ca8bf24cbead9377829b9b1d28
+          created: 1752196596199
+          modified: 1752196635889
+          isPrivate: false
+          sortKey: -1751853795243
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Curso
+    meta:
+      id: fld_a2b04e6cf9424941a548c9ee8996bd73
+      created: 1751860974979
+      modified: 1751861035133
+      sortKey: -1751681760036.4531
+    children:
+      - url: "{{ _.base_url }}courses"
+        name: Get All Courses
+        meta:
+          id: req_69cba895293547b294fa24a5d6d0dfda
+          created: 1751861014699
+          modified: 1751861064626
+          isPrivate: false
+          sortKey: -1751861019141
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}courses"
+        name: Create Course
+        meta:
+          id: req_b210445e8d694481aea732e7e425af19
+          created: 1751861058940
+          modified: 1751862983903
+          isPrivate: false
+          sortKey: -1751861019041
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"code": "Test",
+            	"title": "Epoca Precolombina",
+            	"description": "Curso de la epoca precolombina"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}courses/1"
+        name: Update Course
+        meta:
+          id: req_0e784a15da554102943ac8cd1be0eb51
+          created: 1751861142454
+          modified: 1751861194913
+          isPrivate: false
+          sortKey: -1751861018941
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"code": "PRE-CO",
+            	"title": "Epoca Precolombina",
+            	"description": "Curso de la epoca precolombina"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}courses/3"
+        name: Delete Course
+        meta:
+          id: req_08a91111b91e4a0ab8cf8df0f914912c
+          created: 1751861244941
+          modified: 1751862990358
+          isPrivate: false
+          sortKey: -1751861018841
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Material
+    meta:
+      id: fld_69f74a30651047e3af84f8f24f461077
+      created: 1752262979117
+      modified: 1752266252661
+      sortKey: -1751681760036.27
+    children:
+      - url: "{{ _.base_url }}materials/course/1/materials"
+        name: Get Materials by Course ID
+        meta:
+          id: req_51c759f3d5654e7ea90082df5dc07adf
+          created: 1752263064805
+          modified: 1752263114698
+          isPrivate: false
+          sortKey: -1752263064805
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}materials/teacher/4/materials"
+        name: Get Materials by Teacher ID
+        meta:
+          id: req_05117deec42f4023b81954f2939634c2
+          created: 1752263126561
+          modified: 1752263140741
+          isPrivate: false
+          sortKey: -1752062041973
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}materials/course/1/teacher/4"
+        name: Create Material
+        meta:
+          id: req_951ba8dacd564d498e76ffb04cdb887a
+          created: 1752263157156
+          modified: 1752263752724
+          isPrivate: false
+          sortKey: -1752062041948
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "test",
+            	"fileUrl": "https://test.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}materials/2"
+        name: Delete Material
+        meta:
+          id: req_c758a75044d6461087509d157a7fb83a
+          created: 1752263355369
+          modified: 1752263810160
+          isPrivate: false
+          sortKey: -1752062041773
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}materials/2"
+        name: Update Material
+        meta:
+          id: req_2849fe55be434a1da8d42659e1d262e1
+          created: 1752263422578
+          modified: 1752263797328
+          isPrivate: false
+          sortKey: -1752062041923
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+            	"name": "test3e4",
+            	"fileUrl": "https://test1235353.com",
+            	"course": {
+            		"id": 1,
+            		"code": "PRE-CO",
+            		"title": "Epoca Precolombina",
+            		"description": "Curso de la epoca precolombina",
+            		"createdAt": "2025-07-07T04:05:24.576+00:00"
+            	},
+            	"teacher": {
+            		"id": 4,
+            		"name": "Olman",
+            		"lastname": "Santamaria",
+            		"email": "olmans@ucenfotec.ac.cr",
+            		"password": "$2a$10$MHilSNtmhKlmrhf2hNfYN.45gQGBJ8UuUNv6T4XGsmSrByVyIRrY.",
+            		"createdAt": "2025-07-07T01:56:25.502+00:00",
+            		"updatedAt": "2025-07-07T01:56:25.502+00:00",
+            		"profilePic": null,
+            		"role": {
+            			"id": 2,
+            			"name": "TEACHER",
+            			"description": "Teacher role",
+            			"createdAt": "2025-07-05T02:11:05.150+00:00",
+            			"updatedAt": "2025-07-05T02:11:05.150+00:00"
+            		}
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Users
+    meta:
+      id: fld_fc507e24cfce4be2a292295be47962fb
+      created: 1752263968211
+      modified: 1752263988421
+      sortKey: -1751681760043.875
+    children:
+      - url: "{{ _.base_url }}users/administrative/12"
+        name: Administrative Update of User
+        meta:
+          id: req_251aedc537bf4da694cf3461368f4fa8
+          created: 1752263975273
+          modified: 1752271405647
+          isPrivate: false
+          sortKey: -1752263975273
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Fabian",
+            	"lastname": "Santosssss"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}users/password/12"
+        name: Update User Password
+        meta:
+          id: req_03ffcfdd2e59494e98c10a62aa0f31ac
+          created: 1752271432366
+          modified: 1752271488068
+          isPrivate: false
+          sortKey: -1752271432366
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"password": "prueba123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Stories
+    meta:
+      id: fld_772c13e007ee47abab5f36f14b62f321
+      created: 1752266019334
+      modified: 1752267301905
+      sortKey: -1751681760036.3433
+    children:
+      - url: "{{ _.base_url }}stories/course/1/stories"
+        name: Get Stories by Course ID
+        meta:
+          id: req_e791a4bdcfbb459d96e451f047fde5e3
+          created: 1752266064403
+          modified: 1752266113871
+          isPrivate: false
+          sortKey: -1752266067670
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}stories/course/1"
+        name: Create Story
+        meta:
+          id: req_32353934313c4caab5c9a1203389accc
+          created: 1752266138765
+          modified: 1752266334036
+          isPrivate: false
+          sortKey: -1752266067570
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Juan Santamaria",
+            	"content": "Historia Juan Santamaria"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}stories/1"
+        name: Update Story
+        meta:
+          id: req_475b2d15882f4cb6976df91a4a3acfca
+          created: 1752266248579
+          modified: 1752266302233
+          isPrivate: false
+          sortKey: -1752266067470
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Conquista",
+            	"content": "Contenido conquista actualizado",
+            	"course": {
+            		"id": 1,
+            		"code": "PRE-CO",
+            		"title": "Epoca Precolombina",
+            		"description": "Curso de la epoca precolombina",
+            		"createdAt": "2025-07-07T04:05:24.576+00:00"
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}stories/2"
+        name: Delete Story
+        meta:
+          id: req_19f5d3a3ef5740e98a936735f42c7a87
+          created: 1752266343550
+          modified: 1752266351144
+          isPrivate: false
+          sortKey: -1752266067370
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Illustrations
+    meta:
+      id: fld_f3c92c9a0dd14da0a4d4e6bca0c78bd0
+      created: 1752267294970
+      modified: 1752269174021
+      sortKey: -1751681760036.3403
+    children:
+      - url: "{{ _.base_url }}illustrations/story/1/illustrations"
+        name: Get Illustrations by Story ID
+        meta:
+          id: req_198e3cb9546c42eca9a18282313a9e74
+          created: 1752267322977
+          modified: 1752267538495
+          isPrivate: false
+          sortKey: -1752267325589
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}illustrations/story/1"
+        name: Create Illustration
+        meta:
+          id: req_77dd5550229e4dd08d5c1c10fa9821e0
+          created: 1752267534241
+          modified: 1752267739666
+          isPrivate: false
+          sortKey: -1752267325564
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Cristobal Colon",
+            	"url": "https://test.com",
+            	"altText": "Ilustracion de Cristobal Colon"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}illustrations/1"
+        name: Update Illustration
+        meta:
+          id: req_c1c0cbf52de3437c843ead6c5010be11
+          created: 1752267648992
+          modified: 1752267756157
+          isPrivate: false
+          sortKey: -1752267325557.75
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Juan Santamaria",
+            	"url": "https://juan-santa.com",
+            	"altText": "Ilustracion de Juan Santamaria",
+            	"story": {
+            		"id": 1,
+            		"title": "Conquista",
+            		"content": "Contenido conquista actualizado",
+            		"createdAt": "2025-07-11T20:37:08.192+00:00",
+            		"course": {
+            			"id": 1,
+            			"code": "PRE-CO",
+            			"title": "Epoca Precolombina",
+            			"description": "Curso de la epoca precolombina",
+            			"createdAt": "2025-07-07T04:05:24.576+00:00"
+            		}
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}illustrations/2"
+        name: Delete Illustration
+        meta:
+          id: req_a71d240b81774f0faed85c91759fb79b
+          created: 1752267752096
+          modified: 1752267764302
+          isPrivate: false
+          sortKey: -1752267325551.5
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - name: Audio Tracks
+    meta:
+      id: fld_518aebe3e6bf4e09a18098c9b2ed5e63
+      created: 1752269166922
+      modified: 1752269185065
+      sortKey: -1751681760036.3372
+    children:
+      - url: "{{ _.base_url }}audio-tracks/story/1/audio-tracks"
+        name: Get Audio Tracks by Story ID
+        meta:
+          id: req_d2f73839a1d343a1863c1feb1a9244d0
+          created: 1752269223276
+          modified: 1752269258150
+          isPrivate: false
+          sortKey: -1752269230194
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}audio-tracks/story/1"
+        name: Create Audio Track
+        meta:
+          id: req_0a529f17f07a4be99cafdb4bf4cc9b11
+          created: 1752269271879
+          modified: 1752269497199
+          isPrivate: false
+          sortKey: -1752269230169
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Audio historia Juan Santamaria",
+            	"voiceType": "FEMALE",
+            	"url": "https://test12432.com",
+            	"duration": 63
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}audio-tracks/1"
+        name: Update Audio Track
+        meta:
+          id: req_01e331f1c74c4ec09c6c2c0379135bf2
+          created: 1752269377490
+          modified: 1752269466116
+          isPrivate: false
+          sortKey: -1752269230162.75
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"title": "Audio historia Cristobal Colon",
+            		"voiceType": "MALE",
+            		"url": "https://test1234.com",
+            		"duration": 67,
+            		"story": {
+            			"id": 1,
+            			"title": "Conquista",
+            			"content": "Contenido conquista actualizado",
+            			"createdAt": "2025-07-11T20:37:08.192+00:00",
+            			"course": {
+            				"id": 1,
+            				"code": "PRE-CO",
+            				"title": "Epoca Precolombina",
+            				"description": "Curso de la epoca precolombina",
+            				"createdAt": "2025-07-07T04:05:24.576+00:00"
+            			}
+            		}
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}audio-tracks/2"
+        name: Delete Audio Track
+        meta:
+          id: req_2b6ab01fb0c84736bc3d2fad5b55aed6
+          created: 1752269455776
+          modified: 1752269503689
+          isPrivate: false
+          sortKey: -1752269230156.5
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+  - url: "{{ _.base_url }}auth/login"
+    name: Login
+    meta:
+      id: req_2f9480da2c0c4d77b496be91dbdb7a08
+      created: 1751681760047
+      modified: 1752271514397
+      isPrivate: false
+      sortKey: -1751681760047
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "super.admin@gmail.com", 
+        	"password": "superadmin123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_f19c5335f3d7aac48c26b7f5174d1f49d8ed0da0
+    created: 1751681748697
+    modified: 1751681748697
+environments:
+  name: Base Environment
+  meta:
+    id: env_f19c5335f3d7aac48c26b7f5174d1f49d8ed0da0
+    created: 1751681748696
+    modified: 1751681816486
+    isPrivate: false
+  data:
+    base_url: http://localhost:8080/

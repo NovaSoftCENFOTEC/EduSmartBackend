@@ -19,7 +19,7 @@ public class SchoolSeeder implements ApplicationListener<ContextRefreshedEvent> 
 
     private void createDefaultSchool() {
         School defaultSchool = new School();
-        defaultSchool.setName("Default School");
+        defaultSchool.setName("Escuela Predeterminada");
         defaultSchool.setDomain("DEFAULT");
 
         Optional<School> optionalSchool = schoolRepository.findByDomain("DEFAULT");

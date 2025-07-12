@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.project.demo.DemoApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-07-09T05:30:59.959Z" hostname="MacBook-Air-de-Carlos.local" time="0.319">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.project.demo.DemoApplicationTests" time="0.319"/>
+  <system-out><![CDATA[23:30:56.577 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.project.demo.DemoApplicationTests]: DemoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:30:56.631 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.project.demo.DemoApplication for test class com.project.demo.DemoApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2025-07-08T23:30:56.810-06:00  INFO 73890 --- [demo] [    Test worker] com.project.demo.DemoApplicationTests    : Starting DemoApplicationTests using Java 21.0.7 with PID 73890 (started by Pablo in /Users/Pablo/Desktop/NovaSoftEduSmart/NovaSoftBackend)
+2025-07-08T23:30:56.810-06:00  INFO 73890 --- [demo] [    Test worker] com.project.demo.DemoApplicationTests    : The following 1 profile is active: "test"
+2025-07-08T23:30:57.101-06:00  INFO 73890 --- [demo] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-08T23:30:57.130-06:00  INFO 73890 --- [demo] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
+2025-07-08T23:30:57.374-06:00  INFO 73890 --- [demo] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-08T23:30:57.401-06:00  INFO 73890 --- [demo] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-08T23:30:57.418-06:00  INFO 73890 --- [demo] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-08T23:30:57.524-06:00  INFO 73890 --- [demo] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-08T23:30:57.536-06:00  INFO 73890 --- [demo] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-08T23:30:57.578-06:00  INFO 73890 --- [demo] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@6a4a2090
+2025-07-08T23:30:57.579-06:00  INFO 73890 --- [demo] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-08T23:30:57.594-06:00  WARN 73890 --- [demo] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-08T23:30:58.049-06:00  INFO 73890 --- [demo] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: create table course (id bigint not null auto_increment, code varchar(255) not null, created_at datetime(6), description varchar(255), title varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table group_student (group_id bigint not null, user_id bigint not null, primary key (group_id, user_id)) engine=InnoDB
+Hibernate: create table group_table (id bigint not null auto_increment, name varchar(255), course_id bigint not null, teacher_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table material (id bigint not null auto_increment, file_url varchar(255), uploaded_at datetime(6), course_id bigint not null, teacher_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table role (id integer not null, created_at datetime(6), description varchar(255) not null, name enum ('STUDENT','TEACHER','SUPER_ADMIN') not null, updated_at datetime(6), primary key (id)) engine=InnoDB
+Hibernate: create table school (id bigint not null auto_increment, created_at datetime(6), domain varchar(255) not null, name varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table story (id bigint not null auto_increment, content varchar(255), created_at datetime(6), title varchar(255), course_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table user (id bigint not null auto_increment, created_at datetime(6), email varchar(100) not null, lastname varchar(255), name varchar(255), password varchar(255) not null, profile_picture varchar(255), updated_at datetime(6), role_id integer not null, school_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: alter table if exists course drop index if exists UK_i60mruj0y7a7vs99dqpiye7en
+Hibernate: alter table if exists course add constraint UK_i60mruj0y7a7vs99dqpiye7en unique (code)
+Hibernate: alter table if exists role drop index if exists UK_8sewwnpamngi6b1dwaa88askk
+Hibernate: alter table if exists role add constraint UK_8sewwnpamngi6b1dwaa88askk unique (name)
+Hibernate: alter table if exists school drop index if exists UK_hieb9wekrw3i2ygpr99idxo9w
+Hibernate: alter table if exists school add constraint UK_hieb9wekrw3i2ygpr99idxo9w unique (domain)
+Hibernate: alter table if exists user drop index if exists UK_ob8kqyqqgmefl0aco34akdtpe
+Hibernate: alter table if exists user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)
+Hibernate: create sequence role_seq start with 1 increment by 50 nocache
+Hibernate: alter table if exists group_student add constraint FKcgcxdkbq2jp08th5r493by2bx foreign key (user_id) references user (id)
+Hibernate: alter table if exists group_student add constraint FKaq9v7uubivmovpalmyhou72r7 foreign key (group_id) references group_table (id)
+Hibernate: alter table if exists group_table add constraint FK3iyhyrcwhxlofyax4fpfraj94 foreign key (course_id) references course (id)
+Hibernate: alter table if exists group_table add constraint FKa4cpw0t0mf2m4um8l926y1pm0 foreign key (teacher_id) references user (id)
+Hibernate: alter table if exists material add constraint FKgwu2j6q988nwuqpo6p32uflmv foreign key (course_id) references course (id)
+Hibernate: alter table if exists material add constraint FKocb8x31l0y11mujkklp09nw0x foreign key (teacher_id) references user (id)
+Hibernate: alter table if exists story add constraint FKiwrhodye1oqvvb8x4qd6sfdh foreign key (course_id) references course (id)
+Hibernate: alter table if exists user add constraint FKn82ha3ccdebhokx3a8fgdqeyy foreign key (role_id) references role (id)
+Hibernate: alter table if exists user add constraint FKhbkxju61kpht7qnnhemgjv3u7 foreign key (school_id) references school (id)
+2025-07-08T23:30:58.874-06:00  INFO 73890 --- [demo] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-08T23:30:59.032-06:00  INFO 73890 --- [demo] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-08T23:30:59.347-06:00  WARN 73890 --- [demo] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-08T23:30:59.620-06:00  INFO 73890 --- [demo] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@d4594a8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@78002333, org.springframework.security.web.context.SecurityContextHolderFilter@7fb539df, org.springframework.security.web.header.HeaderWriterFilter@340fd670, org.springframework.web.filter.CorsFilter@1ccf1819, org.springframework.security.web.authentication.logout.LogoutFilter@69959ea5, com.project.demo.logic.entity.auth.JwtAuthenticationFilter@44835de9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@127c5f20, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@417c9b17, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2dba6013, org.springframework.security.web.session.SessionManagementFilter@5b810b54, org.springframework.security.web.access.ExceptionTranslationFilter@5eace68f, org.springframework.security.web.access.intercept.AuthorizationFilter@5c452eb5]
+Hibernate: select r1_0.id,r1_0.created_at,r1_0.description,r1_0.name,r1_0.updated_at from role r1_0 where r1_0.name=?
+Hibernate: select next value for role_seq
+Hibernate: insert into role (created_at,description,name,updated_at,id) values (?,?,?,?,?)
+Hibernate: select r1_0.id,r1_0.created_at,r1_0.description,r1_0.name,r1_0.updated_at from role r1_0 where r1_0.name=?
+Hibernate: select next value for role_seq
+Hibernate: insert into role (created_at,description,name,updated_at,id) values (?,?,?,?,?)
+Hibernate: select r1_0.id,r1_0.created_at,r1_0.description,r1_0.name,r1_0.updated_at from role r1_0 where r1_0.name=?
+Hibernate: insert into role (created_at,description,name,updated_at,id) values (?,?,?,?,?)
+Hibernate: select s1_0.id,s1_0.created_at,s1_0.domain,s1_0.name from school s1_0 where s1_0.domain=?
+Hibernate: insert into school (created_at,domain,name) values (?,?,?)
+Hibernate: select r1_0.id,r1_0.created_at,r1_0.description,r1_0.name,r1_0.updated_at from role r1_0 where r1_0.name=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.lastname,u1_0.name,u1_0.password,u1_0.profile_picture,u1_0.role_id,u1_0.school_id,u1_0.updated_at from user u1_0 where u1_0.email=?
+Hibernate: select s1_0.id,s1_0.created_at,s1_0.domain,s1_0.name from school s1_0 where s1_0.domain=?
+Hibernate: insert into user (created_at,email,lastname,name,password,profile_picture,role_id,school_id,updated_at) values (?,?,?,?,?,?,?,?,?)
+2025-07-08T23:30:59.951-06:00  INFO 73890 --- [demo] [    Test worker] com.project.demo.DemoApplicationTests    : Started DemoApplicationTests in 3.247 seconds (process running for 3.848)
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/Pablo/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.13/979ce25f7d3096a2e82214ba7dc972a05ce7a171/byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

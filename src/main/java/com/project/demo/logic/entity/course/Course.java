@@ -1,48 +1,58 @@
-package com.project.demo.logic.entity.rol;
+package com.project.demo.logic.entity.course;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
-@Table(name = "role")
+@Table(name = "course")
 @Entity
-public class Role {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Integer id;
-
+    private long id;
     @Column(unique = true, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoleEnum name;
-
-    @Column(nullable = false)
+    private String code;
+    private String title;
     private String description;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Date updatedAt;
+    public Course() {
+    }
 
-    public Integer getId() {
+    public Course(long id, String code, String title, String description, Date createdAt) {
+        this.id = id;
+        this.code = code;
+        this.title = title;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public RoleEnum getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(RoleEnum name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -59,13 +69,5 @@ public class Role {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
