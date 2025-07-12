@@ -91,7 +91,7 @@ public class UserRestController {
 
 
     @DeleteMapping("/{userId}")
-    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId, HttpServletRequest request) {
         Optional<User> foundOrder = userRepository.findById(userId);
         if(foundOrder.isPresent()) {
