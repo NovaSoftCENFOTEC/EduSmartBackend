@@ -13,6 +13,7 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
     @Column(name = "file_url")
     private String fileUrl;
 
@@ -31,8 +32,9 @@ public class Material {
     public Material() {
     }
 
-    public Material(long id, String fileUrl, Date uploadedAt, Course course, User teacher) {
+    public Material(long id, String name, String fileUrl, Date uploadedAt, Course course, User teacher) {
         this.id = id;
+        this.name = name;
         this.fileUrl = fileUrl;
         this.uploadedAt = uploadedAt;
         this.course = course;
@@ -45,6 +47,14 @@ public class Material {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFileUrl() {
