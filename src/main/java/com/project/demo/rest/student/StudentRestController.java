@@ -105,7 +105,7 @@ public class StudentRestController {
             // Send email to the new teacher
             String emailBody = "Hola " + newStudentUser.getName() + ",\n\n" +
                     "Tu cuenta ha sido creada con éxito. Aquí están tus credenciales:\n" +
-                    "Email: " + newStudentUser.getEmail() + "\n" +
+                    "Correo: " + newStudentUser.getEmail() + "\n" +
                     "Contraseña: " + randomPassword + "\n\n" +
                     "Por favor, cambia tu contraseña al iniciar sesión por primera vez usando la dirección http://localhost:4200/login.\n\n" +
                     "Saludos,\nEl equipo de EduSmart";
