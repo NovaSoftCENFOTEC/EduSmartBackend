@@ -1,43 +1,30 @@
 package com.project.demo.logic.entity.email;
 
-import com.sendgrid.Method;
-import com.sendgrid.Request;
-import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
-import com.sendgrid.helpers.mail.Mail;
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
-import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class EmailManager {
-    private static final Dotenv dotenv = Dotenv.configure().filename("sendgrid.env").load();
-    private static final String apiKey = dotenv.get("SENDGRID_API_KEY");
-    private static final String fromEmail = dotenv.get("SENDGRID_FROM_EMAIL");
 
-    public String sendEmail(String toEmail, String subject, String body) {
-        Email from = new Email(fromEmail);
-        Email to = new Email(toEmail);
-        Content content = new Content("text/plain", body);
-        Mail mail = new Mail(from, subject, to, content);
+    @Autowired
+    private JavaMailSender mailSender;
 
-        SendGrid sg = new SendGrid(apiKey);
-        Request request = new Request();
+    public void sendEmail(String toEmail, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject(subject);
+        message.setText(body);
+
         try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
+            mailSender.send(message);
+            System.out.println("Email sent successfully to " + toEmail);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error sending email: " + e.getMessage();
+            System.out.println("Error sending email: " + e.getMessage());
         }
-        return "Email sent successfully to " + toEmail;
     }
 
 }
