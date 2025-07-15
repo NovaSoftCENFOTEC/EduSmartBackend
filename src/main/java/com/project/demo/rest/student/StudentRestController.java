@@ -102,7 +102,6 @@ public class StudentRestController {
             newStudentUser.setSchool(foundSchool.get());
             userRepository.save(newStudentUser);
 
-            // Send email to the new teacher
             String emailBody = "Hola " + newStudentUser.getName() + ",\n\n" +
                     "Tu cuenta ha sido creada con éxito. Aquí están tus credenciales:\n" +
                     "Correo: " + newStudentUser.getEmail() + "\n" +
