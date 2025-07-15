@@ -1,4 +1,5 @@
 package com.project.demo.logic.entity.user;
+import com.project.demo.logic.entity.badge.Badge;
 import com.project.demo.logic.entity.rol.Role;
 import com.project.demo.logic.entity.school.School;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "user")
 @Entity
@@ -162,4 +164,6 @@ public class User implements UserDetails {
     public void setSchool(School school) {
         this.school = school;
     }
+
+
 }
