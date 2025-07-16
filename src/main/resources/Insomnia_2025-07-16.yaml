@@ -9,7 +9,7 @@ collection:
     meta:
       id: fld_9f0eb540429b4738a77ad1140300828b
       created: 1751682170153
-      modified: 1752296354122
+      modified: 1752547658999
       sortKey: -1751681760040.75
     children:
       - url: "{{ _.base_url }}schools"
@@ -135,20 +135,21 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTU2NTUsImV4cCI6MTc1MjI5OTI1NX0.D0sEGcoZgIQwAhuoF-JNnhBXqNQExWJNNlKYz0S8noI
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Teachers
     meta:
       id: fld_bd12c6ac3c2b45498ce467f3d472f34f
       created: 1751686174130
-      modified: 1752290584174
+      modified: 1752610888654
       sortKey: -1751681760037.625
     children:
-      - url: "{{ _.base_url }}teachers/school/2"
+      - url: "{{ _.base_url }}teachers/school/1"
         name: Create Teacher By School ID
         meta:
           id: req_109639050001418b99e1a30e5d66722b
           created: 1751686233847
-          modified: 1751862443512
+          modified: 1752611012463
           isPrivate: false
           sortKey: -1751686233847
         method: POST
@@ -158,7 +159,7 @@ collection:
             {
             	"name": "Pedro",
             	"lastname": "Pica Piedra",
-            	"email": "pppiedra@ucenfotec.ac.cr"
+            	"email": "aseguracalderon26@gmail.com"
             }
         headers:
           - name: Content-Type
@@ -195,7 +196,8 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA0NDgsImV4cCI6MTc1MjI5NDA0OH0.S7NJ3_uUCBFXGe0T9Elr0eCPxsJ2ZMvn4Lh5jBsDSII
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Users
     meta:
       id: fld_476b7d0fc258477e95ef8302805fbeb7
@@ -231,7 +233,7 @@ collection:
     meta:
       id: fld_eebb24ec59ea415db533a3205b918c22
       created: 1751853410120
-      modified: 1752296093830
+      modified: 1752548359397
       sortKey: -1751681760039.1875
     children:
       - url: "{{ _.base_url }}students/school/2/students"
@@ -286,7 +288,8 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA2MjEsImV4cCI6MTc1MjI5NDIyMX0.ftlPaKEJRGpvK1rkdLtnttafDtq73d914jm-8O-4PKU
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Groups
     meta:
       id: fld_1229060666004446857c68ec935a02d6
@@ -721,7 +724,7 @@ collection:
     meta:
       id: fld_1bf4400ceb5141f097c1837dec63a33e
       created: 1752263968211
-      modified: 1752263988421
+      modified: 1752547655111
       sortKey: -1751681760043.875
     children:
       - url: "{{ _.base_url }}users/administrative/12"
@@ -783,7 +786,7 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Stories
     meta:
@@ -1900,7 +1903,7 @@ collection:
     meta:
       id: fld_043ff56bc54e4c0cae8cd0e01be8ecc2
       created: 1752453361803
-      modified: 1752453636102
+      modified: 1752547646988
       sortKey: -1751681760045.4375
     children:
       - url: "{{ _.base_url }}badges"
@@ -1963,26 +1966,39 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}badges"
+      - url: "{{ _.base_url }}badges/upload"
         name: Create Badge
         meta:
           id: req_93af241e8ade4de8a02d6da34f960a6e
           created: 1752453721606
-          modified: 1752456168604
+          modified: 1752693637428
           isPrivate: false
           sortKey: -1752337967555
         method: POST
         body:
-          mimeType: application/json
-          text: |-
-            {
-              "title": "Insignia de ejemplo",
-              "description": "Descripción de la insignia",
-              "iconUrl": "https://icon-url.com/icon.png"
-            }
+          mimeType: multipart/form-data
+          params:
+            - id: pair_3b2afa1ea4324534b2d1fab01c571d47
+              name: title
+              value: Insignia de ejemplo
+              disabled: false
+              type: text
+              multiline: false
+            - id: pair_00e3e54150724efbb29a8d9943c1aaff
+              name: description
+              value: Descripción de la insignia
+              disabled: false
+              type: text
+              multiline: false
+            - id: pair_5fb4d64c231e448dbdd94cd3df067e26
+              name: image
+              disabled: false
+              type: file
+              fileName: C:\Users\asegu\Pictures\Screenshots\Captura de pantalla 2024-02-28
+                193102.png
         headers:
           - name: Content-Type
-            value: application/json
+            value: multipart/form-data
           - name: User-Agent
             value: insomnia/11.1.0
         settings:
@@ -2014,36 +2030,6 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _.base_url }}badges/1"
-        name: Update Badge
-        meta:
-          id: req_0f9afb4811c745328b9f94175aa04edd
-          created: 1752456301454
-          modified: 1752456333261
-          isPrivate: false
-          sortKey: -1752309097613.75
-        method: PUT
-        body:
-          mimeType: application/json
-          text: |
-            {
-              "title": "Insignia actualizada",
-              "description": "Descripción actualizada",
-              "iconUrl": "https://icon-url.com/icon-updated.png"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/11.1.0
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: "{{ _.base_url }}badges/1"
         name: Delete Badge
         meta:
           id: req_33b7885da0554909acb27814d5e3db06
@@ -2063,6 +2049,49 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.base_url }}badges/upload"
+        name: Update Badge
+        meta:
+          id: req_44fbc1f4752f4fce992c5a98ea3e3a9a
+          created: 1752693486245
+          modified: 1752693763034
+          isPrivate: false
+          sortKey: -1752328344241.25
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_3b2afa1ea4324534b2d1fab01c571d47
+              name: title
+              value: Insignia de ejemplo cambiada
+              disabled: false
+              type: text
+              multiline: false
+            - id: pair_00e3e54150724efbb29a8d9943c1aaff
+              name: description
+              value: Descripción de la insignia cambiada
+              disabled: false
+              type: text
+              multiline: false
+            - id: pair_5fb4d64c231e448dbdd94cd3df067e26
+              name: image
+              disabled: false
+              type: file
+              fileName: C:\Users\asegu\Pictures\Screenshots\Captura de pantalla 2024-02-28
+                193124.png
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     authentication:
       type: bearer
       token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
@@ -2072,7 +2101,7 @@ collection:
     meta:
       id: req_1726bac77d774aeabc2f950b27a4e77a
       created: 1751681760047
-      modified: 1752372125110
+      modified: 1752546383513
       isPrivate: false
       sortKey: -1751681760047
     method: POST

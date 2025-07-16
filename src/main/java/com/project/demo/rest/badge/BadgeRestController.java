@@ -2,6 +2,7 @@ package com.project.demo.rest.badge;
 
 import com.project.demo.logic.entity.badge.Badge;
 import com.project.demo.logic.entity.badge.BadgeRepository;
+import com.project.demo.logic.entity.cloudinary.CloudinaryService;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.user.User;
@@ -15,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +30,9 @@ public class BadgeRestController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
@@ -87,30 +93,31 @@ public class BadgeRestController {
                 badge, HttpStatus.CREATED, request);
     }
 
-    @PostMapping("/{badgeId}/students/{studentId}")
+    @PostMapping("/upload")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> assignBadgeToStudent(@PathVariable Long badgeId,
-                                                  @PathVariable Long studentId,
-                                                  HttpServletRequest request) {
-        Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
-        if (foundBadge.isEmpty())
-            return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
-                    HttpStatus.NOT_FOUND, request);
+    public ResponseEntity<?> createBadgeWithUpload(@RequestParam("title") String title,
+                                                   @RequestParam("description") String description,
+                                                   @RequestParam("image") MultipartFile image,
+                                                   HttpServletRequest request) {
+        try {
 
-        Optional<User> foundStudent = userRepository.findById(studentId);
-        if (foundStudent.isEmpty())
-            return new GlobalResponseHandler().handleResponse("Estudiante " + studentId + " no encontrado",
-                    HttpStatus.NOT_FOUND, request);
+            String imageUrl = cloudinaryService.uploadImage(image);
 
-        Badge badge = foundBadge.get();
-        User student = foundStudent.get();
+            Badge badge = new Badge();
+            badge.setTitle(title);
+            badge.setDescription(description);
+            badge.setIconUrl(imageUrl);
 
-        badge.getStudents().add(student);
-        badgeRepository.save(badge);
+            badgeRepository.save(badge);
 
-        return new GlobalResponseHandler().handleResponse("Insignia asignada con éxito",
-                badge, HttpStatus.OK, request);
+            return new GlobalResponseHandler().handleResponse("Insignia creada con imagen correctamente",
+                    badge, HttpStatus.CREATED, request);
+        } catch (IOException e) {
+            return new GlobalResponseHandler().handleResponse("Error al subir la imagen",
+                    HttpStatus.INTERNAL_SERVER_ERROR, request);
+        }
     }
+
 
     @DeleteMapping("/{badgeId}/students/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
@@ -142,27 +149,35 @@ public class BadgeRestController {
                 badge, HttpStatus.OK, request);
     }
 
-    @PutMapping("/{badgeId}")
+    @PutMapping("/{badgeId}/upload")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> updateBadge(@PathVariable Long badgeId,
-                                         @RequestBody Badge badge,
-                                         HttpServletRequest request) {
+    public ResponseEntity<?> updateBadgeWithImage(@PathVariable Long badgeId,
+                                                  @RequestParam("title") String title,
+                                                  @RequestParam("description") String description,
+                                                  @RequestParam(value = "image", required = false) MultipartFile image,
+                                                  HttpServletRequest request) {
         Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
         if (foundBadge.isEmpty()) {
-            return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
-                    HttpStatus.NOT_FOUND, request);
+            return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada", HttpStatus.NOT_FOUND, request);
         }
 
-        Badge updated = foundBadge.get();
-        updated.setTitle(badge.getTitle());
-        updated.setDescription(badge.getDescription());
-        updated.setIconUrl(badge.getIconUrl());
+        Badge badge = foundBadge.get();
+        badge.setTitle(title);
+        badge.setDescription(description);
 
-        badgeRepository.save(updated);
+        if (image != null && !image.isEmpty()) {
+            try {
+                String imageUrl = cloudinaryService.uploadImage(image);
+                badge.setIconUrl(imageUrl);
+            } catch (IOException e) {
+                return new GlobalResponseHandler().handleResponse("Error al subir la imagen", HttpStatus.INTERNAL_SERVER_ERROR, request);
+            }
+        }
 
-        return new GlobalResponseHandler().handleResponse("Insignia actualizada con éxito",
-                updated, HttpStatus.OK, request);
+        badgeRepository.save(badge);
+        return new GlobalResponseHandler().handleResponse("Insignia actualizada correctamente", badge, HttpStatus.OK, request);
     }
+
 
     @DeleteMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
