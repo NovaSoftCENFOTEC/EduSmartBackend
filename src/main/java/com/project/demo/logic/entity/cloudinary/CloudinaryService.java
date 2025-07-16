@@ -15,6 +15,7 @@ public class CloudinaryService {
     @Autowired
     private Cloudinary cloudinary;
 
+    //Todo: Implement a method to upload videos or other files if needed.
     public String uploadImage(MultipartFile file) throws IOException {
         Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
         return uploadResult.get("secure_url").toString();
