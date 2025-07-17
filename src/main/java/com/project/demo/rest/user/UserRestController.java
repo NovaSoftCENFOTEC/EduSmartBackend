@@ -97,9 +97,9 @@ public class UserRestController {
         }
     }
 
-    @PutMapping("/password-recovery/{userId}")
-    public ResponseEntity<?> updatePasswordRecovery(@PathVariable Long userId, HttpServletRequest request) {
-        Optional<User> foundUser = userRepository.findById(userId);
+    @PutMapping("/password-recovery/{userEmail}")
+    public ResponseEntity<?> updatePasswordRecovery(@PathVariable String userEmail, HttpServletRequest request) {
+        Optional<User> foundUser = userRepository.findByEmail(userEmail);
         if(foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             String randomPassword = passwordGenerator.generatePassword(12);
@@ -117,7 +117,7 @@ public class UserRestController {
             return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
                     updatedUser, HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userEmail + " no encontrado"  ,
                     HttpStatus.NOT_FOUND, request);
         }
     }
