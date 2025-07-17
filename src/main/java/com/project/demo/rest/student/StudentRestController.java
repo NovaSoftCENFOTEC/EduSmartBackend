@@ -98,6 +98,7 @@ public class StudentRestController {
         if (foundSchool.isPresent()) {
             String randomPassword = passwordGenerator.generatePassword(12);
             newStudentUser.setPassword(passwordEncoder.encode(randomPassword));
+            newStudentUser.setNeedsPasswordChange(true);
             newStudentUser.setRole(optionalRole.get());
             newStudentUser.setSchool(foundSchool.get());
             userRepository.save(newStudentUser);

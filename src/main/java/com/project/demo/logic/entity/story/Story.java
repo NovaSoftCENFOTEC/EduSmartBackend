@@ -13,6 +13,9 @@ public class Story {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
 
     @CreationTimestamp
