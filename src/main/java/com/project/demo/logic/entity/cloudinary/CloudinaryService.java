@@ -17,7 +17,19 @@ public class CloudinaryService {
 
     //Todo: Implement a method to upload videos or other files if needed.
     public String uploadImage(MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("No se subió ningún archivo.");
+        }
+
+        String fileName = file.getOriginalFilename();
+
+        if (fileName == null || !fileName.toLowerCase().matches(".*\\.(jpg|jpeg|png|gif|bmp|webp)$")) {
+            throw new IllegalArgumentException("Solo se permiten archivos de imagen con extensiones .jpg, .jpeg, .png, .gif, .bmp o .webp.");
+        }
+
         Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
         return uploadResult.get("secure_url").toString();
     }
+
+
 }
