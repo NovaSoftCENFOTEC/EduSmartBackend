@@ -6,6 +6,7 @@ import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
+import com.project.demo.rest.badge.dto.BadgeDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/badges")
@@ -43,8 +45,13 @@ public class BadgeRestController {
         meta.setPageNumber(badgePage.getNumber() + 1);
         meta.setPageSize(badgePage.getSize());
 
+        var badgesDto = badgePage.getContent()
+                .stream()
+                .map(BadgeDTO::fromEntity)
+                .collect(Collectors.toList());
+
         return new GlobalResponseHandler().handleResponse("Insignias obtenidas con éxito",
-                badgePage.getContent(), HttpStatus.OK, meta);
+                badgesDto, HttpStatus.OK, meta);
     }
 
     @GetMapping("/student/{studentId}")
@@ -61,18 +68,23 @@ public class BadgeRestController {
         meta.setPageNumber(badgePage.getNumber() + 1);
         meta.setPageSize(badgePage.getSize());
 
-        return new GlobalResponseHandler().handleResponse("Insignias del estudiante obtenidas con éxito",
-                badgePage.getContent(), HttpStatus.OK, meta);
-    }
+        var badgesDto = badgePage.getContent()
+                .stream()
+                .map(BadgeDTO::fromEntity)
+                .collect(Collectors.toList());
 
+        return new GlobalResponseHandler().handleResponse("Insignias del estudiante obtenidas con éxito",
+                badgesDto, HttpStatus.OK, meta);
+    }
 
     @GetMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getBadgeById(@PathVariable Long badgeId, HttpServletRequest request) {
         Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
         if (foundBadge.isPresent()) {
+            BadgeDTO badgeDto = BadgeDTO.fromEntity(foundBadge.get());
             return new GlobalResponseHandler().handleResponse("Insignia obtenida con éxito",
-                    foundBadge.get(), HttpStatus.OK, request);
+                    badgeDto, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
                     HttpStatus.NOT_FOUND, request);
@@ -83,33 +95,45 @@ public class BadgeRestController {
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createBadge(@RequestBody Badge badge, HttpServletRequest request) {
         badgeRepository.save(badge);
+        BadgeDTO badgeDto = BadgeDTO.fromEntity(badge);
         return new GlobalResponseHandler().handleResponse("Insignia creada con éxito",
-                badge, HttpStatus.CREATED, request);
+                badgeDto, HttpStatus.CREATED, request);
     }
 
-    @PostMapping("/{badgeId}/students/{studentId}")
+    @PutMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> assignBadgeToStudent(@PathVariable Long badgeId,
-                                                  @PathVariable Long studentId,
-                                                  HttpServletRequest request) {
+    public ResponseEntity<?> updateBadge(@PathVariable Long badgeId,
+                                         @RequestBody Badge updatedBadge,
+                                         HttpServletRequest request) {
         Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
-        if (foundBadge.isEmpty())
+        if (foundBadge.isEmpty()) {
             return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
                     HttpStatus.NOT_FOUND, request);
-
-        Optional<User> foundStudent = userRepository.findById(studentId);
-        if (foundStudent.isEmpty())
-            return new GlobalResponseHandler().handleResponse("Estudiante " + studentId + " no encontrado",
-                    HttpStatus.NOT_FOUND, request);
+        }
 
         Badge badge = foundBadge.get();
-        User student = foundStudent.get();
+        badge.setTitle(updatedBadge.getTitle());
+        badge.setDescription(updatedBadge.getDescription());
+        badge.setIconUrl(updatedBadge.getIconUrl());
 
-        badge.getStudents().add(student);
         badgeRepository.save(badge);
+        BadgeDTO badgeDto = BadgeDTO.fromEntity(badge);
 
-        return new GlobalResponseHandler().handleResponse("Insignia asignada con éxito",
-                badge, HttpStatus.OK, request);
+        return new GlobalResponseHandler().handleResponse("Insignia actualizada correctamente",
+                badgeDto, HttpStatus.OK, request);
+    }
+
+    @DeleteMapping("/{badgeId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> deleteBadge(@PathVariable Long badgeId, HttpServletRequest request) {
+        Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
+        if (foundBadge.isEmpty()) {
+            return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
+                    HttpStatus.NOT_FOUND, request);
+        }
+        badgeRepository.delete(foundBadge.get());
+        return new GlobalResponseHandler().handleResponse("Insignia eliminada con éxito",
+                null, HttpStatus.OK, request);
     }
 
     @DeleteMapping("/{badgeId}/students/{studentId}")
@@ -138,42 +162,41 @@ public class BadgeRestController {
         }
 
         badgeRepository.save(badge);
+        BadgeDTO badgeDto = BadgeDTO.fromEntity(badge);
+
         return new GlobalResponseHandler().handleResponse("Insignia removida con éxito",
-                badge, HttpStatus.OK, request);
+                badgeDto, HttpStatus.OK, request);
     }
 
-    @PutMapping("/{badgeId}")
+    @PostMapping("/{badgeId}/students/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> updateBadge(@PathVariable Long badgeId,
-                                         @RequestBody Badge badge,
-                                         HttpServletRequest request) {
-        Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
-        if (foundBadge.isEmpty()) {
+    public ResponseEntity<?> assignBadgeToStudent(@PathVariable Long badgeId,
+                                                  @PathVariable Long studentId,
+                                                  HttpServletRequest request) {
+        Optional<Badge> badgeOpt = badgeRepository.findById(badgeId);
+        if (badgeOpt.isEmpty())
             return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
                     HttpStatus.NOT_FOUND, request);
-        }
 
-        Badge updated = foundBadge.get();
-        updated.setTitle(badge.getTitle());
-        updated.setDescription(badge.getDescription());
-        updated.setIconUrl(badge.getIconUrl());
-
-        badgeRepository.save(updated);
-
-        return new GlobalResponseHandler().handleResponse("Insignia actualizada con éxito",
-                updated, HttpStatus.OK, request);
-    }
-
-    @DeleteMapping("/{badgeId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> deleteBadge(@PathVariable Long badgeId, HttpServletRequest request) {
-        Optional<Badge> foundBadge = badgeRepository.findById(badgeId);
-        if (foundBadge.isEmpty()) {
-            return new GlobalResponseHandler().handleResponse("Insignia " + badgeId + " no encontrada",
+        Optional<User> userOpt = userRepository.findById(studentId);
+        if (userOpt.isEmpty())
+            return new GlobalResponseHandler().handleResponse("Estudiante " + studentId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
+
+        Badge badge = badgeOpt.get();
+        User user = userOpt.get();
+
+        if (badge.getStudents().contains(user)) {
+            return new GlobalResponseHandler().handleResponse("Estudiante ya tiene esta insignia asignada",
+                    HttpStatus.BAD_REQUEST, request);
         }
-        badgeRepository.delete(foundBadge.get());
-        return new GlobalResponseHandler().handleResponse("Insignia eliminada con éxito",
-                null, HttpStatus.OK, request);
+
+        badge.getStudents().add(user);
+        badgeRepository.save(badge);
+
+        BadgeDTO badgeDto = BadgeDTO.fromEntity(badge);
+
+        return new GlobalResponseHandler().handleResponse("Insignia asignada con éxito",
+                badgeDto, HttpStatus.OK, request);
     }
 }

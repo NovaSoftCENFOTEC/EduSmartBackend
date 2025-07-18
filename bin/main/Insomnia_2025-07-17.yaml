@@ -9,7 +9,7 @@ collection:
     meta:
       id: fld_9f0eb540429b4738a77ad1140300828b
       created: 1751682170153
-      modified: 1752296354122
+      modified: 1752547658999
       sortKey: -1751681760040.75
     children:
       - url: "{{ _.base_url }}schools"
@@ -135,20 +135,21 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTU2NTUsImV4cCI6MTc1MjI5OTI1NX0.D0sEGcoZgIQwAhuoF-JNnhBXqNQExWJNNlKYz0S8noI
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Teachers
     meta:
       id: fld_bd12c6ac3c2b45498ce467f3d472f34f
       created: 1751686174130
-      modified: 1752290584174
+      modified: 1752610888654
       sortKey: -1751681760037.625
     children:
-      - url: "{{ _.base_url }}teachers/school/2"
+      - url: "{{ _.base_url }}teachers/school/1"
         name: Create Teacher By School ID
         meta:
           id: req_109639050001418b99e1a30e5d66722b
           created: 1751686233847
-          modified: 1751862443512
+          modified: 1752707527639
           isPrivate: false
           sortKey: -1751686233847
         method: POST
@@ -158,7 +159,7 @@ collection:
             {
             	"name": "Pedro",
             	"lastname": "Pica Piedra",
-            	"email": "pppiedra@ucenfotec.ac.cr"
+            	"email": "aseguracalderom26@gmail.com"
             }
         headers:
           - name: Content-Type
@@ -173,12 +174,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}teachers/school/2/teachers"
+      - url: "{{ _.base_url }}teachers/school/1/teachers"
         name: Get All Teachers By School ID
         meta:
           id: req_06f2abc831a44be5a32d14e2c9f34a6a
           created: 1751688007043
-          modified: 1752196368983
+          modified: 1752707678751
           isPrivate: false
           sortKey: -1751686233947
         method: GET
@@ -195,7 +196,8 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA0NDgsImV4cCI6MTc1MjI5NDA0OH0.S7NJ3_uUCBFXGe0T9Elr0eCPxsJ2ZMvn4Lh5jBsDSII
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Users
     meta:
       id: fld_476b7d0fc258477e95ef8302805fbeb7
@@ -231,15 +233,15 @@ collection:
     meta:
       id: fld_eebb24ec59ea415db533a3205b918c22
       created: 1751853410120
-      modified: 1752296093830
+      modified: 1752548359397
       sortKey: -1751681760039.1875
     children:
-      - url: "{{ _.base_url }}students/school/2/students"
+      - url: "{{ _.base_url }}students/school/1/students"
         name: Get All Students By School ID
         meta:
           id: req_0f70f52933174923a9051f14ddff888e
           created: 1751853421824
-          modified: 1751853473514
+          modified: 1752707659612
           isPrivate: false
           sortKey: -1751853421824
         method: GET
@@ -286,7 +288,8 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA2MjEsImV4cCI6MTc1MjI5NDIyMX0.ftlPaKEJRGpvK1rkdLtnttafDtq73d914jm-8O-4PKU
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Groups
     meta:
       id: fld_1229060666004446857c68ec935a02d6
@@ -721,7 +724,7 @@ collection:
     meta:
       id: fld_1bf4400ceb5141f097c1837dec63a33e
       created: 1752263968211
-      modified: 1752263988421
+      modified: 1752547655111
       sortKey: -1751681760043.875
     children:
       - url: "{{ _.base_url }}users/administrative/12"
@@ -783,7 +786,7 @@ collection:
           rebuildPath: true
     authentication:
       type: bearer
-      token: "{% response 'body', 'req_2f9480da2c0c4d77b496be91dbdb7a08',
+      token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Stories
     meta:
@@ -1900,7 +1903,7 @@ collection:
     meta:
       id: fld_043ff56bc54e4c0cae8cd0e01be8ecc2
       created: 1752453361803
-      modified: 1752453636102
+      modified: 1752547646988
       sortKey: -1751681760045.4375
     children:
       - url: "{{ _.base_url }}badges"
@@ -1968,7 +1971,7 @@ collection:
         meta:
           id: req_93af241e8ade4de8a02d6da34f960a6e
           created: 1752453721606
-          modified: 1752456168604
+          modified: 1752725351146
           isPrivate: false
           sortKey: -1752337967555
         method: POST
@@ -1976,9 +1979,9 @@ collection:
           mimeType: application/json
           text: |-
             {
-              "title": "Insignia de ejemplo",
-              "description": "Descripción de la insignia",
-              "iconUrl": "https://icon-url.com/icon.png"
+              "title": "Insignia de Oro",
+              "description": "Otorgada por alto rendimiento",
+              "iconUrl": "https://misitio.com/icons/gold_badge.png"
             }
         headers:
           - name: Content-Type
@@ -1993,46 +1996,16 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.base_url }}badges/2/students/1"
+      - url: "{{ _.base_url }}badges/2/students/2"
         name: Assign Badge
         meta:
           id: req_01a0fce51e3241049a216c98b6cdb380
           created: 1752453724436
-          modified: 1752457173811
+          modified: 1752725694485
           isPrivate: false
           sortKey: -1752318720927.5
         method: POST
         headers:
-          - name: User-Agent
-            value: insomnia/11.1.0
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: "{{ _.base_url }}badges/1"
-        name: Update Badge
-        meta:
-          id: req_0f9afb4811c745328b9f94175aa04edd
-          created: 1752456301454
-          modified: 1752456333261
-          isPrivate: false
-          sortKey: -1752309097613.75
-        method: PUT
-        body:
-          mimeType: application/json
-          text: |
-            {
-              "title": "Insignia actualizada",
-              "description": "Descripción actualizada",
-              "iconUrl": "https://icon-url.com/icon-updated.png"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
           - name: User-Agent
             value: insomnia/11.1.0
         settings:
@@ -2063,6 +2036,36 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.base_url }}badges/1"
+        name: Update Badge
+        meta:
+          id: req_44fbc1f4752f4fce992c5a98ea3e3a9a
+          created: 1752693486245
+          modified: 1752725402087
+          isPrivate: false
+          sortKey: -1752328344241.25
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "title": "Insignia de Plata",
+              "description": "Actualizada la descripción",
+              "iconUrl": "https://misitio.com/icons/silver_badge.png"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     authentication:
       type: bearer
       token: "{% response 'body', 'req_1726bac77d774aeabc2f950b27a4e77a',
@@ -2072,7 +2075,7 @@ collection:
     meta:
       id: req_1726bac77d774aeabc2f950b27a4e77a
       created: 1751681760047
-      modified: 1752372125110
+      modified: 1752546383513
       isPrivate: false
       sortKey: -1751681760047
     method: POST
