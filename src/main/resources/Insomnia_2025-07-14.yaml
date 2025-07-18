@@ -1,14 +1,14 @@
 type: collection.insomnia.rest/5.0
 name: Proyecto 3
 meta:
-  id: wrk_0dbb1784b86546d1ba4596a6d241b66c
-  created: 1752716613973
-  modified: 1752716613973
+  id: wrk_6a36e4c958be4824a43d663f4d5d3682
+  created: 1752816414849
+  modified: 1752816414849
   description: ""
 collection:
   - name: Schools
     meta:
-      id: fld_c80f135921d148d48944ae0d8a05896b
+      id: fld_881cba6d13eb462ba8722cc789f0338f
       created: 1751682170153
       modified: 1752296354122
       sortKey: -1751681760040.75
@@ -17,7 +17,7 @@ collection:
       - url: "{{ _.base_url }}schools"
         name: Get All Schools
         meta:
-          id: req_8e9c7db18eb1421eb86e1bae62311eff
+          id: req_7d289f29069440bfb35a66d8423c0e71
           created: 1751681959439
           modified: 1752296345909
           isPrivate: false
@@ -41,7 +41,7 @@ collection:
       - url: "{{ _.base_url }}schools/1"
         name: Get School By ID
         meta:
-          id: req_c55f70e3bc65431aabcbf867c7acf966
+          id: req_e9ac2935a92842649161591f055cce43
           created: 1751682644256
           modified: 1751682699223
           isPrivate: false
@@ -65,7 +65,7 @@ collection:
       - url: "{{ _.base_url }}schools"
         name: Create School
         meta:
-          id: req_7746ac8d7db14d4a8e774a9c3a504294
+          id: req_2fb7fe4db830487faa1428f31a6cd502
           created: 1751682711001
           modified: 1752290645625
           isPrivate: false
@@ -101,7 +101,7 @@ collection:
       - url: "{{ _.base_url }}schools/2"
         name: Update School
         meta:
-          id: req_acdea15cb3d74c82b9a9696c242af30f
+          id: req_2ec7bae50e304c5f9c84b5160c9b74bc
           created: 1751682837030
           modified: 1751683285571
           isPrivate: false
@@ -134,7 +134,7 @@ collection:
       - url: "{{ _.base_url }}schools/3"
         name: Delete School
         meta:
-          id: req_39d395498ad84aa9918f7399b10362f9
+          id: req_2e9beedac3de49a9830fb6f53dd3e654
           created: 1751683217690
           modified: 1751683244530
           isPrivate: false
@@ -163,7 +163,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTU2NTUsImV4cCI6MTc1MjI5OTI1NX0.D0sEGcoZgIQwAhuoF-JNnhBXqNQExWJNNlKYz0S8noI
   - name: Teachers
     meta:
-      id: fld_e21a2bc2494c421babf767bebaca25a0
+      id: fld_62de38a8b1f046e4b64cd8ea57bb2ff8
       created: 1751686174130
       modified: 1752290584174
       sortKey: -1751681760037.625
@@ -172,7 +172,7 @@ collection:
       - url: "{{ _.base_url }}teachers/school/2"
         name: Create Teacher By School ID
         meta:
-          id: req_2695f753e47c4c83b341b253dbf96677
+          id: req_f90185175b2e4ba9853cc4d27ef10dc5
           created: 1751686233847
           modified: 1751862443512
           isPrivate: false
@@ -206,7 +206,7 @@ collection:
       - url: "{{ _.base_url }}teachers/school/2/teachers"
         name: Get All Teachers By School ID
         meta:
-          id: req_c404f882c64d4eb58ad55cb82ce6f132
+          id: req_630cee530c1643d8a240b16ad28bce12
           created: 1751688007043
           modified: 1752196368983
           isPrivate: false
@@ -235,7 +235,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA0NDgsImV4cCI6MTc1MjI5NDA0OH0.S7NJ3_uUCBFXGe0T9Elr0eCPxsJ2ZMvn4Lh5jBsDSII
   - name: Users
     meta:
-      id: fld_48276347b1634d248fe661272cecdd24
+      id: fld_5a710fcb14e04fd48e966902e4daa9ef
       created: 1751686425784
       modified: 1751853778371
       sortKey: -1751681760036.8438
@@ -244,7 +244,7 @@ collection:
       - url: "{{ _.base_url }}users"
         name: Get All Users
         meta:
-          id: req_58ed533ff78b4e8393c0fbb688b9e5fc
+          id: req_c8edad2577524766a695886e9da1f219
           created: 1751686442480
           modified: 1751686461831
           isPrivate: false
@@ -274,7 +274,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Students
     meta:
-      id: fld_4521767870a847969e8c3c35808bb3a4
+      id: fld_b9e92f599bab4196bdcd24f9e79c1302
       created: 1751853410120
       modified: 1752296093830
       sortKey: -1751681760039.1875
@@ -283,7 +283,7 @@ collection:
       - url: "{{ _.base_url }}students/school/2/students"
         name: Get All Students By School ID
         meta:
-          id: req_521eb4d7aeca4df5b81699c1909aff94
+          id: req_5f5d465cc2a34c55a0d002fd0bde17c9
           created: 1751853421824
           modified: 1751853473514
           isPrivate: false
@@ -307,7 +307,7 @@ collection:
       - url: "{{ _.base_url }}students/school/2"
         name: Create Student By School ID
         meta:
-          id: req_8808b9a4f1734d0fb159fc2da24c0590
+          id: req_42cc9f212d4f4b2c844ddd9f1de03506
           created: 1751853490794
           modified: 1752290673025
           isPrivate: false
@@ -346,7 +346,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA2MjEsImV4cCI6MTc1MjI5NDIyMX0.ftlPaKEJRGpvK1rkdLtnttafDtq73d914jm-8O-4PKU
   - name: Groups
     meta:
-      id: fld_ca5411aa72884881b2c3c90014382186
+      id: fld_7b5e9c735dbc48b7bfa5a91fea82c225
       created: 1751853763196
       modified: 1752263007314
       sortKey: -1751681760036.3555
@@ -355,7 +355,7 @@ collection:
       - url: "{{ _.base_url }}groups"
         name: Get All Groups
         meta:
-          id: req_89ce8c7e70784ab685715dd9523a7182
+          id: req_75ff26448b3e4676934fe02d5e1cef28
           created: 1751853795743
           modified: 1751853902154
           isPrivate: false
@@ -379,7 +379,7 @@ collection:
       - url: "{{ _.base_url }}groups/course/1/teacher/7"
         name: Create Group
         meta:
-          id: req_f86bc21f52364889b5d20bd0706fbebe
+          id: req_63783aa57f294d1383ec583a60d910bb
           created: 1751854136765
           modified: 1752196379009
           isPrivate: false
@@ -411,7 +411,7 @@ collection:
       - url: "{{ _.base_url }}groups/7"
         name: Update Group
         meta:
-          id: req_e50b74e014d941f6a35ec401a5db3fff
+          id: req_a1e44e1cf0724e499f9d313334f6f65f
           created: 1751862273279
           modified: 1752196442031
           isPrivate: false
@@ -463,7 +463,7 @@ collection:
       - url: "{{ _.base_url }}groups/7"
         name: Delete Group
         meta:
-          id: req_1d4da59e8ede4d20a1a057d2c55c7abf
+          id: req_6c61994e86c34993a1940f0ffc2ac3f7
           created: 1751862613009
           modified: 1752196658317
           isPrivate: false
@@ -487,7 +487,7 @@ collection:
       - url: "{{ _.base_url }}groups/1/students/5"
         name: Add Student to Group
         meta:
-          id: req_d72148c45efd43b88f9d8edc5d360483
+          id: req_eb43d8d179064c52b59afa0a5de9954a
           created: 1752196471966
           modified: 1752196641704
           isPrivate: false
@@ -511,7 +511,7 @@ collection:
       - url: "{{ _.base_url }}groups/1/students/5"
         name: Remove Student from Group
         meta:
-          id: req_75e8411d6afa47b9a80c6ea366a64527
+          id: req_da54fdb057f242c0b4f48c0bf2cf2084
           created: 1752196596199
           modified: 1752196635889
           isPrivate: false
@@ -541,7 +541,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Curso
     meta:
-      id: fld_a83a4492e820423b9f23754b9703f9f9
+      id: fld_eb8bc375873e4ea9bdfb04430e49a3ac
       created: 1751860974979
       modified: 1752372191131
       sortKey: -1751681760036.4531
@@ -550,7 +550,7 @@ collection:
       - url: "{{ _.base_url }}courses"
         name: Get All Courses
         meta:
-          id: req_d76e524a8f05443890bb2033462b787d
+          id: req_add28f24b9fa47cbacb1901a84987698
           created: 1751861014699
           modified: 1751861064626
           isPrivate: false
@@ -574,7 +574,7 @@ collection:
       - url: "{{ _.base_url }}courses"
         name: Create Course
         meta:
-          id: req_03beb0105c754370a3a72045833ddb2e
+          id: req_003de10c01da4011ad7a25a3cacfd34b
           created: 1751861058940
           modified: 1751862983903
           isPrivate: false
@@ -608,7 +608,7 @@ collection:
       - url: "{{ _.base_url }}courses/1"
         name: Update Course
         meta:
-          id: req_28003f61941c4f0dab5435f1ad85ba01
+          id: req_5ff661579b434d9a827da3394b5a33ad
           created: 1751861142454
           modified: 1751861194913
           isPrivate: false
@@ -642,7 +642,7 @@ collection:
       - url: "{{ _.base_url }}courses/3"
         name: Delete Course
         meta:
-          id: req_bca1b1f6f41e49d2be0ad3b94ea06097
+          id: req_39711db35f7f437f9d0535e5fe7fc017
           created: 1751861244941
           modified: 1751862990358
           isPrivate: false
@@ -672,7 +672,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Material
     meta:
-      id: fld_e1f3cda1eb894361aced11b08541f4bd
+      id: fld_aedc253f002b43a2802fd3851765ea54
       created: 1752262979117
       modified: 1752290521882
       sortKey: -1751681760036.27
@@ -681,7 +681,7 @@ collection:
       - url: "{{ _.base_url }}materials/course/1/materials"
         name: Get Materials by Course ID
         meta:
-          id: req_f6d7b41c5c234741b46ab775a95571b6
+          id: req_98f4702a0e784f52833948694a4268c8
           created: 1752263064805
           modified: 1752263114698
           isPrivate: false
@@ -705,7 +705,7 @@ collection:
       - url: "{{ _.base_url }}materials/teacher/4/materials"
         name: Get Materials by Teacher ID
         meta:
-          id: req_3797b38d57e44511a09066de38f6100d
+          id: req_05f93edc81dd4ff7aa07adf6cdacb2a5
           created: 1752263126561
           modified: 1752263140741
           isPrivate: false
@@ -729,7 +729,7 @@ collection:
       - url: "{{ _.base_url }}materials/course/1/teacher/1"
         name: Create Material
         meta:
-          id: req_c40594cf18dc44b88d37e9e1d3f27629
+          id: req_ddeb2f2818d5458680a3c5da1c1f00b1
           created: 1752263157156
           modified: 1752290569007
           isPrivate: false
@@ -762,7 +762,7 @@ collection:
       - url: "{{ _.base_url }}materials/2"
         name: Delete Material
         meta:
-          id: req_35eec86b442d4b6e8bfdfa7827bd4ef2
+          id: req_7b9fc36b485844c6a7742b5927a9d0e7
           created: 1752263355369
           modified: 1752263810160
           isPrivate: false
@@ -786,7 +786,7 @@ collection:
       - url: "{{ _.base_url }}materials/2"
         name: Update Material
         meta:
-          id: req_798a9fb7f7714e22823b4f9ee674f35c
+          id: req_4ce308569df4425b99dfbf19447b2d5f
           created: 1752263422578
           modified: 1752263797328
           isPrivate: false
@@ -848,7 +848,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA0NDgsImV4cCI6MTc1MjI5NDA0OH0.S7NJ3_uUCBFXGe0T9Elr0eCPxsJ2ZMvn4Lh5jBsDSII
   - name: Users
     meta:
-      id: fld_d1f95ec97d8d42ccb0c5c5fea1abff16
+      id: fld_561c649394534d2b8720f7034f7b84aa
       created: 1752263968211
       modified: 1752263988421
       sortKey: -1751681760043.875
@@ -857,7 +857,7 @@ collection:
       - url: "{{ _.base_url }}users/administrative/12"
         name: Administrative Update of User
         meta:
-          id: req_d2ff46a7780342c1bc4d5561940d9e2a
+          id: req_1512434783a74c7e85233deaae1059ae
           created: 1752263975273
           modified: 1752271405647
           isPrivate: false
@@ -890,7 +890,7 @@ collection:
       - url: "{{ _.base_url }}users/password/12"
         name: Update User Password
         meta:
-          id: req_9455b178171f4d9e8a74322356cd6953
+          id: req_6d666aa3b54b4c9fb381e7194f92ce29
           created: 1752271432366
           modified: 1752271488068
           isPrivate: false
@@ -928,7 +928,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Stories
     meta:
-      id: fld_5b36d5cc03354fc8a26cdf64108fbb09
+      id: fld_5e5bba0ff935437d8ee3f24127425ef4
       created: 1752266019334
       modified: 1752282041828
       sortKey: -1751681760036.3433
@@ -937,7 +937,7 @@ collection:
       - url: "{{ _.base_url }}stories/course/1/stories"
         name: Get Stories by Course ID
         meta:
-          id: req_092d738724c944c4a64600dc5a3390b2
+          id: req_6b561fc928e24d92b83212e723a44e0f
           created: 1752266064403
           modified: 1752266113871
           isPrivate: false
@@ -961,7 +961,7 @@ collection:
       - url: "{{ _.base_url }}stories/course/1"
         name: Create Story
         meta:
-          id: req_619bc979bde045249535619e03508333
+          id: req_3a364bfb826d45b59542fc14a6ece597
           created: 1752266138765
           modified: 1752290726477
           isPrivate: false
@@ -997,7 +997,7 @@ collection:
       - url: "{{ _.base_url }}stories/1"
         name: Update Story
         meta:
-          id: req_f19ef213aae74eb89c6b20da6b9824cc
+          id: req_ad96dc7b5ae44e20b15c7c1bdbc62d4d
           created: 1752266248579
           modified: 1752266302233
           isPrivate: false
@@ -1037,7 +1037,7 @@ collection:
       - url: "{{ _.base_url }}stories/2"
         name: Delete Story
         meta:
-          id: req_4f0f57b6d5e848bd8f3647144c6ed37d
+          id: req_7c692950693342b9a45aae8b28963542
           created: 1752266343550
           modified: 1752266351144
           isPrivate: false
@@ -1066,7 +1066,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyODE5NzMsImV4cCI6MTc1MjI4NTU3M30.HdhUKUTB9rRWr6olHkdhQkyGOg41G1TT9MIidIpo-qA
   - name: Illustrations
     meta:
-      id: fld_27ca119fd4d24ea59807c72adceb40b4
+      id: fld_043e83fb9ef6456d96b1c524de64a5c8
       created: 1752267294970
       modified: 1752281993315
       sortKey: -1751681760036.3403
@@ -1075,7 +1075,7 @@ collection:
       - url: "{{ _.base_url }}illustrations/story/1/illustrations"
         name: Get Illustrations by Story ID
         meta:
-          id: req_858ea53a2d0c4c6ba82748f8e128ca4b
+          id: req_6b8e54de71c54677b336d0c1dd39aab3
           created: 1752267322977
           modified: 1752267538495
           isPrivate: false
@@ -1099,7 +1099,7 @@ collection:
       - url: "{{ _.base_url }}illustrations/story/1"
         name: Create Illustration
         meta:
-          id: req_ada98af42d4e4e96917c35d849f6067a
+          id: req_ae9acdb046784517aa5bd64534d1e381
           created: 1752267534241
           modified: 1752290744107
           isPrivate: false
@@ -1136,7 +1136,7 @@ collection:
       - url: "{{ _.base_url }}illustrations/1"
         name: Update Illustration
         meta:
-          id: req_7bb85c4b3ca5493686b7a738b4954872
+          id: req_b49596a862de484398ce482d5e27bb70
           created: 1752267648992
           modified: 1752267756157
           isPrivate: false
@@ -1183,7 +1183,7 @@ collection:
       - url: "{{ _.base_url }}illustrations/2"
         name: Delete Illustration
         meta:
-          id: req_dfbc1a0829754b05bcf4896c3f25bea9
+          id: req_3240276514164022a33fee34dbb0ef90
           created: 1752267752096
           modified: 1752267764302
           isPrivate: false
@@ -1212,7 +1212,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyODE5NzMsImV4cCI6MTc1MjI4NTU3M30.HdhUKUTB9rRWr6olHkdhQkyGOg41G1TT9MIidIpo-qA
   - name: Audio Tracks
     meta:
-      id: fld_42bceb99ca8e4dfd99d20a9edae91aaa
+      id: fld_898f7c7adec34df5912bcaad9d153ad6
       created: 1752269166922
       modified: 1752290689154
       sortKey: -1751681760036.3372
@@ -1221,7 +1221,7 @@ collection:
       - url: "{{ _.base_url }}audio-tracks/story/1/audio-tracks"
         name: Get Audio Tracks by Story ID
         meta:
-          id: req_acf3c8cdb0314429baff7cebf5129e4c
+          id: req_80449fef4f3444d186694b8e59751f00
           created: 1752269223276
           modified: 1752281678895
           isPrivate: false
@@ -1248,7 +1248,7 @@ collection:
       - url: "{{ _.base_url }}audio-tracks/story/1"
         name: Create Audio Track
         meta:
-          id: req_c2db0938f8d14bf5b3765c692900ef61
+          id: req_02567b3bd1674bd5a343b98648c38640
           created: 1752269271879
           modified: 1752290713836
           isPrivate: false
@@ -1286,7 +1286,7 @@ collection:
       - url: "{{ _.base_url }}audio-tracks/1"
         name: Update Audio Track
         meta:
-          id: req_955c64b82d4f4cd18711ed68bbf6a62a
+          id: req_01e0f06f2974427db716bc61ddef86f2
           created: 1752269377490
           modified: 1752269466116
           isPrivate: false
@@ -1334,7 +1334,7 @@ collection:
       - url: "{{ _.base_url }}audio-tracks/2"
         name: Delete Audio Track
         meta:
-          id: req_2ce942b1408d4648821984dd0a5a17c5
+          id: req_2a73ed7e3c7a4f4a87cd00e9841ab424
           created: 1752269455776
           modified: 1752269503689
           isPrivate: false
@@ -1363,7 +1363,7 @@ collection:
       token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlci5hZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NTIyOTA2MjEsImV4cCI6MTc1MjI5NDIyMX0.ftlPaKEJRGpvK1rkdLtnttafDtq73d914jm-8O-4PKU
   - name: Quiz
     meta:
-      id: fld_c60059b3a19d4feab929f0d70ba00807
+      id: fld_32b02c1e4e79426f92c0ae0d81071a9a
       created: 1752282166834
       modified: 1752372154085
       sortKey: -1751681760038.4062
@@ -1372,7 +1372,7 @@ collection:
       - url: "{{ _.base_url }}quizzes/story/1"
         name: Create Quiz
         meta:
-          id: req_2d714a72819b478c90d5eea25c9dcd22
+          id: req_5f93d5574c5a4702a8f77a57944fce8c
           created: 1752282174851
           modified: 1752372242757
           isPrivate: false
@@ -1410,7 +1410,7 @@ collection:
       - url: "{{ _.base_url }}quizzes/1"
         name: Update Quiz
         meta:
-          id: req_1213d786806440e4827e00406b2bbaa3
+          id: req_6b59f98f493a45f996bd13a572fda30c
           created: 1752283600886
           modified: 1752283692923
           isPrivate: false
@@ -1444,7 +1444,7 @@ collection:
       - url: "{{ _.base_url }}quizzes/1"
         name: Get Quiz
         meta:
-          id: req_43d8eae80e0a409ca8d527839bb05c59
+          id: req_6065e57419024017b87fa09de9591545
           created: 1752283708279
           modified: 1752297533564
           isPrivate: false
@@ -1468,7 +1468,7 @@ collection:
       - url: "{{ _.base_url }}quizzes/1"
         name: Delete Quiz
         meta:
-          id: req_9ca41105ccd3402fb241ffbf9dafd637
+          id: req_475392e54adb4143939ff88de0af296e
           created: 1752283753906
           modified: 1752283906377
           isPrivate: false
@@ -1492,7 +1492,7 @@ collection:
       - url: "{{ _.base_url }}quizzes"
         name: Get All Quizzes
         meta:
-          id: req_34ef20a510d44c4bbf0b0f94d8cf51c6
+          id: req_9cf8acca2ae94c4bad27c6338cd462ff
           created: 1752283869731
           modified: 1752283896152
           isPrivate: false
@@ -1522,7 +1522,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Question
     meta:
-      id: fld_479f2b004e3b4305bee1af3a9a489758
+      id: fld_9e862d6a33d945b99918fddedeaf49ff
       created: 1752287398434
       modified: 1752372503728
       sortKey: -1751681760037.2344
@@ -1531,7 +1531,7 @@ collection:
       - url: "{{ _.base_url }}questions/quiz/2"
         name: Create Question
         meta:
-          id: req_8ac303f2b0ea424c8beae936151aff54
+          id: req_753b0c4e3876477bbd2d4e62182f0472
           created: 1752287405324
           modified: 1752372516582
           isPrivate: false
@@ -1563,7 +1563,7 @@ collection:
       - url: "{{ _.base_url }}questions/quiz/2"
         name: Get Questions from Quiz
         meta:
-          id: req_47954d298aa243939fdcb352f57c39dc
+          id: req_4567bd93cd004db6a7c966d7c350a597
           created: 1752287902717
           modified: 1752372551439
           isPrivate: false
@@ -1587,7 +1587,7 @@ collection:
       - url: "{{ _.base_url }}questions/1"
         name: Get Question
         meta:
-          id: req_024f9cc9250e411fa67fe8af49d6e3a7
+          id: req_adabb7ab8c2b46bebe54e80759ded9e7
           created: 1752288053681
           modified: 1752372581165
           isPrivate: false
@@ -1611,7 +1611,7 @@ collection:
       - url: "{{ _.base_url }}questions/1"
         name: Update Question
         meta:
-          id: req_2314524977b34d9ea29d24a6236a0464
+          id: req_52387e05aaa74de896cee3f272bc51c5
           created: 1752288161991
           modified: 1752372655266
           isPrivate: false
@@ -1643,7 +1643,7 @@ collection:
       - url: "{{ _.base_url }}questions/1"
         name: Delete Question
         meta:
-          id: req_18215eb44e614e92995167341b0c6600
+          id: req_d02b1fab967a4c7690ab3c6e98dbe27c
           created: 1752288405010
           modified: 1752288451675
           isPrivate: false
@@ -1673,7 +1673,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Options
     meta:
-      id: fld_f283004d467c4c3b82dc5d6ffb146a1c
+      id: fld_eb61ce34d63d47c4b56d96ea6ea2116d
       created: 1752290337538
       modified: 1752372475777
       sortKey: -1751681760037.4297
@@ -1682,7 +1682,7 @@ collection:
       - url: "{{ _.base_url }}options/question/2"
         name: Create Option
         meta:
-          id: req_63e07d65dff847f7a339760bd0699dc6
+          id: req_21c92c265c604b83a18a29633c06edc8
           created: 1752290350037
           modified: 1752372778856
           isPrivate: false
@@ -1715,7 +1715,7 @@ collection:
       - url: "{{ _.base_url }}options/question/2"
         name: Get Options in Question
         meta:
-          id: req_0a5601206a0342ddb3431525a89b1d5b
+          id: req_68f66b97bda44926afc5c69c1aa1cd1f
           created: 1752290878022
           modified: 1752372831035
           isPrivate: false
@@ -1739,7 +1739,7 @@ collection:
       - url: "{{ _.base_url }}options/1"
         name: Get Option
         meta:
-          id: req_d31a3d81a6304b0fa12b723db9b9714b
+          id: req_3d232053dcae4de8a67b10b195ceef94
           created: 1752290967497
           modified: 1752372865277
           isPrivate: false
@@ -1763,7 +1763,7 @@ collection:
       - url: "{{ _.base_url }}options/1"
         name: Update Option
         meta:
-          id: req_707a7f2c5c5940fa88d5a08400067fa7
+          id: req_2d2bb48d8a6445e6a05e712e4eb618d2
           created: 1752291052839
           modified: 1752291085954
           isPrivate: false
@@ -1796,7 +1796,7 @@ collection:
       - url: "{{ _.base_url }}options/1"
         name: Delete Option
         meta:
-          id: req_ffadd5b5280c4ffabb55b79a745ba5e9
+          id: req_b7b5100092ab4321866f9fb5ee28216e
           created: 1752291098457
           modified: 1752372903985
           isPrivate: false
@@ -1826,7 +1826,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Submissions
     meta:
-      id: fld_598abd83da0448baa67bac87002e55da
+      id: fld_99e68ee652d94128891b5fe8fd388fbe
       created: 1752296073112
       modified: 1752372979764
       sortKey: -1751681760039.9688
@@ -1835,7 +1835,7 @@ collection:
       - url: "{{ _.base_url }}submissions/quiz/2/student/1"
         name: Create Submission
         meta:
-          id: req_0eb813ad2fc9496ca4ba1d978bd72b5b
+          id: req_9047db749bdb427390d27ae886671515
           created: 1752296076734
           modified: 1752372998184
           isPrivate: false
@@ -1867,7 +1867,7 @@ collection:
       - url: "{{ _.base_url }}submissions/quiz/1"
         name: Get Submissions for Quiz
         meta:
-          id: req_e1ea61d1b7d74d32b3cee6cfeeaa84cd
+          id: req_bb7d81054eb24ad79997269856b2cf59
           created: 1752296416667
           modified: 1752296541360
           isPrivate: false
@@ -1891,7 +1891,7 @@ collection:
       - url: "{{ _.base_url }}submissions/1"
         name: Get a Submission
         meta:
-          id: req_f38e76b8064f4d2190cedcd7d1d30e76
+          id: req_ae6f05fbf33e42798db0e0779a773750
           created: 1752296512044
           modified: 1752296554969
           isPrivate: false
@@ -1915,7 +1915,7 @@ collection:
       - url: "{{ _.base_url }}submissions/1"
         name: Update Submission
         meta:
-          id: req_bcc5c442d9e44145b5ee6f1fc6cde344
+          id: req_c4b17047616b437f95365c144f74aa67
           created: 1752296580692
           modified: 1752296709650
           isPrivate: false
@@ -1947,7 +1947,7 @@ collection:
       - url: "{{ _.base_url }}submissions/1"
         name: Delete Submission
         meta:
-          id: req_0a2c36ddc5b143f7958ea319acec2e0f
+          id: req_f3ff3879bd304a07a718492ef0c1fe75
           created: 1752296673701
           modified: 1752296758246
           isPrivate: false
@@ -1971,7 +1971,7 @@ collection:
       - url: "{{ _.base_url }}submissions/student/1"
         name: Get user's Submissions
         meta:
-          id: req_3f9e2e6f71dd4d838e76387f4d70270a
+          id: req_266b7ff9308f4f2ba6c895508bdfef1d
           created: 1752296763517
           modified: 1752296796872
           isPrivate: false
@@ -2001,7 +2001,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Answer
     meta:
-      id: fld_6d8504eb460a4627aae0935692be290d
+      id: fld_c01df6d56eb44050981ccd4845c93e3a
       created: 1752298457617
       modified: 1752373127712
       sortKey: -1751681760038.7969
@@ -2010,7 +2010,7 @@ collection:
       - url: "{{ _.base_url }}answers/submission/1/bulk"
         name: Post multiple Answers
         meta:
-          id: req_2e2b3c682cea47dc8023ffbdedbfe742
+          id: req_5957a5525c324041a2be7d58dc453008
           created: 1752298470917
           modified: 1752298524350
           isPrivate: false
@@ -2053,7 +2053,7 @@ collection:
       - url: "{{ _.base_url }}answers/1"
         name: Update Answer
         meta:
-          id: req_123caa61ae1044c59de8f68f50970cd5
+          id: req_fb72496111974e2682d2f673df52d7e0
           created: 1752298570678
           modified: 1752298632796
           isPrivate: false
@@ -2085,7 +2085,7 @@ collection:
       - url: "{{ _.base_url }}answers/submission/1"
         name: Get Submissions's Answers
         meta:
-          id: req_903a94fac72d4a2b80f2283a4fa8606e
+          id: req_9a87089b538a467c89e2cadeca9115cd
           created: 1752298617413
           modified: 1752298697566
           isPrivate: false
@@ -2109,7 +2109,7 @@ collection:
       - url: "{{ _.base_url }}answers/1"
         name: Get Answer
         meta:
-          id: req_79875be9c0e54bc7a939511ec867bf78
+          id: req_ba0a3af4d1694a789169d1c29cf61ab1
           created: 1752298700565
           modified: 1752298751134
           isPrivate: false
@@ -2133,7 +2133,7 @@ collection:
       - url: "{{ _.base_url }}answers/submission/1/question/2/option/2"
         name: Post One Answer
         meta:
-          id: req_ee9777f87e324687a495355a51d5916d
+          id: req_c3c4e4ca91aa4476a9082c34cda02a42
           created: 1752298771640
           modified: 1752373266470
           isPrivate: false
@@ -2157,7 +2157,7 @@ collection:
       - url: "{{ _.base_url }}answers/question/1"
         name: Get Answer by Question
         meta:
-          id: req_3a761ed398a84e188356fdc2c1bc4453
+          id: req_ba78cb2025134824824685ac2d601166
           created: 1752298906373
           modified: 1752298992459
           isPrivate: false
@@ -2181,7 +2181,7 @@ collection:
       - url: "{{ _.base_url }}answers/1"
         name: Delete Answer
         meta:
-          id: req_ac8bc6c40ae646279d64cfcaf5a7052a
+          id: req_ca29347ad72f4f8bb2b7e25c3b59358a
           created: 1752299013637
           modified: 1752299470879
           isPrivate: false
@@ -2205,7 +2205,7 @@ collection:
       - url: "{{ _.base_url }}answers/submission/1/results"
         name: Get Structured Answer
         meta:
-          id: req_97e4e334ef534aa2a2737966f1188524
+          id: req_e4015f9d49ef446b883a11743e793884
           created: 1752299474300
           modified: 1752373148592
           isPrivate: false
@@ -2235,7 +2235,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Badges
     meta:
-      id: fld_c4069177295d4d4eb8e8f6fa5e888dbe
+      id: fld_5c093f879d4e41fb986bf7bd22974690
       created: 1752453361803
       modified: 1752453636102
       sortKey: -1751681760045.4375
@@ -2244,7 +2244,7 @@ collection:
       - url: "{{ _.base_url }}badges"
         name: Get All Badges
         meta:
-          id: req_a0a0ba6948b34a4b95d7af217a239630
+          id: req_c01408d7900e4ef2aca6c8996508e104
           created: 1752453447320
           modified: 1752453658938
           isPrivate: false
@@ -2268,7 +2268,7 @@ collection:
       - url: "{{ _.base_url }}badges/student/1"
         name: Get All By Student ID
         meta:
-          id: req_49467a7661b1418f9a29dd8d8bcf3bec
+          id: req_d0ead4b667b840e38ec4d8cae924cec5
           created: 1752453703121
           modified: 1752455912285
           isPrivate: false
@@ -2292,7 +2292,7 @@ collection:
       - url: "{{ _.base_url }}badges/1"
         name: Get Badge By ID
         meta:
-          id: req_67798d376d5f4e2780964794be62307a
+          id: req_7a232961582444ebab3927bd599aa816
           created: 1752453718118
           modified: 1752718693131
           isPrivate: false
@@ -2320,7 +2320,7 @@ collection:
       - url: "{{ _.base_url }}badges"
         name: Create Badge
         meta:
-          id: req_e4838fa407004d6292295ad7a2296969
+          id: req_fe59a1507d2e4d119de6a9200620f02c
           created: 1752453721606
           modified: 1752456168604
           isPrivate: false
@@ -2354,7 +2354,7 @@ collection:
       - url: "{{ _.base_url }}badges/2/students/1"
         name: Assign Badge
         meta:
-          id: req_be9fd047a57849cf9c61de54045122a9
+          id: req_eae5c8fd1c0746eb91439d411d92cd7b
           created: 1752453724436
           modified: 1752457173811
           isPrivate: false
@@ -2378,7 +2378,7 @@ collection:
       - url: "{{ _.base_url }}badges/1"
         name: Update Badge
         meta:
-          id: req_1b4ae2e204c84d08ab82f9d1db587b2c
+          id: req_64e21f2005bf413aa7ee7749fe7077bd
           created: 1752456301454
           modified: 1752456333261
           isPrivate: false
@@ -2412,7 +2412,7 @@ collection:
       - url: "{{ _.base_url }}badges/1"
         name: Delete Badge
         meta:
-          id: req_b24dfb824d28473e9774a31b45b531bf
+          id: req_2b634b064e7d410694645783c30ebdd4
           created: 1752456360659
           modified: 1752456383176
           isPrivate: false
@@ -2442,7 +2442,7 @@ collection:
         'b64::JC50b2tlbg==::46b', 'never', 60 %}"
   - name: Assignments
     meta:
-      id: fld_8df892d01a434454b53e38573018dd64
+      id: fld_0f43bf2fc0f14929ba211d8d79bef6ec
       created: 1752718180592
       modified: 1752721068700
       sortKey: -1751681760042.3125
@@ -2451,9 +2451,9 @@ collection:
       - url: "{{ _.base_url }}assignments"
         name: Get All Asignments
         meta:
-          id: req_df400fa537d84304b64acaaeed5fd435
+          id: req_1249b0c5c8534dffa4add28e3e5d6945
           created: 1752718183937
-          modified: 1752720708158
+          modified: 1752817870991
           isPrivate: false
           description: ""
           sortKey: -1752718183937
@@ -2468,8 +2468,11 @@ collection:
             value: insomnia/11.2.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_8eb1ba4cffde4ac28c76d0b6abffcc78',
+          token: "{% response 'body', 'req_2a815b7910d84bfa9f1ac7b14e8b8142',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -2481,7 +2484,7 @@ collection:
       - url: "{{ _.base_url }}assignments"
         name: Create Assignment
         meta:
-          id: req_026115da9826458aba00a69658379f6a
+          id: req_20d781da4abb4771a735f6adbcbc3c26
           created: 1752718355980
           modified: 1752720566880
           isPrivate: false
@@ -2509,6 +2512,9 @@ collection:
           type: bearer
           token: "{% response 'body', 'req_8eb1ba4cffde4ac28c76d0b6abffcc78',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -2520,7 +2526,7 @@ collection:
       - url: "{{ _.base_url }}assignments/1"
         name: Get Assignment By ID
         meta:
-          id: req_5b7cbcc432d7469f90733fb6e12a4a9f
+          id: req_cb0c61beb1e1493cb1c05f4abf87703c
           created: 1752718632945
           modified: 1752719389845
           isPrivate: false
@@ -2534,6 +2540,9 @@ collection:
           type: bearer
           token: "{% response 'body', 'req_eb95572ec9904d759edc84731a0534a9',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -2545,9 +2554,9 @@ collection:
       - url: "{{ _.base_url }}assignments/group/1"
         name: Add group to Assignment
         meta:
-          id: req_6cd9c9e9cdd2409baca15020d4566e5e
+          id: req_5266f24ca776411d8962eb618e0ebe6c
           created: 1752719928347
-          modified: 1752720112020
+          modified: 1752816804135
           isPrivate: false
           description: ""
           sortKey: -1752719928347
@@ -2570,6 +2579,9 @@ collection:
           type: bearer
           token: "{% response 'body', 'req_8eb1ba4cffde4ac28c76d0b6abffcc78',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -2581,7 +2593,7 @@ collection:
       - url: "{{ _.base_url }}assignments/4"
         name: Update Assignment
         meta:
-          id: req_e9c76142725d406a8a361a3fe8ab3175
+          id: req_1a6e422a1367459d93c0607f8cd46464
           created: 1752720257762
           modified: 1752720661985
           isPrivate: false
@@ -2609,6 +2621,9 @@ collection:
           type: bearer
           token: "{% response 'body', 'req_8eb1ba4cffde4ac28c76d0b6abffcc78',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -2620,7 +2635,7 @@ collection:
       - url: "{{ _.base_url }}assignments/1"
         name: Delete Assignment
         meta:
-          id: req_91bb909a28734596a411d226b170faf7
+          id: req_a9cd734ca14341eab99d180a3011fbb2
           created: 1752720376715
           modified: 1752720465262
           isPrivate: false
@@ -2634,6 +2649,9 @@ collection:
           type: bearer
           token: "{% response 'body', 'req_8eb1ba4cffde4ac28c76d0b6abffcc78',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -2642,10 +2660,38 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.base_url }}assignments/group/1"
+        name: Assignments by Group ID
+        meta:
+          id: req_3080df2834ce49c797fe500bb13c70f2
+          created: 1752816762300
+          modified: 1752818178193
+          isPrivate: false
+          description: ""
+          sortKey: -1752816762300
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_2a815b7910d84bfa9f1ac7b14e8b8142',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
   - url: "{{ _.base_url }}auth/login"
     name: Login
     meta:
-      id: req_8eb1ba4cffde4ac28c76d0b6abffcc78
+      id: req_2a815b7910d84bfa9f1ac7b14e8b8142
       created: 1751681760047
       modified: 1752372125110
       isPrivate: false
@@ -2680,13 +2726,13 @@ collection:
 cookieJar:
   name: Default Jar
   meta:
-    id: jar_3801312c1a334c2d9d1c88cc78507f52
+    id: jar_08a31d0b3d084080ad48d2f5c504f614
     created: 1751681748697
     modified: 1751681748697
 environments:
   name: Base Environment
   meta:
-    id: env_c0b9e30f59f14b2ab22c33a78170d296
+    id: env_8a02e0371fca4b9b9c906133dd722934
     created: 1751681748696
     modified: 1751681816486
     isPrivate: false

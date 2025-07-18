@@ -67,6 +67,30 @@ public class AssignmentRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
+    @GetMapping("/group/{groupId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
+    public ResponseEntity<?> getAssignmentsByGroupId(@PathVariable Long groupId,
+                                                     @RequestParam(defaultValue = "1") int page,
+                                                     @RequestParam(defaultValue = "10") int size,
+                                                     HttpServletRequest request) {
+        Optional<Group> groupOptional = groupRepository.findById(groupId);
+        if (groupOptional.isEmpty()) {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Assignment> assignmentPage = assignmentRepository.findByGroup(groupOptional.get(), pageable);
+
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+        meta.setTotalPages(assignmentPage.getTotalPages());
+        meta.setTotalElements(assignmentPage.getTotalElements());
+        meta.setPageNumber(assignmentPage.getNumber() + 1);
+        meta.setPageSize(assignmentPage.getSize());
+
+        return new GlobalResponseHandler().handleResponse("Asignaciones obtenidas con éxito para el grupo " + groupId,
+                assignmentPage.getContent(), HttpStatus.OK, meta);
+    }
 
     @PostMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")

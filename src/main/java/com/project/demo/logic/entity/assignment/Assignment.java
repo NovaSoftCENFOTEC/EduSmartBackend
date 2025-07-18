@@ -2,6 +2,7 @@ package com.project.demo.logic.entity.assignment;
 
 import com.project.demo.logic.entity.group.Group;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -20,6 +21,7 @@ public class Assignment {
     private LocalDate dueDate;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
