@@ -53,6 +53,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
     private School school;
 
+    @Column(name = "needs_password_change", nullable = false)
+    boolean needsPasswordChange = false;
+
     // Constructors
     public User() {}
 
@@ -165,5 +168,11 @@ public class User implements UserDetails {
         this.school = school;
     }
 
+    public boolean isNeedsPasswordChange() {
+        return needsPasswordChange;
+    }
 
+    public void setNeedsPasswordChange(boolean needsPasswordChange) {
+        this.needsPasswordChange = needsPasswordChange;
+    }
 }

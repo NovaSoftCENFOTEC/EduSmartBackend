@@ -98,6 +98,7 @@ public class TeacherRestController {
         if (foundSchool.isPresent()) {
             String randomPassword = passwordGenerator.generatePassword(12);
             newTeacherUser.setPassword(passwordEncoder.encode(randomPassword));
+            newTeacherUser.setNeedsPasswordChange(true);
             newTeacherUser.setRole(optionalRole.get());
             newTeacherUser.setSchool(foundSchool.get());
             userRepository.save(newTeacherUser);
