@@ -88,6 +88,7 @@ public class UserRestController {
         if(foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            updatedUser.setNeedsPasswordChange(false);
             userRepository.save(updatedUser);
             return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
                     updatedUser, HttpStatus.OK, request);
@@ -97,13 +98,14 @@ public class UserRestController {
         }
     }
 
-    @PutMapping("/password-recovery/{userId}")
-    public ResponseEntity<?> updatePasswordRecovery(@PathVariable Long userId, HttpServletRequest request) {
-        Optional<User> foundUser = userRepository.findById(userId);
+    @PutMapping("/password-recovery/{userEmail}")
+    public ResponseEntity<?> updatePasswordRecovery(@PathVariable String userEmail, HttpServletRequest request) {
+        Optional<User> foundUser = userRepository.findByEmail(userEmail);
         if(foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             String randomPassword = passwordGenerator.generatePassword(12);
             updatedUser.setPassword(passwordEncoder.encode(randomPassword));
+            updatedUser.setNeedsPasswordChange(true);
 
             String emailBody = "Hola " + updatedUser.getName() + ",\n\n" +
                     "Se ha generado una contraseña temporal con éxito. Aquí están tus credenciales:\n" +
@@ -117,7 +119,7 @@ public class UserRestController {
             return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
                     updatedUser, HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userEmail + " no encontrado"  ,
                     HttpStatus.NOT_FOUND, request);
         }
     }
