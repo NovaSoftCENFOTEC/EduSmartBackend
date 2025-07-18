@@ -1,4 +1,5 @@
 package com.project.demo.logic.entity.user;
+import com.project.demo.logic.entity.badge.Badge;
 import com.project.demo.logic.entity.rol.Role;
 import com.project.demo.logic.entity.school.School;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "user")
 @Entity
@@ -50,6 +52,9 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
     private School school;
+
+    @Column(name = "needs_password_change", nullable = false)
+    boolean needsPasswordChange = false;
 
     // Constructors
     public User() {}
@@ -161,5 +166,13 @@ public class User implements UserDetails {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public boolean isNeedsPasswordChange() {
+        return needsPasswordChange;
+    }
+
+    public void setNeedsPasswordChange(boolean needsPasswordChange) {
+        this.needsPasswordChange = needsPasswordChange;
     }
 }
