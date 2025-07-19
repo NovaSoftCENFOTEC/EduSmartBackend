@@ -4,6 +4,8 @@ import com.project.demo.logic.entity.answer.Answer;
 import com.project.demo.logic.entity.quiz.Quiz;
 import com.project.demo.logic.entity.user.User;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,7 +17,7 @@ public class Submission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Date submittedAt;
+    private LocalDateTime submittedAt;
     private double score;
 
     @ManyToOne
@@ -37,11 +39,11 @@ public class Submission {
         this.id = id;
     }
 
-    public Date getSubmittedAt() {
+    public LocalDateTime getSubmittedAt() {
         return submittedAt;
     }
 
-    public void setSubmittedAt(Date submittedAt) {
+    public void setSubmittedAt(LocalDateTime submittedAt) {
         this.submittedAt = submittedAt;
     }
 

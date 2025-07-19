@@ -25,7 +25,7 @@ hs_err_pid*
 replay_pid*
 .DS_Store
 src/main/resources/application.properties
-src/main/resources/application-dev.properties
+src/main/resources/application-test.properties
 .graddle/
 .idea/
 build/
