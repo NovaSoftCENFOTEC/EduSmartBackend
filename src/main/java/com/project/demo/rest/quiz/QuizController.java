@@ -1,6 +1,7 @@
 package com.project.demo.rest.quiz;
 
-import com.project.demo.logic.entity.gemini.GeminiService;
+
+import com.project.demo.logic.entity.deepseek.DeepSeekService;
 import com.project.demo.logic.entity.quiz.Quiz;
 import com.project.demo.logic.entity.quiz.QuizRepository;
 import com.project.demo.logic.entity.story.Story;
@@ -39,7 +40,7 @@ public class QuizController {
     private OptionRepository optionRepository;
 
     @Autowired
-    private GeminiService geminiService;
+    private DeepSeekService deepSeekService;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
@@ -142,7 +143,7 @@ public class QuizController {
         try {
             String storyContent = quiz.getStory().getContent();
 
-            String aiResponse = geminiService.generateQuizQuestions(storyContent, numberOfQuestions);
+            String aiResponse = deepSeekService.generateQuizQuestions(storyContent, numberOfQuestions);
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(aiResponse);
