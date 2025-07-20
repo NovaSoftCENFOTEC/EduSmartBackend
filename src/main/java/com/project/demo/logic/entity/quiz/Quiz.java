@@ -1,35 +1,48 @@
 package com.project.demo.logic.entity.quiz;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.project.demo.logic.entity.question.Question;
+
 import com.project.demo.logic.entity.story.Story;
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.time.LocalDateTime;
 
-@JsonIgnoreProperties({"questions"})
 @Entity
 @Table(name = "quiz")
 public class Quiz {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
-    private Date dueDate;
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
 
     @ManyToOne
-    @JoinColumn(name = "story_id", nullable = false)
+    @JoinColumn(name = "story_id")
     private Story story;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-    private Set<Question> questions;
+    @Transient
+    private boolean generateWithAI = false;
 
-    public int getId() {
+    @Transient
+    private int numberOfQuestions = 5;
+
+    public Quiz() {}
+
+    public Quiz(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,11 +62,11 @@ public class Quiz {
         this.description = description;
     }
 
-    public Date getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -65,11 +78,19 @@ public class Quiz {
         this.story = story;
     }
 
-    public Set<Question> getQuestions() {
-        return questions;
+    public boolean isGenerateWithAI() {
+        return generateWithAI;
     }
 
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
+    public void setGenerateWithAI(boolean generateWithAI) {
+        this.generateWithAI = generateWithAI;
+    }
+
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(int numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
     }
 }

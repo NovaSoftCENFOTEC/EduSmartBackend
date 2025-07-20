@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +52,7 @@ public class SubmissionRestController {
     @PostMapping("/quiz/{quizId}/student/{studentId}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createSubmission(@PathVariable Integer quizId, @PathVariable Integer studentId,
-                                              @RequestBody Submission submission, HttpServletRequest request) {
+                                              @RequestBody(required = false) Submission submission, HttpServletRequest request) {
         Optional<Quiz> foundQuiz = quizRepository.findById(quizId);
         if (!foundQuiz.isPresent()) {
             return new GlobalResponseHandler().handleResponse("Quiz " + quizId + " no encontrado", HttpStatus.NOT_FOUND, request);
@@ -67,17 +69,17 @@ public class SubmissionRestController {
         }
 
         Quiz quiz = foundQuiz.get();
-        if (quiz.getDueDate() != null && quiz.getDueDate().before(new Date())) {
+        if (quiz.getDueDate() != null && quiz.getDueDate().isBefore(LocalDateTime.now())) {
             return new GlobalResponseHandler().handleResponse("El quiz ya ha vencido", HttpStatus.BAD_REQUEST, request);
         }
 
-        submission.setQuiz(foundQuiz.get());
-        submission.setStudent(foundStudent.get());
-        submission.setSubmittedAt(new Date());
-        submission.setScore(0.0);
-
-        submissionRepository.save(submission);
-        return new GlobalResponseHandler().handleResponse("Submission creada con éxito", submission, HttpStatus.OK, request);
+        Submission newSubmission = new Submission();
+        newSubmission.setQuiz(foundQuiz.get());
+        newSubmission.setStudent(foundStudent.get());
+        newSubmission.setSubmittedAt(LocalDateTime.now());
+        newSubmission.setScore(0.0);
+        submissionRepository.save(newSubmission);
+        return new GlobalResponseHandler().handleResponse("Submission creada con éxito", newSubmission, HttpStatus.OK, request);
     }
 
     @PutMapping("/{id}")
