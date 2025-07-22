@@ -1,5 +1,7 @@
 package com.project.demo.rest.user;
 
+import com.project.demo.logic.entity.auth.PasswordGenerator;
+import com.project.demo.logic.entity.email.EmailManager;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.user.User;
@@ -27,6 +29,12 @@ public class UserRestController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PasswordGenerator passwordGenerator;
+
+    @Autowired
+    private EmailManager emailManager;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
@@ -59,9 +67,9 @@ public class UserRestController {
     @PutMapping("/administrative/{userId}")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
-        Optional<User> foundOrder = userRepository.findById(userId);
-        if(foundOrder.isPresent()) {
-            User updatedUser = foundOrder.get();
+        Optional<User> foundUser = userRepository.findById(userId);
+        if(foundUser.isPresent()) {
+            User updatedUser = foundUser.get();
             updatedUser.setName(user.getName());
             updatedUser.setLastname(user.getLastname());
             userRepository.save(updatedUser);
@@ -76,10 +84,11 @@ public class UserRestController {
     @PutMapping("/password/{userId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> updatePassword(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
-        Optional<User> foundOrder = userRepository.findById(userId);
-        if(foundOrder.isPresent()) {
-            User updatedUser = foundOrder.get();
+        Optional<User> foundUser = userRepository.findById(userId);
+        if(foundUser.isPresent()) {
+            User updatedUser = foundUser.get();
             updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            updatedUser.setNeedsPasswordChange(false);
             userRepository.save(updatedUser);
             return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
                     updatedUser, HttpStatus.OK, request);
@@ -89,15 +98,42 @@ public class UserRestController {
         }
     }
 
+    @PutMapping("/password-recovery/{userEmail}")
+    public ResponseEntity<?> updatePasswordRecovery(@PathVariable String userEmail, HttpServletRequest request) {
+        Optional<User> foundUser = userRepository.findByEmail(userEmail);
+        if(foundUser.isPresent()) {
+            User updatedUser = foundUser.get();
+            String randomPassword = passwordGenerator.generatePassword(12);
+            updatedUser.setPassword(passwordEncoder.encode(randomPassword));
+            updatedUser.setNeedsPasswordChange(true);
+
+            String emailBody = "Hola " + updatedUser.getName() + ",\n\n" +
+                    "Se ha generado una contraseña temporal con éxito. Aquí están tus credenciales:\n" +
+                    "Correo: " + updatedUser.getEmail() + "\n" +
+                    "Contraseña: " + randomPassword + "\n\n" +
+                    "Por favor, cambia tu contraseña al iniciar sesión usando la dirección http://localhost:4200/login.\n\n" +
+                    "Saludos,\nEl equipo de EduSmart";
+            emailManager.sendEmail(updatedUser.getEmail(), "Generación de Contraseña Temporal", emailBody);
+
+            userRepository.save(updatedUser);
+            return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
+                    updatedUser, HttpStatus.OK, request);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Usuario " + userEmail + " no encontrado"  ,
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+
 
     @DeleteMapping("/{userId}")
-    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId, HttpServletRequest request) {
-        Optional<User> foundOrder = userRepository.findById(userId);
-        if(foundOrder.isPresent()) {
+        Optional<User> foundUser = userRepository.findById(userId);
+        if(foundUser.isPresent()) {
             userRepository.deleteById(userId);
             return new GlobalResponseHandler().handleResponse("Usuario eliminado con exito",
-                    foundOrder.get(), HttpStatus.OK, request);
+                    foundUser.get(), HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
                     HttpStatus.NOT_FOUND, request);

@@ -1,6 +1,7 @@
 package com.project.demo.rest.student;
 
 import com.project.demo.logic.entity.auth.PasswordGenerator;
+import com.project.demo.logic.entity.email.EmailManager;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.rol.Role;
@@ -41,6 +42,9 @@ public class StudentRestController {
 
     @Autowired
     private PasswordGenerator passwordGenerator;
+
+    @Autowired
+    private EmailManager emailManager;
 
     @GetMapping("/school/{schoolId}/students")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
@@ -94,9 +98,19 @@ public class StudentRestController {
         if (foundSchool.isPresent()) {
             String randomPassword = passwordGenerator.generatePassword(12);
             newStudentUser.setPassword(passwordEncoder.encode(randomPassword));
+            newStudentUser.setNeedsPasswordChange(true);
             newStudentUser.setRole(optionalRole.get());
             newStudentUser.setSchool(foundSchool.get());
             userRepository.save(newStudentUser);
+
+            String emailBody = "Hola " + newStudentUser.getName() + ",\n\n" +
+                    "Tu cuenta ha sido creada con éxito. Aquí están tus credenciales:\n" +
+                    "Correo: " + newStudentUser.getEmail() + "\n" +
+                    "Contraseña: " + randomPassword + "\n\n" +
+                    "Por favor, cambia tu contraseña al iniciar sesión por primera vez usando la dirección http://localhost:4200/login.\n\n" +
+                    "Saludos,\nEl equipo de EduSmart";
+            emailManager.sendEmail(newStudentUser.getEmail(), "Bienvenido a EduSmart", emailBody);
+
             return new GlobalResponseHandler().handleResponse("Estudiante creado con exito",
                     randomPassword, HttpStatus.OK, request);
         } else {
