@@ -112,7 +112,7 @@ public class StudentRestController {
             emailManager.sendEmail(newStudentUser.getEmail(), "Bienvenido a EduSmart", emailBody);
 
             return new GlobalResponseHandler().handleResponse("Estudiante creado con exito",
-                    randomPassword, HttpStatus.OK, request);
+                    newStudentUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Escuela " + schoolId + " no encontrada",
                     HttpStatus.NOT_FOUND, request);
