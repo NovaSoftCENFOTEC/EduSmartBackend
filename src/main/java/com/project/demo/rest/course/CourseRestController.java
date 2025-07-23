@@ -46,7 +46,7 @@ public class CourseRestController {
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addCourse(@RequestBody Course course, HttpServletRequest request) {
         courseRepository.save(course);
-        return new GlobalResponseHandler().handleResponse("Curso creado con exito",
+        return new GlobalResponseHandler().handleResponse("Curso creado con éxito",
                 course, HttpStatus.OK, request);
     }
 
@@ -61,7 +61,7 @@ public class CourseRestController {
             updatedCourse.setDescription(course.getDescription());
             courseRepository.save(updatedCourse);
 
-            return new GlobalResponseHandler().handleResponse("Curso editado con exito",
+            return new GlobalResponseHandler().handleResponse("Curso editado con éxito",
                     course, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Curso " + courseId + " no encontrado",
@@ -75,7 +75,7 @@ public class CourseRestController {
         Optional<Course> foundCourse = courseRepository.findById(courseId);
         if (foundCourse.isPresent()) {
             courseRepository.delete(foundCourse.get());
-            return new GlobalResponseHandler().handleResponse("Curso eliminado con exito",
+            return new GlobalResponseHandler().handleResponse("Curso eliminado con éxito",
                     foundCourse.get(), HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Curso " + courseId + " no encontrado",

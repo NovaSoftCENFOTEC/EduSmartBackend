@@ -38,7 +38,7 @@ public class SchoolRestController {
         meta.setPageNumber(schoolPage.getNumber() + 1);
         meta.setPageSize(schoolPage.getSize());
 
-        return new GlobalResponseHandler().handleResponse("Escuelas obtenidas con exito",
+        return new GlobalResponseHandler().handleResponse("Escuelas obtenidas con éxito",
                 schoolPage.getContent(), HttpStatus.OK, meta);
     }
 
@@ -48,7 +48,7 @@ public class SchoolRestController {
         Optional<School> foundSchool = schoolRepository.findById(schoolId);
         if (foundSchool.isPresent()) {
             return new GlobalResponseHandler().handleResponse(
-                    "Escuela obtenida con exito",
+                    "Escuela obtenida con éxito",
                     foundSchool.get(),
                     HttpStatus.OK,
                     request);
@@ -65,7 +65,7 @@ public class SchoolRestController {
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> addSchool(@RequestBody School school, HttpServletRequest request) {
         schoolRepository.save(school);
-        return new GlobalResponseHandler().handleResponse("Escuela creada con exito",
+        return new GlobalResponseHandler().handleResponse("Escuela creada con éxito",
                 school, HttpStatus.OK, request);
     }
 
@@ -78,7 +78,7 @@ public class SchoolRestController {
             updatedSchool.setName(school.getName());
             updatedSchool.setDomain(school.getDomain());
             schoolRepository.save(updatedSchool);
-            return new GlobalResponseHandler().handleResponse("Escuela editada con exito",
+            return new GlobalResponseHandler().handleResponse("Escuela editada con éxito",
                     school, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Escuela " + schoolId + " no encontrada",
@@ -92,7 +92,7 @@ public class SchoolRestController {
         Optional<School> foundSchool = schoolRepository.findById(schoolId);
         if (foundSchool.isPresent()) {
             schoolRepository.deleteById(schoolId);
-            return new GlobalResponseHandler().handleResponse("Escuela eliminada con exito",
+            return new GlobalResponseHandler().handleResponse("Escuela eliminada con éxito",
                     foundSchool.get(), HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Escuela " + schoolId + " no encontrada",
