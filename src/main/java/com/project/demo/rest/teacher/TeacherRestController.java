@@ -111,7 +111,7 @@ public class TeacherRestController {
                     "Saludos,\nEl equipo de EduSmart";
             emailManager.sendEmail(newTeacherUser.getEmail(), "Bienvenido a EduSmart", emailBody);
 
-            return new GlobalResponseHandler().handleResponse("Docente creado con exito",
+            return new GlobalResponseHandler().handleResponse("Docente creado con éxito",
                     newTeacherUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Escuela " + schoolId + " no encontrada",
