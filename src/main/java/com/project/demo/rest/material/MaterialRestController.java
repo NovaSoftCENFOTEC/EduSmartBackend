@@ -96,7 +96,7 @@ public class MaterialRestController {
             if (foundTeacher.isPresent()) {
                 material.setTeacher(foundTeacher.get());
                 materialRepository.save(material);
-                return new GlobalResponseHandler().handleResponse("Material creado con exito",
+                return new GlobalResponseHandler().handleResponse("Material creado con éxito",
                         material, HttpStatus.OK, request);
 
             } else {
@@ -122,7 +122,7 @@ public class MaterialRestController {
             updatedMaterial.setTeacher(material.getTeacher());
             materialRepository.save(updatedMaterial);
 
-            return new GlobalResponseHandler().handleResponse("Material actualizado con exito",
+            return new GlobalResponseHandler().handleResponse("Material actualizado con éxito",
                     updatedMaterial, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Material " + materialId + " no encontrado",
@@ -136,7 +136,7 @@ public class MaterialRestController {
         Optional<Material> foundMaterial = materialRepository.findById(materialId);
         if (foundMaterial.isPresent()) {
             materialRepository.delete(foundMaterial.get());
-            return new GlobalResponseHandler().handleResponse("Material eliminado con exito",
+            return new GlobalResponseHandler().handleResponse("Material eliminado con éxito",
                     foundMaterial.get(), HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Material " + materialId + " no encontrado",

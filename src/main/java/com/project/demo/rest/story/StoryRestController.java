@@ -59,7 +59,7 @@ public class StoryRestController {
         if (foundCourse.isPresent()) {
             story.setCourse(foundCourse.get());
             storyRepository.save(story);
-            return new GlobalResponseHandler().handleResponse("Historia creada con exito",
+            return new GlobalResponseHandler().handleResponse("Historia creada con éxito",
                     story, HttpStatus.CREATED, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Curso " + courseId + " no encontrado",
@@ -78,7 +78,7 @@ public class StoryRestController {
             updatedStory.setCourse(story.getCourse());
             storyRepository.save(updatedStory);
 
-            return new GlobalResponseHandler().handleResponse("Historia editada con exito",
+            return new GlobalResponseHandler().handleResponse("Historia editada con éxito",
                     updatedStory, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Historia " + storyId + " no encontrada",
@@ -92,7 +92,7 @@ public class StoryRestController {
         Optional<Story> foundStory = storyRepository.findById(storyId);
         if (foundStory.isPresent()) {
             storyRepository.delete(foundStory.get());
-            return new GlobalResponseHandler().handleResponse("Historia eliminada con exito",
+            return new GlobalResponseHandler().handleResponse("Historia eliminada con éxito",
                     foundStory.get(), HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Historia " + storyId + " no encontrada",

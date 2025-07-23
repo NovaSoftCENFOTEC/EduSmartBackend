@@ -51,7 +51,7 @@ public class UserRestController {
         meta.setPageNumber(userPage.getNumber() + 1);
         meta.setPageSize(userPage.getSize());
 
-        return new GlobalResponseHandler().handleResponse("Usuarios obtenidos con exito",
+        return new GlobalResponseHandler().handleResponse("Usuarios obtenidos con éxito",
                 userPage.getContent(), HttpStatus.OK, meta);
     }
 
@@ -60,7 +60,7 @@ public class UserRestController {
     public ResponseEntity<?> addUser(@RequestBody User user, HttpServletRequest request) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return new GlobalResponseHandler().handleResponse("Usuario creado con exito",
+        return new GlobalResponseHandler().handleResponse("Usuario creado con éxito",
                 user, HttpStatus.OK, request);
     }
 
@@ -73,7 +73,7 @@ public class UserRestController {
             updatedUser.setName(user.getName());
             updatedUser.setLastname(user.getLastname());
             userRepository.save(updatedUser);
-            return new GlobalResponseHandler().handleResponse("Usuario actualizado con exito",
+            return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
@@ -90,7 +90,7 @@ public class UserRestController {
             updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
             updatedUser.setNeedsPasswordChange(false);
             userRepository.save(updatedUser);
-            return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
+            return new GlobalResponseHandler().handleResponse("Contraseña actualizada con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
@@ -116,7 +116,7 @@ public class UserRestController {
             emailManager.sendEmail(updatedUser.getEmail(), "Generación de Contraseña Temporal", emailBody);
 
             userRepository.save(updatedUser);
-            return new GlobalResponseHandler().handleResponse("Contraseña actualizada con exito",
+            return new GlobalResponseHandler().handleResponse("Contraseña actualizada con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userEmail + " no encontrado"  ,
@@ -132,7 +132,7 @@ public class UserRestController {
         Optional<User> foundUser = userRepository.findById(userId);
         if(foundUser.isPresent()) {
             userRepository.deleteById(userId);
-            return new GlobalResponseHandler().handleResponse("Usuario eliminado con exito",
+            return new GlobalResponseHandler().handleResponse("Usuario eliminado con éxito",
                     foundUser.get(), HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,

@@ -47,7 +47,7 @@ public class GroupRestController {
         meta.setPageNumber(groupPage.getNumber() + 1);
         meta.setPageSize(groupPage.getSize());
 
-        return new GlobalResponseHandler().handleResponse("Grupos obtenidos con exito",
+        return new GlobalResponseHandler().handleResponse("Grupos obtenidos con éxito",
                 groupPage.getContent(), HttpStatus.OK, meta);
     }
 
@@ -68,7 +68,7 @@ public class GroupRestController {
             meta.setPageNumber(groupPage.getNumber() + 1);
             meta.setPageSize(groupPage.getSize());
 
-            return new GlobalResponseHandler().handleResponse("Grupos obtenidos con exito por ID curso",
+            return new GlobalResponseHandler().handleResponse("Grupos obtenidos con éxito por ID curso",
                     groupPage.getContent(), HttpStatus.OK, meta);
         } else {
             return new GlobalResponseHandler().handleResponse("Curso " + courseId + " no encontrado",
@@ -93,7 +93,7 @@ public class GroupRestController {
             meta.setPageNumber(groupPage.getNumber() + 1);
             meta.setPageSize(groupPage.getSize());
 
-            return new GlobalResponseHandler().handleResponse("Grupos obtenidos con exito por ID docente",
+            return new GlobalResponseHandler().handleResponse("Grupos obtenidos con éxito por ID docente",
                     groupPage.getContent(), HttpStatus.OK, meta);
         } else {
             return new GlobalResponseHandler().handleResponse("Docente " + teacherId + " no encontrado",
@@ -124,7 +124,7 @@ public class GroupRestController {
             return new GlobalResponseHandler().handleResponse("Curso " + courseId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
         }
-        return new GlobalResponseHandler().handleResponse("Grupo creado con exito",
+        return new GlobalResponseHandler().handleResponse("Grupo creado con éxito",
                 group, HttpStatus.OK, request);
     }
 
@@ -165,7 +165,7 @@ public class GroupRestController {
             updatedGroup.setTeacher(group.getTeacher());
             groupRepository.save(updatedGroup);
 
-            return new GlobalResponseHandler().handleResponse("Grupo actualizado con exito",
+            return new GlobalResponseHandler().handleResponse("Grupo actualizado con éxito",
                     group, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
@@ -179,7 +179,7 @@ public class GroupRestController {
         Optional<Group> foundGroup = groupRepository.findById(groupId);
         if (foundGroup.isPresent()) {
             groupRepository.delete(foundGroup.get());
-            return new GlobalResponseHandler().handleResponse("Grupo eliminado con exito",
+            return new GlobalResponseHandler().handleResponse("Grupo eliminado con éxito",
                     null, HttpStatus.OK, request);
         } else {
             return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
