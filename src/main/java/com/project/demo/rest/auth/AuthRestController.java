@@ -1,6 +1,7 @@
 package com.project.demo.rest.auth;
 
 import com.project.demo.logic.entity.auth.AuthenticationService;
+import com.project.demo.logic.entity.auth.GoogleAuthService;
 import com.project.demo.logic.entity.auth.JwtService;
 import com.project.demo.logic.entity.rol.Role;
 import com.project.demo.logic.entity.rol.RoleEnum;
@@ -8,6 +9,7 @@ import com.project.demo.logic.entity.rol.RoleRepository;
 import com.project.demo.logic.entity.user.LoginResponse;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
+import com.project.demo.rest.auth.dto.GoogleLoginRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,8 @@ public class AuthRestController {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private GoogleAuthService googleAuthService;
 
 
     private final AuthenticationService authenticationService;
@@ -60,6 +64,26 @@ public class AuthRestController {
         return ResponseEntity.ok(loginResponse);
     }
 
+    @PostMapping("/google-login")
+        public ResponseEntity<?> authenticateGoogleUser(@RequestBody GoogleLoginRequestDto request) {
+            try {
+                User authenticatedUser = googleAuthService.authenticateGoogleUser(request.getIdToken());
+                String jwtToken = jwtService.generateToken(authenticatedUser);
+
+                LoginResponse loginResponse = new LoginResponse();
+                loginResponse.setToken(jwtToken);
+                loginResponse.setExpiresIn(jwtService.getExpirationTime());
+                loginResponse.setAuthUser(authenticatedUser);
+
+                Optional<User> foundedUser = userRepository.findByEmail(authenticatedUser.getEmail());
+                foundedUser.ifPresent(loginResponse::setAuthUser);
+
+                return ResponseEntity.ok(loginResponse);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ID Token invalido o usuario no encontrado. Por favor, verifica el token.");
+            }
+        }
+
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
@@ -68,7 +92,7 @@ public class AuthRestController {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.USER);
+        Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.STUDENT);
 
         if (optionalRole.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Role not found");
