@@ -23,6 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/groups")
 public class GroupRestController {
+
     @Autowired
     private GroupRepository groupRepository;
 
@@ -41,6 +42,7 @@ public class GroupRestController {
 
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Group> groupPage = groupRepository.findAll(pageable);
+
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(groupPage.getTotalPages());
         meta.setTotalElements(groupPage.getTotalElements());
@@ -49,6 +51,28 @@ public class GroupRestController {
 
         return new GlobalResponseHandler().handleResponse("Grupos obtenidos con éxito",
                 groupPage.getContent(), HttpStatus.OK, meta);
+    }
+
+    @GetMapping("/{groupId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getGroupWithStudents(@PathVariable Long groupId,
+                                                  HttpServletRequest request) {
+
+        Optional<Group> foundGroup = groupRepository.findWithStudentsById(groupId);
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+
+        if (foundGroup.isPresent()) {
+            meta.setTotalElements(1);
+            meta.setPageNumber(1);
+            meta.setPageSize(1);
+            meta.setTotalPages(1);
+
+            return new GlobalResponseHandler().handleResponse("Grupo obtenido con éxito",
+                    foundGroup.get(), HttpStatus.OK, meta);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
     }
 
     @GetMapping("/course/{courseId}/groups")
@@ -62,6 +86,7 @@ public class GroupRestController {
         if (foundCourse.isPresent()) {
             Pageable pageable = PageRequest.of(page - 1, size);
             Page<Group> groupPage = groupRepository.findGroupsByCourseId(courseId, pageable);
+
             Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
             meta.setTotalPages(groupPage.getTotalPages());
             meta.setTotalElements(groupPage.getTotalElements());
@@ -87,6 +112,7 @@ public class GroupRestController {
         if (foundTeacher.isPresent()) {
             Pageable pageable = PageRequest.of(page - 1, size);
             Page<Group> groupPage = groupRepository.findGroupsByTeacherId(teacherId, pageable);
+
             Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
             meta.setTotalPages(groupPage.getTotalPages());
             meta.setTotalElements(groupPage.getTotalElements());
@@ -114,7 +140,6 @@ public class GroupRestController {
             Optional<User> foundTeacher = userRepository.findById(teacherId);
             if (foundTeacher.isPresent()) {
                 group.setTeacher(foundTeacher.get());
-
                 groupRepository.save(group);
             } else {
                 return new GlobalResponseHandler().handleResponse("Docente " + teacherId + " no encontrado",
@@ -152,7 +177,6 @@ public class GroupRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
-
 
     @PutMapping("/{groupId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
