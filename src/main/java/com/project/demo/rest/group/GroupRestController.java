@@ -235,4 +235,23 @@ public class GroupRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
+    @GetMapping("/student/{studentId}/groups")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> getGroupsByStudent(@PathVariable Long studentId,
+                                                @RequestParam(defaultValue = "1") int page,
+                                                @RequestParam(defaultValue = "10") int size,
+                                                HttpServletRequest request) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Group> groupPage = groupRepository.findGroupsByStudentId(studentId, pageable);
+
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+        meta.setTotalPages(groupPage.getTotalPages());
+        meta.setTotalElements(groupPage.getTotalElements());
+        meta.setPageNumber(groupPage.getNumber() + 1);
+        meta.setPageSize(groupPage.getSize());
+
+        return new GlobalResponseHandler().handleResponse("Grupos del estudiante obtenidos con éxito",
+                groupPage.getContent(), HttpStatus.OK, meta);
+    }
 }
