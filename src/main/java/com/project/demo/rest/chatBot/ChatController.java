@@ -40,7 +40,8 @@ public class ChatController {
 
             messages.add(Map.of("role", "user", "content", userMessage));
             lmStudioRequest.put("messages", messages);
-            lmStudioRequest.put("temperature", 0.7);
+            double TEMPERATURE = 0.7;
+            lmStudioRequest.put("temperature", TEMPERATURE);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
