@@ -254,4 +254,27 @@ public class GroupRestController {
         return new GlobalResponseHandler().handleResponse("Grupos del estudiante obtenidos con éxito",
                 groupPage.getContent(), HttpStatus.OK, meta);
     }
+
+    @GetMapping("/{groupId}/course")
+
+    public ResponseEntity<?> getCourseByGroup(@PathVariable Long groupId,
+                                              HttpServletRequest request) {
+
+        Optional<Group> foundGroup = groupRepository.findById(groupId);
+        if (foundGroup.isPresent()) {
+            Course course = foundGroup.get().getCourse();
+
+            Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+            meta.setTotalElements(1);
+            meta.setPageNumber(1);
+            meta.setPageSize(1);
+            meta.setTotalPages(1);
+
+            return new GlobalResponseHandler().handleResponse("Curso del grupo obtenido con éxito",
+                    course, HttpStatus.OK, meta);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
 }
