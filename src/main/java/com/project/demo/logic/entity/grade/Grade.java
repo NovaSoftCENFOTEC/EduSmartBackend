@@ -1,6 +1,6 @@
 package com.project.demo.logic.entity.grade;
 
-import com.project.demo.logic.entity.taskSubmission.taskSubmission;
+import com.project.demo.logic.entity.taskSubmission.TaskSubmission;
 import com.project.demo.logic.entity.user.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +25,7 @@ public class Grade {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "submission_id", referencedColumnName = "id")
-    private taskSubmission submission;
+    private TaskSubmission submission;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
@@ -33,7 +33,7 @@ public class Grade {
 
     public Grade() {}
 
-    public Grade(Double grade, String justification, taskSubmission submission, User teacher) {
+    public Grade(Double grade, String justification, TaskSubmission submission, User teacher) {
         this.grade = grade;
         this.justification = justification;
         this.submission = submission;
@@ -72,11 +72,11 @@ public class Grade {
         this.gradedAt = gradedAt;
     }
 
-    public taskSubmission getSubmission() {
+    public TaskSubmission getSubmission() {
         return submission;
     }
 
-    public void setSubmission(taskSubmission submission) {
+    public void setSubmission(TaskSubmission submission) {
         this.submission = submission;
     }
 

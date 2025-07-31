@@ -2704,7 +2704,7 @@ collection:
         meta:
           id: req_f1be2c47c472470c804dff55a9f269ed
           created: 1753907965480
-          modified: 1753908177822
+          modified: 1753922453220
           isPrivate: false
           description: ""
           sortKey: -1753907965480
@@ -2730,7 +2730,7 @@ collection:
             value: insomnia/11.2.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_853c252f721f40369f4fabbe24963f9d',
+          token: "{% response 'body', 'req_2e7a0826182e4be98194acaf2bf57a31',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
         settings:
           renderRequestBody: true
@@ -2896,7 +2896,7 @@ collection:
         meta:
           id: req_68dae821aa93475b922489b9a49c9651
           created: 1753909173512
-          modified: 1753909243346
+          modified: 1753922378733
           isPrivate: false
           description: ""
           sortKey: -1753909173512

@@ -2,8 +2,8 @@ package com.project.demo.rest.grade;
 
 import com.project.demo.logic.entity.grade.Grade;
 import com.project.demo.logic.entity.grade.GradeRepository;
-import com.project.demo.logic.entity.taskSubmission.taskSubmission;
-import com.project.demo.logic.entity.taskSubmission.taskSubmissionRepository;
+import com.project.demo.logic.entity.taskSubmission.TaskSubmission;
+import com.project.demo.logic.entity.taskSubmission.TaskSubmissionRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
@@ -25,7 +25,7 @@ public class GradeRestController {
     private GradeRepository gradeRepository;
 
     @Autowired
-    private taskSubmissionRepository taskSubmissionRepository;
+    private TaskSubmissionRepository taskSubmissionRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -85,7 +85,7 @@ public class GradeRestController {
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> createGrade(@RequestBody Grade grade, HttpServletRequest request) {
 
-        Optional<taskSubmission> submission = taskSubmissionRepository.findById(grade.getSubmission().getId());
+        Optional<TaskSubmission> submission = taskSubmissionRepository.findById(grade.getSubmission().getId());
         Optional<User> teacher = userRepository.findById(grade.getTeacher().getId());
 
         if (submission.isEmpty()) {

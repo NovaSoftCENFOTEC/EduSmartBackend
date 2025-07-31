@@ -1,7 +1,7 @@
 package com.project.demo.rest.taskSubmission;
 
-import com.project.demo.logic.entity.taskSubmission.taskSubmission;
-import com.project.demo.logic.entity.taskSubmission.taskSubmissionRepository;
+import com.project.demo.logic.entity.taskSubmission.TaskSubmission;
+import com.project.demo.logic.entity.taskSubmission.TaskSubmissionRepository;
 import com.project.demo.logic.entity.assignment.Assignment;
 import com.project.demo.logic.entity.assignment.AssignmentRepository;
 import com.project.demo.logic.entity.user.User;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class TaskSubmissionRestController {
 
     @Autowired
-    private taskSubmissionRepository taskSubmissionRepository;
+    private TaskSubmissionRepository taskSubmissionRepository;
 
     @Autowired
     private AssignmentRepository assignmentRepository;
@@ -38,7 +38,7 @@ public class TaskSubmissionRestController {
             HttpServletRequest request) {
 
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<taskSubmission> submissions = taskSubmissionRepository.findAll(pageable);
+        Page<TaskSubmission> submissions = taskSubmissionRepository.findAll(pageable);
 
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(submissions.getTotalPages());
@@ -53,7 +53,7 @@ public class TaskSubmissionRestController {
     @GetMapping("/{submissionId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getTaskSubmissionById(@PathVariable Long submissionId, HttpServletRequest request) {
-        Optional<taskSubmission> found = taskSubmissionRepository.findById(submissionId);
+        Optional<TaskSubmission> found = taskSubmissionRepository.findById(submissionId);
         if (found.isPresent()) {
             Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
             return new GlobalResponseHandler().handleResponse("Entrega de tarea obtenida con éxito",
@@ -72,7 +72,7 @@ public class TaskSubmissionRestController {
                                                HttpServletRequest request) {
 
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<taskSubmission> submissions = taskSubmissionRepository.findByAssignmentId(assignmentId, pageable);
+        Page<TaskSubmission> submissions = taskSubmissionRepository.findByAssignmentId(assignmentId, pageable);
 
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(submissions.getTotalPages());
@@ -92,7 +92,7 @@ public class TaskSubmissionRestController {
                                             HttpServletRequest request) {
 
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<taskSubmission> submissions = taskSubmissionRepository.findByStudentId(studentId, pageable);
+        Page<TaskSubmission> submissions = taskSubmissionRepository.findByStudentId(studentId, pageable);
 
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(submissions.getTotalPages());
@@ -106,7 +106,7 @@ public class TaskSubmissionRestController {
 
     @PostMapping
     @PreAuthorize("hasRole('STUDENT')")
-    public ResponseEntity<?> createTaskSubmission(@RequestBody taskSubmission submission, HttpServletRequest request) {
+    public ResponseEntity<?> createTaskSubmission(@RequestBody TaskSubmission submission, HttpServletRequest request) {
 
         Optional<Assignment> assignment = assignmentRepository.findById(submission.getAssignment().getId());
         Optional<User> student = userRepository.findById(submission.getStudent().getId());
@@ -124,7 +124,7 @@ public class TaskSubmissionRestController {
         submission.setAssignment(assignment.get());
         submission.setStudent(student.get());
 
-        taskSubmission saved = (taskSubmission) taskSubmissionRepository.save(submission);
+        TaskSubmission saved = (TaskSubmission) taskSubmissionRepository.save(submission);
 
         return new GlobalResponseHandler().handleResponse("Entrega registrada con éxito",
                 saved, HttpStatus.CREATED, request);
@@ -133,16 +133,16 @@ public class TaskSubmissionRestController {
     @PutMapping("/{submissionId}")
     @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<?> updateTaskSubmission(@PathVariable Long submissionId,
-                                                  @RequestBody taskSubmission submission,
+                                                  @RequestBody TaskSubmission submission,
                                                   HttpServletRequest request) {
 
-        Optional<taskSubmission> found = taskSubmissionRepository.findById(submissionId);
+        Optional<TaskSubmission> found = taskSubmissionRepository.findById(submissionId);
         if (found.isEmpty()) {
             return new GlobalResponseHandler().handleResponse("Entrega no encontrada",
                     HttpStatus.NOT_FOUND, request);
         }
 
-        taskSubmission updated = found.get();
+        TaskSubmission updated = found.get();
         updated.setComment(submission.getComment());
         updated.setFileUrl(submission.getFileUrl());
         updated.setSubmittedAt(submission.getSubmittedAt());
@@ -156,7 +156,7 @@ public class TaskSubmissionRestController {
     @DeleteMapping("/{submissionId}")
     @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<?> deleteTaskSubmission(@PathVariable Long submissionId, HttpServletRequest request) {
-        Optional<taskSubmission> found = taskSubmissionRepository.findById(submissionId);
+        Optional<TaskSubmission> found = taskSubmissionRepository.findById(submissionId);
         if (found.isPresent()) {
             taskSubmissionRepository.delete(found.get());
             return new GlobalResponseHandler().handleResponse("Entrega eliminada con éxito",

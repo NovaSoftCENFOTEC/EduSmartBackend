@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Table(name = "task_submission")
 @Entity
-public class taskSubmission {
+public class TaskSubmission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,10 +30,10 @@ public class taskSubmission {
     @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private User student;
 
-    public taskSubmission() {
+    public TaskSubmission() {
     }
 
-    public taskSubmission(Long id, String fileUrl, String comment, LocalDate submittedAt, Assignment assignment, User student) {
+    public TaskSubmission(Long id, String fileUrl, String comment, LocalDate submittedAt, Assignment assignment, User student) {
         this.id = id;
         this.fileUrl = fileUrl;
         this.comment = comment;
