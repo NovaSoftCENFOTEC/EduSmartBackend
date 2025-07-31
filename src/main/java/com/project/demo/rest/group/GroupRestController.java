@@ -256,7 +256,6 @@ public class GroupRestController {
     }
 
     @GetMapping("/{groupId}/course")
-
     public ResponseEntity<?> getCourseByGroup(@PathVariable Long groupId,
                                               HttpServletRequest request) {
 
