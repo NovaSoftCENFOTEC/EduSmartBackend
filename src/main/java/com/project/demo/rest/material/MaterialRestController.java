@@ -8,6 +8,7 @@ import com.project.demo.logic.entity.material.Material;
 import com.project.demo.logic.entity.material.MaterialRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
+import com.project.demo.rest.material.dto.MaterialUpdateDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,9 +36,9 @@ public class MaterialRestController {
     @GetMapping("/course/{courseId}/materials")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getMaterialsByCourse(@PathVariable Long courseId,
-                                               @RequestParam(defaultValue = "1") int page,
-                                               @RequestParam(defaultValue = "10") int size,
-                                               HttpServletRequest request) {
+                                                  @RequestParam(defaultValue = "1") int page,
+                                                  @RequestParam(defaultValue = "10") int size,
+                                                  HttpServletRequest request) {
 
         Optional<Course> foundCourse = courseRepository.findById(courseId);
         if (foundCourse.isPresent()) {
@@ -111,15 +112,24 @@ public class MaterialRestController {
 
     @PutMapping("/{materialId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> updateMaterial(@PathVariable Long materialId, @RequestBody Material material, HttpServletRequest request) {
+    public ResponseEntity<?> updateMaterial(@PathVariable Long materialId, @RequestBody MaterialUpdateDto materialDto, HttpServletRequest request) {
         Optional<Material> foundMaterial = materialRepository.findById(materialId);
         if (foundMaterial.isPresent()) {
             Material updatedMaterial = foundMaterial.get();
-            updatedMaterial.setName(material.getName());
-            updatedMaterial.setFileUrl(material.getFileUrl());
-            updatedMaterial.setUploadedAt(material.getUploadedAt());
-            updatedMaterial.setCourse(material.getCourse());
-            updatedMaterial.setTeacher(material.getTeacher());
+
+            updatedMaterial.setName(materialDto.getName());
+            updatedMaterial.setFileUrl(materialDto.getFileUrl());
+
+            if (materialDto.getCourseId() != null) {
+                Optional<Course> course = courseRepository.findById(materialDto.getCourseId());
+                course.ifPresent(updatedMaterial::setCourse);
+            }
+
+            if (materialDto.getTeacherId() != null) {
+                Optional<User> teacher = userRepository.findById(materialDto.getTeacherId());
+                teacher.ifPresent(updatedMaterial::setTeacher);
+            }
+
             materialRepository.save(updatedMaterial);
 
             return new GlobalResponseHandler().handleResponse("Material actualizado con éxito",
