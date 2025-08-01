@@ -7,11 +7,9 @@ public class MaterialUpdateDto {
     private Long courseId;
     private Long teacherId;
 
-    // Default constructor
     public MaterialUpdateDto() {
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }
