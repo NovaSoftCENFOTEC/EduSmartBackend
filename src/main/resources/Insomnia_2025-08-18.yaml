@@ -2704,7 +2704,7 @@ collection:
         meta:
           id: req_f1be2c47c472470c804dff55a9f269ed
           created: 1753907965480
-          modified: 1753922453220
+          modified: 1754090825651
           isPrivate: false
           description: ""
           sortKey: -1753907965480
@@ -2713,8 +2713,8 @@ collection:
           mimeType: application/json
           text: |
             {
-              "comment": "Mi entrega para la tarea de historia",
-              "fileUrl": "https://misarchivos.com/entrega/historia1.pdf",
+              "comment": "Mi entrega para la tarea de Cívica",
+              "fileUrl": "https://misarchivos.com/entrega/historia2.pdf",
               "submittedAt": "2025-07-30T14:35:00",
               "assignment": {
                 "id": 16
@@ -2954,7 +2954,7 @@ collection:
         meta:
           id: req_38551201f8684dbb9bd25fdbebd91c3f
           created: 1753915454396
-          modified: 1753917251378
+          modified: 1754090859671
           isPrivate: false
           description: ""
           sortKey: -1753915454396
@@ -2965,7 +2965,7 @@ collection:
             {
               "grade": 95.7,
               "justification": "buen trabajo",
-              "submission": { "id": 1 },
+              "submission": { "id": 3 },
               "teacher": { "id": 2 }
             }
         headers:
@@ -3079,6 +3079,31 @@ collection:
           description: ""
           sortKey: -1753919583530
         method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_2e7a0826182e4be98194acaf2bf57a31',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}grades/student/2"
+        name: Get Grade by Student ID
+        meta:
+          id: req_252724431c414e71bdcac01995c24fe5
+          created: 1754090106369
+          modified: 1754090467992
+          isPrivate: false
+          description: ""
+          sortKey: -1754090106369
+        method: GET
         headers:
           - name: User-Agent
             value: insomnia/11.2.0

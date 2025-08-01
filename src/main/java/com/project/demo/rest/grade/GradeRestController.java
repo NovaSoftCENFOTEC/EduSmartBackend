@@ -142,5 +142,25 @@ public class GradeRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
+    @GetMapping("/student/{studentId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getGradesByStudentId(@PathVariable Long studentId,
+                                                  @RequestParam(defaultValue = "1") int page,
+                                                  @RequestParam(defaultValue = "10") int size,
+                                                  HttpServletRequest request) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Grade> grades = gradeRepository.findBySubmissionStudentId(studentId, pageable);
+
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+        meta.setTotalPages(grades.getTotalPages());
+        meta.setTotalElements(grades.getTotalElements());
+        meta.setPageNumber(grades.getNumber() + 1);
+        meta.setPageSize(grades.getSize());
+
+        return new GlobalResponseHandler().handleResponse("Calificaciones del estudiante obtenidas con éxito",
+                grades.getContent(), HttpStatus.OK, meta);
+    }
+
+
 
 }
