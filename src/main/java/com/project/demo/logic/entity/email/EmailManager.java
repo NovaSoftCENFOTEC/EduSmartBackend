@@ -1,5 +1,7 @@
 package com.project.demo.logic.entity.email;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailManager {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmailManager.class);
     @Autowired
     private JavaMailSender mailSender;
 
@@ -19,11 +22,10 @@ public class EmailManager {
 
         try {
             mailSender.send(message);
-            System.out.println("Email sent successfully to " + toEmail);
+            logger.info("Correo enviado a: {}", toEmail);
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error sending email: " + e.getMessage());
+            logger.error("Error al enviar correo a {}: {}", toEmail, e.getMessage());
         }
     }
 
