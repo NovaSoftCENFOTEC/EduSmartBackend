@@ -70,14 +70,33 @@ public class UserRestController {
                 user, HttpStatus.OK, request);
     }
 
-    @PutMapping("/administrative/{userId}")
-    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
+    @PutMapping("/{userId}")
+    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findById(userId);
         if(foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             updatedUser.setName(user.getName());
             updatedUser.setLastname(user.getLastname());
+            updatedUser.setProfilePic(user.getProfilePic());
+            userRepository.save(updatedUser);
+            return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
+                    updatedUser, HttpStatus.OK, request);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+    @PutMapping("/administrative/{userId}")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
+    public ResponseEntity<?> updateUserByAdmin(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
+        Optional<User> foundUser = userRepository.findById(userId);
+        if(foundUser.isPresent()) {
+            User updatedUser = foundUser.get();
+            updatedUser.setName(user.getName());
+            updatedUser.setLastname(user.getLastname());
+            updatedUser.setProfilePic(user.getProfilePic());
             userRepository.save(updatedUser);
             return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
                     updatedUser, HttpStatus.OK, request);
