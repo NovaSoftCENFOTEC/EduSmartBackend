@@ -2,12 +2,14 @@ package com.project.demo.rest.user;
 
 import com.project.demo.logic.entity.auth.PasswordGenerator;
 import com.project.demo.logic.entity.email.EmailManager;
+import com.project.demo.logic.entity.email.EmailTemplates;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserRestController {
+
+    @Value("${app.login.url}")
+    private String loginUrl;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -64,14 +70,33 @@ public class UserRestController {
                 user, HttpStatus.OK, request);
     }
 
-    @PutMapping("/administrative/{userId}")
-    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
+    @PutMapping("/{userId}")
+    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findById(userId);
         if(foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             updatedUser.setName(user.getName());
             updatedUser.setLastname(user.getLastname());
+            updatedUser.setProfilePic(user.getProfilePic());
+            userRepository.save(updatedUser);
+            return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
+                    updatedUser, HttpStatus.OK, request);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+    @PutMapping("/administrative/{userId}")
+    @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
+    public ResponseEntity<?> updateUserByAdmin(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
+        Optional<User> foundUser = userRepository.findById(userId);
+        if(foundUser.isPresent()) {
+            User updatedUser = foundUser.get();
+            updatedUser.setName(user.getName());
+            updatedUser.setLastname(user.getLastname());
+            updatedUser.setProfilePic(user.getProfilePic());
             userRepository.save(updatedUser);
             return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
                     updatedUser, HttpStatus.OK, request);
@@ -107,12 +132,7 @@ public class UserRestController {
             updatedUser.setPassword(passwordEncoder.encode(randomPassword));
             updatedUser.setNeedsPasswordChange(true);
 
-            String emailBody = "Hola " + updatedUser.getName() + ",\n\n" +
-                    "Se ha generado una contraseña temporal con éxito. Aquí están tus credenciales:\n" +
-                    "Correo: " + updatedUser.getEmail() + "\n" +
-                    "Contraseña: " + randomPassword + "\n\n" +
-                    "Por favor, cambia tu contraseña al iniciar sesión usando la dirección http://localhost:4200/login.\n\n" +
-                    "Saludos,\nEl equipo de EduSmart";
+            String emailBody = EmailTemplates.temporaryPasswordEmail(updatedUser.getName(), updatedUser.getEmail(), randomPassword, loginUrl);
             emailManager.sendEmail(updatedUser.getEmail(), "Generación de Contraseña Temporal", emailBody);
 
             userRepository.save(updatedUser);
