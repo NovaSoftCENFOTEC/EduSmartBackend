@@ -2,16 +2,20 @@ package com.project.demo.rest.audioTrack;
 
 import com.project.demo.logic.entity.audioTrack.AudioTrack;
 import com.project.demo.logic.entity.audioTrack.AudioTrackRepository;
+import com.project.demo.logic.entity.audioTrack.GoogleCloudTTSService;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.story.Story;
 import com.project.demo.logic.entity.story.StoryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,9 @@ import java.util.Optional;
 public class AudioTrackRestController {
     @Autowired
     private AudioTrackRepository audioTrackRepository;
+
+    @Autowired
+    private GoogleCloudTTSService googleCloudTTSService;
 
     @Autowired
     private StoryRepository storyRepository;
@@ -65,6 +72,25 @@ public class AudioTrackRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
+
+    @PostMapping("/tts")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> generateAudioTrackFromText(@RequestBody String text) {
+        try {
+            byte[] audioData = googleCloudTTSService.convertTextToMp3(text);
+            ByteArrayResource resource = new ByteArrayResource(audioData);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"speech.mp3\"")
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .contentLength(audioData.length)
+                    .body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GlobalResponseHandler().handleResponse(
+                    "Error generating audio track: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null));
+        }
+    }
+
 
     @PutMapping("/{audioTrackId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
