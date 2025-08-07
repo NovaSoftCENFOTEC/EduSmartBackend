@@ -23,15 +23,12 @@ public class StoryAudioTrackService {
         String content = story.getContent();
         Long storyId = story.getId();
 
-        // Generate MP3s
         byte[] maleAudio = googleCloudTTSService.convertTextToMp3(content, VoiceTypeEnum.MALE);
         byte[] femaleAudio = googleCloudTTSService.convertTextToMp3(content, VoiceTypeEnum.FEMALE);
 
-        // Upload to Cloudinary
         String maleUrl = cloudinaryService.uploadAudio(maleAudio, "story_" + storyId + "_male.mp3");
         String femaleUrl = cloudinaryService.uploadAudio(femaleAudio, "story_" + storyId + "_female.mp3");
 
-        // Create and save AudioTracks
         AudioTrack maleTrack = new AudioTrack();
         maleTrack.setTitle(story.getTitle() + " (Masuculino)");
         maleTrack.setVoiceType(VoiceTypeEnum.MALE);
@@ -52,15 +49,12 @@ public class StoryAudioTrackService {
         String content = story.getContent();
         Long storyId = story.getId();
 
-        // Generate new MP3s
         byte[] maleAudio = googleCloudTTSService.convertTextToMp3(content, VoiceTypeEnum.MALE);
         byte[] femaleAudio = googleCloudTTSService.convertTextToMp3(content, VoiceTypeEnum.FEMALE);
 
-        // Upload to Cloudinary
         String maleUrl = cloudinaryService.uploadAudio(maleAudio, "story_" + storyId + "_male.mp3");
         String femaleUrl = cloudinaryService.uploadAudio(femaleAudio, "story_" + storyId + "_female.mp3");
 
-        // Find and update AudioTracks
         AudioTrack maleTrack = audioTrackRepository.findByStoryAndVoiceType(story, VoiceTypeEnum.MALE);
         AudioTrack femaleTrack = audioTrackRepository.findByStoryAndVoiceType(story, VoiceTypeEnum.FEMALE);
 
