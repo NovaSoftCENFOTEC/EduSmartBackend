@@ -34,7 +34,7 @@ public class AssignmentRestController {
     private CourseRepository courseRepository;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAllAssignments(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -54,7 +54,7 @@ public class AssignmentRestController {
     }
 
     @GetMapping("/{assignmentId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAssignmentById(@PathVariable Long assignmentId, HttpServletRequest request) {
 
         Optional<Assignment> foundAssignment = assignmentRepository.findById(assignmentId);
@@ -93,7 +93,7 @@ public class AssignmentRestController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> createAssignment(@RequestBody Assignment assignment, HttpServletRequest request) {
         Optional<Group> group = groupRepository.findById(assignment.getGroup().getId());
         if (group.isPresent()) {
@@ -108,7 +108,7 @@ public class AssignmentRestController {
     }
 
     @PostMapping("/group/{groupId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> createAssignmentForGroup(@PathVariable Long groupId,
                                                       @RequestBody Assignment assignment,
                                                       HttpServletRequest request) {
