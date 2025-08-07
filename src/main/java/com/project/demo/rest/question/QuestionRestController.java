@@ -42,6 +42,13 @@ public class QuestionRestController {
         }
     }
 
+    @GetMapping("/quiz/{quizId}/student")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getQuestionsByQuizForStudent(@PathVariable Integer quizId, HttpServletRequest request) {
+        List<Question> questions = questionRepository.findByQuizId(quizId);
+        return new GlobalResponseHandler().handleResponse("Preguntas obtenidas correctamente", questions, HttpStatus.OK, request);
+    }
+
     @PostMapping("/quiz/{quizId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createQuestion(@PathVariable Integer quizId, @RequestBody Question question, HttpServletRequest request) {
