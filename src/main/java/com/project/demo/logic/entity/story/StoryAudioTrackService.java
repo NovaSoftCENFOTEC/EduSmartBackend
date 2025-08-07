@@ -69,4 +69,16 @@ public class StoryAudioTrackService {
             audioTrackRepository.save(femaleTrack);
         }
     }
+
+    public void deleteAudioTracksForStory(Story story) {
+        AudioTrack maleTrack = audioTrackRepository.findByStoryAndVoiceType(story, VoiceTypeEnum.MALE);
+        AudioTrack femaleTrack = audioTrackRepository.findByStoryAndVoiceType(story, VoiceTypeEnum.FEMALE);
+
+        if (maleTrack != null) {
+            audioTrackRepository.delete(maleTrack);
+        }
+        if (femaleTrack != null) {
+            audioTrackRepository.delete(femaleTrack);
+        }
+    }
 }
