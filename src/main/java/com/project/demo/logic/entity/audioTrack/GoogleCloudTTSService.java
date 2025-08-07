@@ -5,6 +5,8 @@ import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.texttospeech.v1.*;
 import com.google.protobuf.ByteString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,15 @@ import java.io.IOException;
 @Service
 public class GoogleCloudTTSService {
 
+    private static final Logger logger = LoggerFactory.getLogger(GoogleCloudTTSService.class);
+
     @Value("${gcp.credentials.location}")
     private Resource credentialsResource;
 
-    public byte[] convertTextToMp3(String text) throws IOException {
+    private final static String LANGUAGE_CODE = "es-US";
+
+    public byte[] convertTextToMp3(String text, VoiceTypeEnum voiceType) throws IOException {
+        logger.info("Empezando la conversión de texto a MP3 con Google Cloud TTS");
         GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsResource.getInputStream());
 
         TextToSpeechSettings settings = TextToSpeechSettings.newBuilder()
@@ -27,10 +34,17 @@ public class GoogleCloudTTSService {
         try (TextToSpeechClient textToSpeechClient = TextToSpeechClient.create(settings)) {
             SynthesisInput input = SynthesisInput.newBuilder().setText(text).build();
 
-            VoiceSelectionParams voice = VoiceSelectionParams.newBuilder()
-                    .setLanguageCode("es-US")
-                    .setSsmlGender(SsmlVoiceGender.NEUTRAL)
-                    .build();
+            VoiceSelectionParams.Builder voiceBuilder = VoiceSelectionParams.newBuilder()
+                    .setLanguageCode(LANGUAGE_CODE);
+
+            if (voiceType.equals(VoiceTypeEnum.FEMALE)) {
+                voiceBuilder.setSsmlGender(SsmlVoiceGender.FEMALE);
+            } else if (voiceType.equals(VoiceTypeEnum.MALE)) {
+                voiceBuilder.setSsmlGender(SsmlVoiceGender.MALE);
+            } else {
+                voiceBuilder.setSsmlGender(SsmlVoiceGender.NEUTRAL);
+            }
+            VoiceSelectionParams voice = voiceBuilder.build();
 
             AudioConfig audioConfig = AudioConfig.newBuilder()
                     .setAudioEncoding(AudioEncoding.MP3)
@@ -39,7 +53,11 @@ public class GoogleCloudTTSService {
             SynthesizeSpeechResponse response = textToSpeechClient.synthesizeSpeech(input, voice, audioConfig);
 
             ByteString audioContents = response.getAudioContent();
+            logger.info("Conversión de texto a MP3 completada exitosamente");
             return audioContents.toByteArray();
+        } catch (IOException e) {
+            logger.error("Error durante la conversión de texto a MP3: {}", e.getMessage());
+            throw e;
         }
     }
 }

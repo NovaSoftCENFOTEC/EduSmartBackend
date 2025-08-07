@@ -3,6 +3,7 @@ package com.project.demo.rest.audioTrack;
 import com.project.demo.logic.entity.audioTrack.AudioTrack;
 import com.project.demo.logic.entity.audioTrack.AudioTrackRepository;
 import com.project.demo.logic.entity.audioTrack.GoogleCloudTTSService;
+import com.project.demo.logic.entity.audioTrack.VoiceTypeEnum;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.story.Story;
@@ -73,25 +74,6 @@ public class AudioTrackRestController {
         }
     }
 
-    @PostMapping("/tts")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
-    public ResponseEntity<?> generateAudioTrackFromText(@RequestBody String text) {
-        try {
-            byte[] audioData = googleCloudTTSService.convertTextToMp3(text);
-            ByteArrayResource resource = new ByteArrayResource(audioData);
-
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"speech.mp3\"")
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .contentLength(audioData.length)
-                    .body(resource);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GlobalResponseHandler().handleResponse(
-                    "Error generating audio track: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null));
-        }
-    }
-
-
     @PutMapping("/{audioTrackId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateAudioTrack(@PathVariable Long audioTrackId, @RequestBody AudioTrack audioTrack, HttpServletRequest request) {
@@ -101,7 +83,6 @@ public class AudioTrackRestController {
             updatedAudioTrack.setTitle(audioTrack.getTitle());
             updatedAudioTrack.setVoiceType(audioTrack.getVoiceType());
             updatedAudioTrack.setUrl(audioTrack.getUrl());
-            updatedAudioTrack.setDuration(audioTrack.getDuration());
             updatedAudioTrack.setStory(updatedAudioTrack.getStory());
             audioTrackRepository.save(updatedAudioTrack);
 
