@@ -110,6 +110,7 @@ public class StoryRestController {
     public ResponseEntity<?> deleteStory(@PathVariable Long storyId, HttpServletRequest request) {
         Optional<Story> foundStory = storyRepository.findById(storyId);
         if (foundStory.isPresent()) {
+            storyAudioTrackService.deleteAudioTracksForStory(foundStory.get());
             storyRepository.delete(foundStory.get());
             return new GlobalResponseHandler().handleResponse("Historia eliminada con éxito",
                     foundStory.get(), HttpStatus.OK, request);
