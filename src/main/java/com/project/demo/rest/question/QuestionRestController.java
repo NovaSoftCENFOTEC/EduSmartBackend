@@ -25,14 +25,14 @@ public class QuestionRestController {
     private QuizRepository quizRepository;
 
     @GetMapping("/quiz/{quizId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuestionsByQuiz(@PathVariable Integer quizId, HttpServletRequest request) {
         List<Question> questions = questionRepository.findByQuizId(quizId);
         return new GlobalResponseHandler().handleResponse("Preguntas obtenidas correctamente", questions, HttpStatus.OK, request);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuestionById(@PathVariable Integer id, HttpServletRequest request) {
         Optional<Question> question = questionRepository.findById(id);
         if (question.isPresent()) {

@@ -26,7 +26,7 @@ public class OptionRestController {
     private QuestionRepository questionRepository;
 
     @GetMapping("/question/{questionId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getOptionsByQuestion(@PathVariable Integer questionId, HttpServletRequest request) {
         List<Option> options = optionRepository.findByQuestionId(questionId);
         return new GlobalResponseHandler().handleResponse("Opciones obtenidas correctamente", options, HttpStatus.OK, request);

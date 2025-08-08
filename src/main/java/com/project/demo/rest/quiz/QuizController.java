@@ -49,7 +49,7 @@ public class QuizController {
     @GetMapping("/story/{storyId}/quizzes")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuizzesByStory(@PathVariable Integer storyId, HttpServletRequest request) {
-        Optional<Quiz> quizzes = quizService.getQuizById(storyId);
+        List<Quiz> quizzes = quizService.getQuizzesByStoryId(storyId);
         return new GlobalResponseHandler().handleResponse("Quizzes obtenidos correctamente", quizzes, HttpStatus.OK, request);
     }
 
