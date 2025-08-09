@@ -133,7 +133,7 @@ public class GradeRestController {
 
 
     @PutMapping("/{gradeId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateGrade(@PathVariable Long gradeId,
                                          @RequestBody GradeDTO gradeDto,
                                          HttpServletRequest request) {
@@ -157,7 +157,7 @@ public class GradeRestController {
     }
 
     @DeleteMapping("/{gradeId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteGrade(@PathVariable Long gradeId, HttpServletRequest request) {
         Optional<Grade> found = gradeRepository.findById(gradeId);
         if (found.isPresent()) {

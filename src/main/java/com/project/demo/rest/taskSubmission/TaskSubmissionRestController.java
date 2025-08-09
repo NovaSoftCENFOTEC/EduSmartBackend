@@ -73,7 +73,7 @@ public class TaskSubmissionRestController {
     }
 
     @GetMapping("/assignment/{assignmentId}")
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasAnyRole('TEACHER','STUDENT')")
     public ResponseEntity<?> getByAssignmentId(@PathVariable Long assignmentId,
                                                @RequestParam(defaultValue = "1") int page,
                                                @RequestParam(defaultValue = "10") int size,
