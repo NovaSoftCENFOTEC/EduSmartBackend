@@ -178,7 +178,7 @@ public class TaskSubmissionRestController {
     }
 
     @DeleteMapping("/{submissionId}")
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> deleteTaskSubmission(@PathVariable Long submissionId, HttpServletRequest request) {
         Optional<TaskSubmission> found = taskSubmissionRepository.findById(submissionId);
         if (found.isPresent()) {

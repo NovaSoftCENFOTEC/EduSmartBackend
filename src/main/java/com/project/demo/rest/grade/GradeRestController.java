@@ -33,7 +33,7 @@ public class GradeRestController {
     private UserRepository userRepository;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAllGrades(@RequestParam(defaultValue = "1") int page,
                                           @RequestParam(defaultValue = "10") int size,
                                           HttpServletRequest request) {
@@ -71,7 +71,7 @@ public class GradeRestController {
     }
 
     @GetMapping("/submission/{submissionId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getBySubmissionId(@PathVariable Long submissionId,
                                                @RequestParam(defaultValue = "1") int page,
                                                @RequestParam(defaultValue = "10") int size,
@@ -133,7 +133,7 @@ public class GradeRestController {
 
 
     @PutMapping("/{gradeId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> updateGrade(@PathVariable Long gradeId,
                                          @RequestBody GradeDTO gradeDto,
                                          HttpServletRequest request) {
@@ -157,7 +157,7 @@ public class GradeRestController {
     }
 
     @DeleteMapping("/{gradeId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> deleteGrade(@PathVariable Long gradeId, HttpServletRequest request) {
         Optional<Grade> found = gradeRepository.findById(gradeId);
         if (found.isPresent()) {
@@ -171,7 +171,7 @@ public class GradeRestController {
     }
 
     @GetMapping("/student/{studentId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getGradesByStudentId(@PathVariable Long studentId,
                                                   @RequestParam(defaultValue = "1") int page,
                                                   @RequestParam(defaultValue = "10") int size,
