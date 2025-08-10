@@ -46,4 +46,7 @@ public class QuizService {
             return quiz;
         });
     }
+    public List<Quiz> getQuizzesByStoryId(Integer storyId) {
+        return quizRepository.findByStoryId(storyId);
+    }
 }

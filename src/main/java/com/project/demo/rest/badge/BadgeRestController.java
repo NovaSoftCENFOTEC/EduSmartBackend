@@ -169,7 +169,7 @@ public class BadgeRestController {
     }
 
     @PostMapping("/{badgeId}/students/{studentId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> assignBadgeToStudent(@PathVariable Long badgeId,
                                                   @PathVariable Long studentId,
                                                   HttpServletRequest request) {
