@@ -5,6 +5,7 @@ import com.project.demo.logic.entity.course.CourseRepository;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.story.Story;
+import com.project.demo.logic.entity.story.StoryAudioTrackService;
 import com.project.demo.logic.entity.story.StoryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class StoryRestController {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private StoryAudioTrackService storyAudioTrackService;
 
     @GetMapping("/course/{courseId}/stories")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER', 'SUPER_ADMIN')")
@@ -59,6 +63,14 @@ public class StoryRestController {
         if (foundCourse.isPresent()) {
             story.setCourse(foundCourse.get());
             storyRepository.save(story);
+
+            try {
+                storyAudioTrackService.generateAndSaveAudioTracksForStory(story);
+            } catch (Exception e) {
+                return new GlobalResponseHandler().handleResponse("Story created but failed to generate audio tracks: " + e.getMessage(),
+                        story, HttpStatus.CREATED, request);
+            }
+
             return new GlobalResponseHandler().handleResponse("Historia creada con éxito",
                     story, HttpStatus.CREATED, request);
         } else {
@@ -78,6 +90,13 @@ public class StoryRestController {
             updatedStory.setCourse(story.getCourse());
             storyRepository.save(updatedStory);
 
+            try {
+                storyAudioTrackService.updateAudioTracksForStory(updatedStory);
+            } catch (Exception e) {
+                return new GlobalResponseHandler().handleResponse("Story updated but failed to update audio tracks: " + e.getMessage(),
+                        updatedStory, HttpStatus.OK, request);
+            }
+
             return new GlobalResponseHandler().handleResponse("Historia editada con éxito",
                     updatedStory, HttpStatus.OK, request);
         } else {
@@ -91,6 +110,7 @@ public class StoryRestController {
     public ResponseEntity<?> deleteStory(@PathVariable Long storyId, HttpServletRequest request) {
         Optional<Story> foundStory = storyRepository.findById(storyId);
         if (foundStory.isPresent()) {
+            storyAudioTrackService.deleteAudioTracksForStory(foundStory.get());
             storyRepository.delete(foundStory.get());
             return new GlobalResponseHandler().handleResponse("Historia eliminada con éxito",
                     foundStory.get(), HttpStatus.OK, request);

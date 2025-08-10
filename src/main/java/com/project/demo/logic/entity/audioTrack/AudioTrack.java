@@ -13,12 +13,10 @@ public class AudioTrack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    @Column(unique = true, nullable = false, name = "voice_type")
+    @Column( nullable = false, name = "voice_type")
     @Enumerated(EnumType.STRING)
     private VoiceTypeEnum voiceType;
     private String url;
-    @Column(name = "duration_sec")
-    private int duration; // in seconds
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
@@ -31,12 +29,11 @@ public class AudioTrack {
     public AudioTrack() {
     }
 
-    public AudioTrack(long id, String title, VoiceTypeEnum voiceType, String url, int duration, Date createdAt, Story story) {
+    public AudioTrack(long id, String title, VoiceTypeEnum voiceType, String url, Date createdAt, Story story) {
         this.id = id;
         this.title = title;
         this.voiceType = voiceType;
         this.url = url;
-        this.duration = duration;
         this.createdAt = createdAt;
         this.story = story;
     }
@@ -71,14 +68,6 @@ public class AudioTrack {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public Date getCreatedAt() {

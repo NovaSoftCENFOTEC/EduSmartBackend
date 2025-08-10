@@ -2,16 +2,21 @@ package com.project.demo.rest.audioTrack;
 
 import com.project.demo.logic.entity.audioTrack.AudioTrack;
 import com.project.demo.logic.entity.audioTrack.AudioTrackRepository;
+import com.project.demo.logic.entity.audioTrack.GoogleCloudTTSService;
+import com.project.demo.logic.entity.audioTrack.VoiceTypeEnum;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.story.Story;
 import com.project.demo.logic.entity.story.StoryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +28,9 @@ import java.util.Optional;
 public class AudioTrackRestController {
     @Autowired
     private AudioTrackRepository audioTrackRepository;
+
+    @Autowired
+    private GoogleCloudTTSService googleCloudTTSService;
 
     @Autowired
     private StoryRepository storyRepository;
@@ -75,7 +83,6 @@ public class AudioTrackRestController {
             updatedAudioTrack.setTitle(audioTrack.getTitle());
             updatedAudioTrack.setVoiceType(audioTrack.getVoiceType());
             updatedAudioTrack.setUrl(audioTrack.getUrl());
-            updatedAudioTrack.setDuration(audioTrack.getDuration());
             updatedAudioTrack.setStory(updatedAudioTrack.getStory());
             audioTrackRepository.save(updatedAudioTrack);
 

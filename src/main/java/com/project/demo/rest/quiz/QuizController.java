@@ -34,7 +34,7 @@ public class QuizController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuizById(@PathVariable Integer id, HttpServletRequest request) {
         Optional<Quiz> quiz = quizService.getQuizById(id);
         if (quiz.isPresent()) {
@@ -44,6 +44,13 @@ public class QuizController {
             return new GlobalResponseHandler().handleResponse("Quiz " + id + " no encontrado", HttpStatus.NOT_FOUND,
                     request);
         }
+    }
+
+    @GetMapping("/story/{storyId}/quizzes")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getQuizzesByStory(@PathVariable Integer storyId, HttpServletRequest request) {
+        List<Quiz> quizzes = quizService.getQuizzesByStoryId(storyId);
+        return new GlobalResponseHandler().handleResponse("Quizzes obtenidos correctamente", quizzes, HttpStatus.OK, request);
     }
 
     @PostMapping("/story/{storyId}")
