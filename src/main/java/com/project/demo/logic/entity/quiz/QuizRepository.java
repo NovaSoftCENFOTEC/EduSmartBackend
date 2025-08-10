@@ -8,4 +8,5 @@ public interface QuizRepository extends JpaRepository<Quiz, Integer> {
     List<Quiz> findByDueDateAfter(java.util.Date now);
 
     List<Quiz> findByTitleContainingIgnoreCase(String title);
+
 }
