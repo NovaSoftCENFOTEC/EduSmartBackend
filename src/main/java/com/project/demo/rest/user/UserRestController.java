@@ -49,7 +49,7 @@ public class UserRestController {
             @RequestParam(defaultValue = "10") int size,
             HttpServletRequest request) {
 
-        Pageable pageable = PageRequest.of(page-1, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         Page<User> userPage = userRepository.findAll(pageable);
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(userPage.getTotalPages());
@@ -74,7 +74,7 @@ public class UserRestController {
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findById(userId);
-        if(foundUser.isPresent()) {
+        if (foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             updatedUser.setName(user.getName());
             updatedUser.setLastname(user.getLastname());
@@ -83,7 +83,7 @@ public class UserRestController {
             return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
         }
     }
@@ -92,7 +92,7 @@ public class UserRestController {
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUserByAdmin(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findById(userId);
-        if(foundUser.isPresent()) {
+        if (foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             updatedUser.setName(user.getName());
             updatedUser.setLastname(user.getLastname());
@@ -101,7 +101,7 @@ public class UserRestController {
             return new GlobalResponseHandler().handleResponse("Usuario actualizado con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
         }
     }
@@ -110,7 +110,7 @@ public class UserRestController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> updatePassword(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findById(userId);
-        if(foundUser.isPresent()) {
+        if (foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
             updatedUser.setNeedsPasswordChange(false);
@@ -118,7 +118,7 @@ public class UserRestController {
             return new GlobalResponseHandler().handleResponse("Contraseña actualizada con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
         }
     }
@@ -126,7 +126,7 @@ public class UserRestController {
     @PutMapping("/password-recovery/{userEmail}")
     public ResponseEntity<?> updatePasswordRecovery(@PathVariable String userEmail, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findByEmail(userEmail);
-        if(foundUser.isPresent()) {
+        if (foundUser.isPresent()) {
             User updatedUser = foundUser.get();
             String randomPassword = passwordGenerator.generatePassword(12);
             updatedUser.setPassword(passwordEncoder.encode(randomPassword));
@@ -139,23 +139,22 @@ public class UserRestController {
             return new GlobalResponseHandler().handleResponse("Contraseña actualizada con éxito",
                     updatedUser, HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userEmail + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userEmail + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
         }
     }
-
 
 
     @DeleteMapping("/{userId}")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findById(userId);
-        if(foundUser.isPresent()) {
+        if (foundUser.isPresent()) {
             userRepository.deleteById(userId);
             return new GlobalResponseHandler().handleResponse("Usuario eliminado con éxito",
                     foundUser.get(), HttpStatus.OK, request);
         } else {
-            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado"  ,
+            return new GlobalResponseHandler().handleResponse("Usuario " + userId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);
         }
     }
@@ -166,5 +165,26 @@ public class UserRestController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (User) authentication.getPrincipal();
     }
+
+    @GetMapping("/{userId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> getUserById(@PathVariable Long userId, HttpServletRequest request) {
+        Optional<User> foundUser = userRepository.findById(userId);
+        if (foundUser.isPresent()) {
+            return new GlobalResponseHandler().handleResponse(
+                    "Usuario obtenido con éxito",
+                    foundUser.get(),
+                    HttpStatus.OK,
+                    request
+            );
+        } else {
+            return new GlobalResponseHandler().handleResponse(
+                    "Usuario " + userId + " no encontrado",
+                    HttpStatus.NOT_FOUND,
+                    request
+            );
+        }
+    }
+
 
 }
