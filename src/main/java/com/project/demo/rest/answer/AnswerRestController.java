@@ -2,13 +2,13 @@ package com.project.demo.rest.answer;
 
 import com.project.demo.logic.entity.answer.Answer;
 import com.project.demo.logic.entity.answer.AnswerRepository;
-import com.project.demo.logic.entity.submission.Submission;
-import com.project.demo.logic.entity.submission.SubmissionRepository;
-import com.project.demo.logic.entity.question.Question;
-import com.project.demo.logic.entity.question.QuestionRepository;
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.option.Option;
 import com.project.demo.logic.entity.option.OptionRepository;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
+import com.project.demo.logic.entity.question.Question;
+import com.project.demo.logic.entity.question.QuestionRepository;
+import com.project.demo.logic.entity.submission.Submission;
+import com.project.demo.logic.entity.submission.SubmissionRepository;
 import com.project.demo.logic.request.AnswerRequest;
 import com.project.demo.logic.request.AnswerUpdateRequest;
 import com.project.demo.rest.answer.dto.AnswerResultDto;
@@ -46,8 +46,9 @@ public class AnswerRestController {
 
     /**
      * Obtiene todas las respuestas asociadas a una entrega.
+     *
      * @param submissionId identificador de la entrega
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return respuestas de la entrega
      */
     @GetMapping("/submission/{submissionId}")
@@ -59,7 +60,8 @@ public class AnswerRestController {
 
     /**
      * Obtiene una respuesta por su identificador.
-     * @param id identificador de la respuesta
+     *
+     * @param id      identificador de la respuesta
      * @param request petición HTTP
      * @return respuesta encontrada
      */
@@ -76,10 +78,11 @@ public class AnswerRestController {
 
     /**
      * Crea una nueva respuesta para una pregunta en una entrega.
+     *
      * @param submissionId identificador de la entrega
-     * @param questionId identificador de la pregunta
-     * @param optionId identificador de la opción seleccionada
-     * @param request petición HTTP
+     * @param questionId   identificador de la pregunta
+     * @param optionId     identificador de la opción seleccionada
+     * @param request      petición HTTP
      * @return respuesta creada
      */
     @PostMapping("/submission/{submissionId}/question/{questionId}/option/{optionId}")
@@ -119,9 +122,10 @@ public class AnswerRestController {
 
     /**
      * Crea respuestas en bloque para una entrega.
-     * @param submissionId identificador de la entrega
+     *
+     * @param submissionId   identificador de la entrega
      * @param answerRequests lista de respuestas
-     * @param request petición HTTP
+     * @param request        petición HTTP
      * @return respuestas creadas
      */
     @PostMapping("/submission/{submissionId}/bulk")
@@ -159,9 +163,10 @@ public class AnswerRestController {
 
     /**
      * Actualiza la opción seleccionada de una respuesta.
-     * @param id identificador de la respuesta
+     *
+     * @param id            identificador de la respuesta
      * @param updateRequest datos de actualización
-     * @param request petición HTTP
+     * @param request       petición HTTP
      * @return respuesta actualizada
      */
     @PutMapping("/{id}")
@@ -187,7 +192,8 @@ public class AnswerRestController {
 
     /**
      * Elimina una respuesta por su identificador.
-     * @param id identificador de la respuesta
+     *
+     * @param id      identificador de la respuesta
      * @param request petición HTTP
      * @return respuesta eliminada
      */
@@ -205,8 +211,9 @@ public class AnswerRestController {
 
     /**
      * Obtiene todas las respuestas asociadas a una pregunta.
+     *
      * @param questionId identificador de la pregunta
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return respuestas de la pregunta
      */
     @GetMapping("/question/{questionId}")
@@ -218,8 +225,9 @@ public class AnswerRestController {
 
     /**
      * Obtiene los resultados de una entrega, incluyendo el puntaje y respuestas.
+     *
      * @param submissionId identificador de la entrega
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return resultados de la entrega
      */
     @GetMapping("/submission/{submissionId}/results")

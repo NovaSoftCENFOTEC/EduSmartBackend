@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 public interface IllustrationRepository extends JpaRepository<Illustration, Long> {
     /**
      * Busca las ilustraciones por el identificador de la historia.
-     * @param storyId identificador de la historia
+     *
+     * @param storyId  identificador de la historia
      * @param pageable paginación
      * @return página de ilustraciones
      */

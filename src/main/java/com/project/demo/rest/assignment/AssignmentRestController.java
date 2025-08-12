@@ -2,10 +2,9 @@ package com.project.demo.rest.assignment;
 
 import com.project.demo.logic.entity.assignment.Assignment;
 import com.project.demo.logic.entity.assignment.AssignmentRepository;
+import com.project.demo.logic.entity.course.CourseRepository;
 import com.project.demo.logic.entity.group.Group;
 import com.project.demo.logic.entity.group.GroupRepository;
-import com.project.demo.logic.entity.course.Course;
-import com.project.demo.logic.entity.course.CourseRepository;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,8 +38,9 @@ public class AssignmentRestController {
 
     /**
      * Obtiene todas las asignaciones paginadas.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de asignaciones
      */
@@ -66,8 +66,9 @@ public class AssignmentRestController {
 
     /**
      * Obtiene una asignación por su identificador.
+     *
      * @param assignmentId identificador de la asignación
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return asignación encontrada
      */
     @GetMapping("/{assignmentId}")
@@ -87,9 +88,10 @@ public class AssignmentRestController {
 
     /**
      * Obtiene las asignaciones de un grupo específico.
+     *
      * @param groupId identificador del grupo
-     * @param page número de página
-     * @param size tamaño de página
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de asignaciones del grupo
      */
@@ -120,8 +122,9 @@ public class AssignmentRestController {
 
     /**
      * Crea una nueva asignación.
+     *
      * @param assignment datos de la asignación
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return asignación creada
      */
     @PostMapping
@@ -141,9 +144,10 @@ public class AssignmentRestController {
 
     /**
      * Crea una nueva asignación para un grupo específico.
-     * @param groupId identificador del grupo
+     *
+     * @param groupId    identificador del grupo
      * @param assignment datos de la asignación
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return asignación creada en el grupo
      */
     @PostMapping("/group/{groupId}")
@@ -167,9 +171,10 @@ public class AssignmentRestController {
 
     /**
      * Actualiza una asignación existente.
+     *
      * @param assignmentId identificador de la asignación
-     * @param assignment datos actualizados
-     * @param request petición HTTP
+     * @param assignment   datos actualizados
+     * @param request      petición HTTP
      * @return asignación actualizada
      */
     @PutMapping("/{assignmentId}")
@@ -198,8 +203,9 @@ public class AssignmentRestController {
 
     /**
      * Elimina una asignación por su identificador.
+     *
      * @param assignmentId identificador de la asignación
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return resultado de la eliminación
      */
     @DeleteMapping("/{assignmentId}")

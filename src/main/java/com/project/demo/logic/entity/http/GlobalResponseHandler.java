@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalResponseHandler {
     /**
      * Construye una respuesta HTTP con mensaje, cuerpo, estado y metadatos extraídos de la petición.
+     *
      * @param message mensaje de la respuesta
-     * @param body cuerpo de la respuesta
-     * @param status estado HTTP
+     * @param body    cuerpo de la respuesta
+     * @param status  estado HTTP
      * @param request petición HTTP
-     * @param <T> tipo de dato del cuerpo
+     * @param <T>     tipo de dato del cuerpo
      * @return ResponseEntity con la respuesta
      */
     @ResponseBody
@@ -30,31 +31,33 @@ public class GlobalResponseHandler {
             return new ResponseEntity<>(response, status);
         }
         HttpResponse<T> response = new HttpResponse<>(message, body, meta);
-        return  new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(response, status);
     }
 
     /**
      * Construye una respuesta HTTP con mensaje y estado, usando metadatos de la petición.
+     *
      * @param message mensaje de la respuesta
-     * @param status estado HTTP
+     * @param status  estado HTTP
      * @param request petición HTTP
-     * @param <T> tipo de dato del cuerpo
+     * @param <T>     tipo de dato del cuerpo
      * @return ResponseEntity con la respuesta
      */
     @ResponseBody
     public <T> ResponseEntity<?> handleResponse(String message, HttpStatus status, HttpServletRequest request) {
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         HttpResponse<?> response = new HttpResponse<>(message, meta);
-        return  new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(response, status);
     }
 
     /**
      * Construye una respuesta HTTP con mensaje, cuerpo, estado y metadatos proporcionados.
+     *
      * @param message mensaje de la respuesta
-     * @param body cuerpo de la respuesta
-     * @param status estado HTTP
-     * @param meta metadatos
-     * @param <T> tipo de dato del cuerpo
+     * @param body    cuerpo de la respuesta
+     * @param status  estado HTTP
+     * @param meta    metadatos
+     * @param <T>     tipo de dato del cuerpo
      * @return ResponseEntity con la respuesta
      */
     @ResponseBody
@@ -65,6 +68,6 @@ public class GlobalResponseHandler {
             return new ResponseEntity<>(response, status);
         }
         HttpResponse<T> response = new HttpResponse<>(message, body, meta);
-        return  new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(response, status);
     }
 }

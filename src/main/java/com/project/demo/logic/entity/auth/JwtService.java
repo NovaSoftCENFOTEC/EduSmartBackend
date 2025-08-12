@@ -5,15 +5,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 /**
  * Servicio para la gestión de tokens JWT.
@@ -29,6 +29,7 @@ public class JwtService {
 
     /**
      * Extrae el nombre de usuario (email) del token JWT.
+     *
      * @param token token JWT
      * @return nombre de usuario
      */
@@ -38,9 +39,10 @@ public class JwtService {
 
     /**
      * Extrae un claim específico del token JWT.
-     * @param token token JWT
+     *
+     * @param token          token JWT
      * @param claimsResolver función para resolver el claim
-     * @param <T> tipo de dato del claim
+     * @param <T>            tipo de dato del claim
      * @return valor del claim
      */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -50,6 +52,7 @@ public class JwtService {
 
     /**
      * Genera un token JWT para el usuario.
+     *
      * @param userDetails detalles del usuario
      * @return token JWT generado
      */
@@ -59,6 +62,7 @@ public class JwtService {
 
     /**
      * Genera un token JWT con claims adicionales.
+     *
      * @param extraClaims claims adicionales
      * @param userDetails detalles del usuario
      * @return token JWT generado
@@ -69,6 +73,7 @@ public class JwtService {
 
     /**
      * Obtiene el tiempo de expiración del token JWT.
+     *
      * @return tiempo de expiración en milisegundos
      */
     public long getExpirationTime() {
@@ -77,9 +82,10 @@ public class JwtService {
 
     /**
      * Genera un token JWT con claims adicionales y un tiempo de expiración específico.
+     *
      * @param extraClaims claims adicionales
      * @param userDetails detalles del usuario
-     * @param expiration tiempo de expiración en milisegundos
+     * @param expiration  tiempo de expiración en milisegundos
      * @return token JWT generado
      */
     private String buildToken(
@@ -99,7 +105,8 @@ public class JwtService {
 
     /**
      * Valida si el token JWT es válido.
-     * @param token token JWT
+     *
+     * @param token       token JWT
      * @param userDetails detalles del usuario
      * @return true si el token es válido, false en caso contrario
      */
@@ -110,6 +117,7 @@ public class JwtService {
 
     /**
      * Verifica si el token JWT ha expirado.
+     *
      * @param token token JWT
      * @return true si el token ha expirado, false en caso contrario
      */
@@ -119,6 +127,7 @@ public class JwtService {
 
     /**
      * Extrae la fecha de expiración del token JWT.
+     *
      * @param token token JWT
      * @return fecha de expiración
      */
@@ -128,6 +137,7 @@ public class JwtService {
 
     /**
      * Extrae todos los claims del token JWT.
+     *
      * @param token token JWT
      * @return claims extraídos
      */
@@ -143,6 +153,7 @@ public class JwtService {
     /**
      * Obtiene la clave de firma para el token JWT.
      * Utiliza la clave secreta configurada en las propiedades de la aplicación.
+     *
      * @return clave de firma
      */
     private Key getSignInKey() {

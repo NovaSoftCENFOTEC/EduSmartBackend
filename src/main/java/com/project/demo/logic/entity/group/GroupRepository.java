@@ -17,6 +17,7 @@ import java.util.Optional;
 public interface GroupRepository extends JpaRepository<Group, Long> {
     /**
      * Busca los grupos por el identificador del curso.
+     *
      * @param courseId identificador del curso
      * @param pageable paginación
      * @return página de grupos
@@ -25,14 +26,16 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
 
     /**
      * Busca los grupos por el identificador del profesor.
+     *
      * @param teacherId identificador del profesor
-     * @param pageable paginación
+     * @param pageable  paginación
      * @return página de grupos
      */
     Page<Group> findGroupsByTeacherId(Long teacherId, Pageable pageable);
 
     /**
      * Busca un grupo junto con sus estudiantes por el identificador del grupo.
+     *
      * @param groupId identificador del grupo
      * @return grupo con estudiantes (opcional)
      */
@@ -40,8 +43,9 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
 
     /**
      * Busca los grupos por el identificador del estudiante.
+     *
      * @param studentId identificador del estudiante
-     * @param pageable paginación
+     * @param pageable  paginación
      * @return página de grupos
      */
     @Query("SELECT DISTINCT g FROM Group g JOIN g.students s WHERE s.id = :studentId")

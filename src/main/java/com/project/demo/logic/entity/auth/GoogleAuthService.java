@@ -1,15 +1,15 @@
 package com.project.demo.logic.entity.auth;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-import com.google.api.client.json.gson.GsonFactory;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -31,10 +31,11 @@ public class GoogleAuthService {
 
     /**
      * Autentica a un usuario usando el token de Google.
+     *
      * @param idTokenString token de Google proporcionado por el cliente
      * @return usuario autenticado si existe en la base de datos
      * @throws GeneralSecurityException si ocurre un error de seguridad
-     * @throws IOException si ocurre un error de entrada/salida
+     * @throws IOException              si ocurre un error de entrada/salida
      */
     public User authenticateGoogleUser(String idTokenString) throws GeneralSecurityException, IOException {
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())

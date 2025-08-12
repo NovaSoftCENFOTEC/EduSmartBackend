@@ -29,8 +29,9 @@ public class CourseRestController {
 
     /**
      * Obtiene todos los cursos paginados.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de cursos
      */
@@ -55,7 +56,8 @@ public class CourseRestController {
 
     /**
      * Crea un nuevo curso.
-     * @param course datos del curso
+     *
+     * @param course  datos del curso
      * @param request petición HTTP
      * @return curso creado
      */
@@ -69,9 +71,10 @@ public class CourseRestController {
 
     /**
      * Actualiza un curso existente.
+     *
      * @param courseId identificador del curso
-     * @param course datos actualizados
-     * @param request petición HTTP
+     * @param course   datos actualizados
+     * @param request  petición HTTP
      * @return curso actualizado
      */
     @PutMapping("/{courseId}")
@@ -95,8 +98,9 @@ public class CourseRestController {
 
     /**
      * Elimina un curso por su identificador.
+     *
      * @param courseId identificador del curso
-     * @param request petición HTTP
+     * @param request  petición HTTP
      * @return resultado de la eliminación
      */
     @DeleteMapping("/{courseId}")

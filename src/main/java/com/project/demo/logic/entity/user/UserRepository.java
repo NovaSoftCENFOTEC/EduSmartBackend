@@ -14,9 +14,10 @@ import java.util.Optional;
  * Permite consultar usuarios por nombre, apellido, correo, escuela y rol.
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>  {
+public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Busca usuarios cuyo nombre contiene un carácter específico (ignorando mayúsculas/minúsculas).
+     *
      * @param character carácter a buscar
      * @return lista de usuarios
      */
@@ -25,6 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long>  {
 
     /**
      * Busca un usuario por nombre exacto.
+     *
      * @param name nombre del usuario
      * @return usuario encontrado (opcional)
      */
@@ -33,6 +35,7 @@ public interface UserRepository extends JpaRepository<User, Long>  {
 
     /**
      * Busca un usuario por apellido.
+     *
      * @param lastname apellido del usuario
      * @return usuario encontrado (opcional)
      */
@@ -40,6 +43,7 @@ public interface UserRepository extends JpaRepository<User, Long>  {
 
     /**
      * Busca un usuario por correo electrónico.
+     *
      * @param email correo electrónico
      * @return usuario encontrado (opcional)
      */
@@ -47,6 +51,7 @@ public interface UserRepository extends JpaRepository<User, Long>  {
 
     /**
      * Busca usuarios por el identificador de la escuela.
+     *
      * @param schoolId identificador de la escuela
      * @param pageable paginación
      * @return página de usuarios
@@ -55,8 +60,9 @@ public interface UserRepository extends JpaRepository<User, Long>  {
 
     /**
      * Busca usuarios por el identificador de la escuela y el identificador del rol.
+     *
      * @param schoolId identificador de la escuela
-     * @param roleId identificador del rol
+     * @param roleId   identificador del rol
      * @param pageable paginación
      * @return página de usuarios
      */

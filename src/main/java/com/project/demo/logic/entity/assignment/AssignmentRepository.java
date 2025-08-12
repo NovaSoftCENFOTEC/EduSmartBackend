@@ -15,7 +15,8 @@ public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
 
     /**
      * Busca tareas por el identificador del grupo.
-     * @param groupId identificador del grupo
+     *
+     * @param groupId  identificador del grupo
      * @param pageable paginación
      * @return página de tareas
      */
@@ -23,7 +24,8 @@ public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
 
     /**
      * Busca tareas por el grupo.
-     * @param group grupo
+     *
+     * @param group    grupo
      * @param pageable paginación
      * @return página de tareas
      */

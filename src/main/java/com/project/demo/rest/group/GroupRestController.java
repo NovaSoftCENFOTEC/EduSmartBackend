@@ -39,8 +39,9 @@ public class GroupRestController {
 
     /**
      * Obtiene todos los grupos paginados.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de grupos
      */
@@ -66,6 +67,7 @@ public class GroupRestController {
 
     /**
      * Obtiene un grupo junto con sus estudiantes por su identificador.
+     *
      * @param groupId identificador del grupo
      * @param request petición HTTP
      * @return grupo encontrado
@@ -94,10 +96,11 @@ public class GroupRestController {
 
     /**
      * Obtiene los grupos asociados a un curso.
+     *
      * @param courseId identificador del curso
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page     número de página
+     * @param size     tamaño de página
+     * @param request  petición HTTP
      * @return lista de grupos del curso
      */
     @GetMapping("/course/{courseId}/groups")
@@ -128,10 +131,11 @@ public class GroupRestController {
 
     /**
      * Obtiene los grupos asociados a un docente.
+     *
      * @param teacherId identificador del docente
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page      número de página
+     * @param size      tamaño de página
+     * @param request   petición HTTP
      * @return lista de grupos del docente
      */
     @GetMapping("/teacher/{teacherId}/groups")
@@ -162,10 +166,11 @@ public class GroupRestController {
 
     /**
      * Crea un nuevo grupo asociado a un curso y docente.
-     * @param courseId identificador del curso
+     *
+     * @param courseId  identificador del curso
      * @param teacherId identificador del docente
-     * @param group datos del grupo
-     * @param request petición HTTP
+     * @param group     datos del grupo
+     * @param request   petición HTTP
      * @return grupo creado
      */
     @PostMapping("/course/{courseId}/teacher/{teacherId}")
@@ -196,9 +201,10 @@ public class GroupRestController {
 
     /**
      * Añade un estudiante a un grupo.
-     * @param groupId identificador del grupo
+     *
+     * @param groupId   identificador del grupo
      * @param studentId identificador del estudiante
-     * @param request petición HTTP
+     * @param request   petición HTTP
      * @return grupo actualizado
      */
     @PostMapping("/{groupId}/students/{studentId}")
@@ -228,8 +234,9 @@ public class GroupRestController {
 
     /**
      * Actualiza los datos de un grupo.
+     *
      * @param groupId identificador del grupo
-     * @param group datos actualizados
+     * @param group   datos actualizados
      * @param request petición HTTP
      * @return grupo actualizado
      */
@@ -254,6 +261,7 @@ public class GroupRestController {
 
     /**
      * Elimina un grupo por su identificador.
+     *
      * @param groupId identificador del grupo
      * @param request petición HTTP
      * @return resultado de la eliminación
@@ -274,9 +282,10 @@ public class GroupRestController {
 
     /**
      * Elimina un estudiante de un grupo.
-     * @param groupId identificador del grupo
+     *
+     * @param groupId   identificador del grupo
      * @param studentId identificador del estudiante
-     * @param request petición HTTP
+     * @param request   petición HTTP
      * @return grupo actualizado
      */
     @DeleteMapping("/{groupId}/students/{studentId}")
@@ -306,10 +315,11 @@ public class GroupRestController {
 
     /**
      * Obtiene los grupos asociados a un estudiante.
+     *
      * @param studentId identificador del estudiante
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page      número de página
+     * @param size      tamaño de página
+     * @param request   petición HTTP
      * @return lista de grupos del estudiante
      */
     @GetMapping("/student/{studentId}/groups")
@@ -334,6 +344,7 @@ public class GroupRestController {
 
     /**
      * Obtiene el curso asociado a un grupo.
+     *
      * @param groupId identificador del grupo
      * @param request petición HTTP
      * @return curso del grupo

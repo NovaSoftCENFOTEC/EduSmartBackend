@@ -1,10 +1,10 @@
 package com.project.demo.rest.question;
 
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.question.Question;
 import com.project.demo.logic.entity.question.QuestionRepository;
 import com.project.demo.logic.entity.quiz.Quiz;
 import com.project.demo.logic.entity.quiz.QuizRepository;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,8 @@ public class QuestionRestController {
 
     /**
      * Obtiene las preguntas asociadas a un quiz.
-     * @param quizId identificador del quiz
+     *
+     * @param quizId  identificador del quiz
      * @param request petición HTTP
      * @return lista de preguntas
      */
@@ -44,7 +45,8 @@ public class QuestionRestController {
 
     /**
      * Obtiene una pregunta por su identificador.
-     * @param id identificador de la pregunta
+     *
+     * @param id      identificador de la pregunta
      * @param request petición HTTP
      * @return pregunta encontrada
      */
@@ -61,7 +63,8 @@ public class QuestionRestController {
 
     /**
      * Obtiene las preguntas asociadas a un quiz para estudiantes.
-     * @param quizId identificador del quiz
+     *
+     * @param quizId  identificador del quiz
      * @param request petición HTTP
      * @return lista de preguntas
      */
@@ -74,9 +77,10 @@ public class QuestionRestController {
 
     /**
      * Crea una nueva pregunta para un quiz.
-     * @param quizId identificador del quiz
+     *
+     * @param quizId   identificador del quiz
      * @param question datos de la pregunta
-     * @param request petición HTTP
+     * @param request  petición HTTP
      * @return pregunta creada
      */
     @PostMapping("/quiz/{quizId}")
@@ -94,9 +98,10 @@ public class QuestionRestController {
 
     /**
      * Actualiza los datos de una pregunta existente.
-     * @param id identificador de la pregunta
+     *
+     * @param id              identificador de la pregunta
      * @param questionDetails datos actualizados
-     * @param request petición HTTP
+     * @param request         petición HTTP
      * @return pregunta actualizada
      */
     @PutMapping("/{id}")
@@ -115,7 +120,8 @@ public class QuestionRestController {
 
     /**
      * Elimina una pregunta por su identificador.
-     * @param id identificador de la pregunta
+     *
+     * @param id      identificador de la pregunta
      * @param request petición HTTP
      * @return resultado de la eliminación
      */

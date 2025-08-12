@@ -25,6 +25,7 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
     /**
      * Método que se ejecuta al iniciar el contexto de la aplicación.
      * Carga los roles si no existen.
+     *
      * @param contextRefreshedEvent evento de inicio de contexto
      */
     @Override
@@ -36,7 +37,7 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
      * Carga los roles básicos en la base de datos si no existen.
      */
     private void loadRoles() {
-        RoleEnum[] roleNames = new RoleEnum[] { RoleEnum.STUDENT, RoleEnum.TEACHER, RoleEnum.SUPER_ADMIN };
+        RoleEnum[] roleNames = new RoleEnum[]{RoleEnum.STUDENT, RoleEnum.TEACHER, RoleEnum.SUPER_ADMIN};
         Map<RoleEnum, String> roleDescriptionMap = Map.of(
                 RoleEnum.STUDENT, "Student role",
                 RoleEnum.TEACHER, "Teacher role",

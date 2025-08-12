@@ -39,10 +39,11 @@ public class MaterialRestController {
 
     /**
      * Obtiene los materiales asociados a un curso.
+     *
      * @param courseId identificador del curso
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page     número de página
+     * @param size     tamaño de página
+     * @param request  petición HTTP
      * @return lista de materiales del curso
      */
     @GetMapping("/course/{courseId}/materials")
@@ -72,10 +73,11 @@ public class MaterialRestController {
 
     /**
      * Obtiene los materiales asociados a un profesor.
+     *
      * @param teacherId identificador del profesor
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page      número de página
+     * @param size      tamaño de página
+     * @param request   petición HTTP
      * @return lista de materiales del profesor
      */
     @GetMapping("/teacher/{teacherId}/materials")
@@ -105,10 +107,11 @@ public class MaterialRestController {
 
     /**
      * Crea un nuevo material asociado a un curso y profesor.
-     * @param courseId identificador del curso
+     *
+     * @param courseId  identificador del curso
      * @param teacherId identificador del profesor
-     * @param material datos del material
-     * @param request petición HTTP
+     * @param material  datos del material
+     * @param request   petición HTTP
      * @return material creado
      */
     @PostMapping("/course/{courseId}/teacher/{teacherId}")
@@ -140,9 +143,10 @@ public class MaterialRestController {
 
     /**
      * Actualiza los datos de un material existente.
-     * @param materialId identificador del material
+     *
+     * @param materialId  identificador del material
      * @param materialDto datos actualizados
-     * @param request petición HTTP
+     * @param request     petición HTTP
      * @return material actualizado
      */
     @PutMapping("/{materialId}")
@@ -177,8 +181,9 @@ public class MaterialRestController {
 
     /**
      * Elimina un material por su identificador.
+     *
      * @param materialId identificador del material
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return resultado de la eliminación
      */
     @DeleteMapping("/{materialId}")

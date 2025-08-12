@@ -2,17 +2,20 @@ package com.project.demo.rest.taskSubmission;
 
 import com.project.demo.logic.entity.assignment.Assignment;
 import com.project.demo.logic.entity.assignment.AssignmentRepository;
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
+import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.taskSubmission.TaskSubmission;
 import com.project.demo.logic.entity.taskSubmission.TaskSubmissionRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
-import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.rest.taskSubmission.dto.TaskSubmissionDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
-import org.springframework.http.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +42,9 @@ public class TaskSubmissionRestController {
 
     /**
      * Obtiene todas las entregas de tareas paginadas.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de entregas de tareas
      */
@@ -70,8 +74,9 @@ public class TaskSubmissionRestController {
 
     /**
      * Obtiene una entrega de tarea por su identificador.
+     *
      * @param submissionId identificador de la entrega
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return entrega encontrada
      */
     @GetMapping("/{submissionId}")
@@ -91,10 +96,11 @@ public class TaskSubmissionRestController {
 
     /**
      * Obtiene las entregas de tareas asociadas a una asignación.
+     *
      * @param assignmentId identificador de la asignación
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page         número de página
+     * @param size         tamaño de página
+     * @param request      petición HTTP
      * @return lista de entregas de la asignación
      */
     @GetMapping("/assignment/{assignmentId}")
@@ -123,10 +129,11 @@ public class TaskSubmissionRestController {
 
     /**
      * Obtiene las entregas de tareas asociadas a un estudiante.
+     *
      * @param studentId identificador del estudiante
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page      número de página
+     * @param size      tamaño de página
+     * @param request   petición HTTP
      * @return lista de entregas del estudiante
      */
     @GetMapping("/student/{studentId}")
@@ -155,8 +162,9 @@ public class TaskSubmissionRestController {
 
     /**
      * Crea una nueva entrega de tarea.
+     *
      * @param submissionDTO datos de la entrega
-     * @param request petición HTTP
+     * @param request       petición HTTP
      * @return entrega creada
      */
     @PostMapping
@@ -193,9 +201,10 @@ public class TaskSubmissionRestController {
 
     /**
      * Actualiza los datos de una entrega de tarea existente.
-     * @param submissionId identificador de la entrega
+     *
+     * @param submissionId  identificador de la entrega
      * @param submissionDTO datos actualizados
-     * @param request petición HTTP
+     * @param request       petición HTTP
      * @return entrega actualizada
      */
     @PutMapping("/{submissionId}")
@@ -225,8 +234,9 @@ public class TaskSubmissionRestController {
 
     /**
      * Elimina una entrega de tarea por su identificador.
+     *
      * @param submissionId identificador de la entrega
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return resultado de la eliminación
      */
     @DeleteMapping("/{submissionId}")

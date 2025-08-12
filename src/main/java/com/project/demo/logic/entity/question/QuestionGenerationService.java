@@ -17,20 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuestionGenerationService {
 
+    private static final Logger logger = LoggerFactory.getLogger(QuestionGenerationService.class);
     @Autowired
     private DeepSeekService deepSeekService;
-
     @Autowired
     private QuestionRepository questionRepository;
-
     @Autowired
     private OptionRepository optionRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(QuestionGenerationService.class);
-
     /**
      * Genera preguntas y opciones para un cuestionario usando IA.
-     * @param quiz cuestionario al que se agregarán las preguntas
+     *
+     * @param quiz              cuestionario al que se agregarán las preguntas
      * @param numberOfQuestions número de preguntas a generar
      */
     public void generateQuestionsWithAI(Quiz quiz, int numberOfQuestions) {

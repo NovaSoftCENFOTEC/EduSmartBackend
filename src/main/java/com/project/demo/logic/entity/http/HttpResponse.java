@@ -1,22 +1,20 @@
 package com.project.demo.logic.entity.http;
 
 
-
-import java.util.Collection;
-import java.util.List;
-
 /**
  * Representa una respuesta HTTP estándar.
  * Incluye mensaje, datos y metadatos de la respuesta.
+ *
  * @param <T> tipo de dato de la respuesta
  */
 public class HttpResponse<T> {
-    private  String message;
+    private String message;
     private T data;
     private Meta meta;
 
     /**
      * Constructor con solo mensaje.
+     *
      * @param message mensaje de la respuesta
      */
     public HttpResponse(String message) {
@@ -25,8 +23,9 @@ public class HttpResponse<T> {
 
     /**
      * Constructor con mensaje y datos.
+     *
      * @param message mensaje de la respuesta
-     * @param data datos de la respuesta
+     * @param data    datos de la respuesta
      */
     public HttpResponse(String message, T data) {
         this.message = message;
@@ -35,8 +34,9 @@ public class HttpResponse<T> {
 
     /**
      * Constructor con mensaje y metadatos.
+     *
      * @param message mensaje de la respuesta
-     * @param meta metadatos
+     * @param meta    metadatos
      */
     public HttpResponse(String message, Meta meta) {
         this.message = message;
@@ -45,9 +45,10 @@ public class HttpResponse<T> {
 
     /**
      * Constructor con mensaje, datos y metadatos.
+     *
      * @param message mensaje de la respuesta
-     * @param data datos de la respuesta
-     * @param meta metadatos
+     * @param data    datos de la respuesta
+     * @param meta    metadatos
      */
     public HttpResponse(String message, T data, Meta meta) {
         this.message = message;
@@ -57,6 +58,7 @@ public class HttpResponse<T> {
 
     /**
      * Obtiene el mensaje de la respuesta.
+     *
      * @return mensaje
      */
     public String getMessage() {
@@ -65,6 +67,7 @@ public class HttpResponse<T> {
 
     /**
      * Establece el mensaje de la respuesta.
+     *
      * @param message mensaje
      */
     public void setMessage(String message) {
@@ -73,6 +76,7 @@ public class HttpResponse<T> {
 
     /**
      * Obtiene los datos de la respuesta.
+     *
      * @return datos
      */
     public T getData() {
@@ -81,6 +85,7 @@ public class HttpResponse<T> {
 
     /**
      * Establece los datos de la respuesta.
+     *
      * @param data datos
      */
     public void setData(T data) {
@@ -89,6 +94,7 @@ public class HttpResponse<T> {
 
     /**
      * Obtiene los metadatos de la respuesta.
+     *
      * @return metadatos
      */
     public Meta getMeta() {
@@ -97,6 +103,7 @@ public class HttpResponse<T> {
 
     /**
      * Establece los metadatos de la respuesta.
+     *
      * @param meta metadatos
      */
     public void setMeta(Meta meta) {

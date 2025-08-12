@@ -37,12 +37,13 @@ public class Illustration {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la ilustración
-     * @param title título de la ilustración
-     * @param url URL de la ilustración
-     * @param altText texto alternativo
+     *
+     * @param id        identificador de la ilustración
+     * @param title     título de la ilustración
+     * @param url       URL de la ilustración
+     * @param altText   texto alternativo
      * @param createdAt fecha de creación
-     * @param story historia asociada
+     * @param story     historia asociada
      */
     public Illustration(long id, String title, String url, String altText, Date createdAt, Story story) {
         this.id = id;
@@ -55,6 +56,7 @@ public class Illustration {
 
     /**
      * Obtiene el identificador único de la ilustración.
+     *
      * @return id de la ilustración
      */
     public long getId() {
@@ -63,6 +65,7 @@ public class Illustration {
 
     /**
      * Establece el identificador único de la ilustración.
+     *
      * @param id identificador de la ilustración
      */
     public void setId(long id) {
@@ -71,6 +74,7 @@ public class Illustration {
 
     /**
      * Obtiene el título de la ilustración.
+     *
      * @return título
      */
     public String getTitle() {
@@ -79,6 +83,7 @@ public class Illustration {
 
     /**
      * Establece el título de la ilustración.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -87,6 +92,7 @@ public class Illustration {
 
     /**
      * Obtiene la URL de la ilustración.
+     *
      * @return URL
      */
     public String getUrl() {
@@ -95,6 +101,7 @@ public class Illustration {
 
     /**
      * Establece la URL de la ilustración.
+     *
      * @param url URL
      */
     public void setUrl(String url) {
@@ -103,6 +110,7 @@ public class Illustration {
 
     /**
      * Obtiene el texto alternativo de la ilustración.
+     *
      * @return texto alternativo
      */
     public String getAltText() {
@@ -111,6 +119,7 @@ public class Illustration {
 
     /**
      * Establece el texto alternativo de la ilustración.
+     *
      * @param altText texto alternativo
      */
     public void setAltText(String altText) {
@@ -119,6 +128,7 @@ public class Illustration {
 
     /**
      * Obtiene la fecha de creación de la ilustración.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -127,6 +137,7 @@ public class Illustration {
 
     /**
      * Establece la fecha de creación de la ilustración.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {
@@ -135,6 +146,7 @@ public class Illustration {
 
     /**
      * Obtiene la historia asociada a la ilustración.
+     *
      * @return historia
      */
     public Story getStory() {
@@ -143,6 +155,7 @@ public class Illustration {
 
     /**
      * Establece la historia asociada a la ilustración.
+     *
      * @param story historia
      */
     public void setStory(Story story) {

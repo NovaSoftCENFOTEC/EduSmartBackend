@@ -38,11 +38,12 @@ public class Story {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la historia
-     * @param title título de la historia
-     * @param content contenido de la historia
+     *
+     * @param id        identificador de la historia
+     * @param title     título de la historia
+     * @param content   contenido de la historia
      * @param createdAt fecha de creación
-     * @param course curso asociado
+     * @param course    curso asociado
      */
     public Story(long id, String title, String content, Date createdAt, Course course) {
         this.id = id;
@@ -54,6 +55,7 @@ public class Story {
 
     /**
      * Obtiene el identificador único de la historia.
+     *
      * @return id de la historia
      */
     public long getId() {
@@ -62,6 +64,7 @@ public class Story {
 
     /**
      * Establece el identificador único de la historia.
+     *
      * @param id identificador de la historia
      */
     public void setId(long id) {
@@ -70,6 +73,7 @@ public class Story {
 
     /**
      * Obtiene el título de la historia.
+     *
      * @return título
      */
     public String getTitle() {
@@ -78,6 +82,7 @@ public class Story {
 
     /**
      * Establece el título de la historia.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -86,6 +91,7 @@ public class Story {
 
     /**
      * Obtiene el contenido de la historia.
+     *
      * @return contenido
      */
     public String getContent() {
@@ -94,6 +100,7 @@ public class Story {
 
     /**
      * Establece el contenido de la historia.
+     *
      * @param content contenido
      */
     public void setContent(String content) {
@@ -102,6 +109,7 @@ public class Story {
 
     /**
      * Obtiene la fecha de creación de la historia.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -110,6 +118,7 @@ public class Story {
 
     /**
      * Establece la fecha de creación de la historia.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {
@@ -118,6 +127,7 @@ public class Story {
 
     /**
      * Obtiene el curso asociado a la historia.
+     *
      * @return curso
      */
     public Course getCourse() {
@@ -126,6 +136,7 @@ public class Story {
 
     /**
      * Establece el curso asociado a la historia.
+     *
      * @param course curso
      */
     public void setCourse(Course course) {

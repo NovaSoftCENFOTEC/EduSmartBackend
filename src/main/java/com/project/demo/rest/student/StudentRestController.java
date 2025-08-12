@@ -57,10 +57,11 @@ public class StudentRestController {
 
     /**
      * Obtiene los estudiantes asociados a una escuela.
+     *
      * @param schoolId identificador de la escuela
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page     número de página
+     * @param size     tamaño de página
+     * @param request  petición HTTP
      * @return lista de estudiantes de la escuela
      */
     @GetMapping("/school/{schoolId}/students")
@@ -75,7 +76,7 @@ public class StudentRestController {
             Optional<Role> foundRole = roleRepository.findByName(RoleEnum.valueOf("STUDENT"));
             if (foundRole.isPresent()) {
 
-                Pageable pageable = PageRequest.of(page-1, size);
+                Pageable pageable = PageRequest.of(page - 1, size);
                 Page<User> userPage = userRepository.findBySchoolIdAndRoleId(schoolId, foundRole.get().getId(), pageable);
                 Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
                 meta.setTotalPages(userPage.getTotalPages());
@@ -97,9 +98,10 @@ public class StudentRestController {
 
     /**
      * Crea un nuevo estudiante asociado a una escuela.
-     * @param schoolId identificador de la escuela
+     *
+     * @param schoolId       identificador de la escuela
      * @param newStudentUser datos del estudiante
-     * @param request petición HTTP
+     * @param request        petición HTTP
      * @return estudiante creado
      */
     @PostMapping("/school/{schoolId}")

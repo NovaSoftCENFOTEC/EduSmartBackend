@@ -17,7 +17,7 @@ public class AudioTrack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    @Column( nullable = false, name = "voice_type")
+    @Column(nullable = false, name = "voice_type")
     @Enumerated(EnumType.STRING)
     private VoiceTypeEnum voiceType;
     private String url;
@@ -38,12 +38,13 @@ public class AudioTrack {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la pista
-     * @param title título de la pista
+     *
+     * @param id        identificador de la pista
+     * @param title     título de la pista
      * @param voiceType tipo de voz
-     * @param url URL de la pista
+     * @param url       URL de la pista
      * @param createdAt fecha de creación
-     * @param story historia asociada
+     * @param story     historia asociada
      */
     public AudioTrack(long id, String title, VoiceTypeEnum voiceType, String url, Date createdAt, Story story) {
         this.id = id;
@@ -56,6 +57,7 @@ public class AudioTrack {
 
     /**
      * Obtiene el identificador único de la pista de audio.
+     *
      * @return id de la pista
      */
     public long getId() {
@@ -64,6 +66,7 @@ public class AudioTrack {
 
     /**
      * Establece el identificador único de la pista de audio.
+     *
      * @param id identificador de la pista
      */
     public void setId(long id) {
@@ -72,6 +75,7 @@ public class AudioTrack {
 
     /**
      * Obtiene el título de la pista de audio.
+     *
      * @return título
      */
     public String getTitle() {
@@ -80,6 +84,7 @@ public class AudioTrack {
 
     /**
      * Establece el título de la pista de audio.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -88,6 +93,7 @@ public class AudioTrack {
 
     /**
      * Obtiene el tipo de voz de la pista de audio.
+     *
      * @return tipo de voz
      */
     public VoiceTypeEnum getVoiceType() {
@@ -96,6 +102,7 @@ public class AudioTrack {
 
     /**
      * Establece el tipo de voz de la pista de audio.
+     *
      * @param voiceType tipo de voz
      */
     public void setVoiceType(VoiceTypeEnum voiceType) {
@@ -104,6 +111,7 @@ public class AudioTrack {
 
     /**
      * Obtiene la URL de la pista de audio.
+     *
      * @return URL
      */
     public String getUrl() {
@@ -112,6 +120,7 @@ public class AudioTrack {
 
     /**
      * Establece la URL de la pista de audio.
+     *
      * @param url URL
      */
     public void setUrl(String url) {
@@ -120,6 +129,7 @@ public class AudioTrack {
 
     /**
      * Obtiene la fecha de creación de la pista de audio.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -128,6 +138,7 @@ public class AudioTrack {
 
     /**
      * Establece la fecha de creación de la pista de audio.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {
@@ -136,6 +147,7 @@ public class AudioTrack {
 
     /**
      * Obtiene la historia asociada a la pista de audio.
+     *
      * @return historia
      */
     public Story getStory() {
@@ -144,6 +156,7 @@ public class AudioTrack {
 
     /**
      * Establece la historia asociada a la pista de audio.
+     *
      * @param story historia
      */
     public void setStory(Story story) {

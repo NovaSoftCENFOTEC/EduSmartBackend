@@ -33,9 +33,10 @@ public class IllustrationRestController {
 
     /**
      * Obtiene todas las ilustraciones asociadas a una historia.
+     *
      * @param storyId identificador de la historia
-     * @param page número de página
-     * @param size tamaño de página
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return ilustraciones de la historia
      */
@@ -65,9 +66,10 @@ public class IllustrationRestController {
 
     /**
      * Crea una nueva ilustración para una historia.
-     * @param storyId identificador de la historia
+     *
+     * @param storyId      identificador de la historia
      * @param illustration datos de la ilustración
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return ilustración creada
      */
     @PostMapping("/story/{storyId}")
@@ -87,9 +89,10 @@ public class IllustrationRestController {
 
     /**
      * Actualiza una ilustración existente.
+     *
      * @param illustrationId identificador de la ilustración
-     * @param illustration datos actualizados
-     * @param request petición HTTP
+     * @param illustration   datos actualizados
+     * @param request        petición HTTP
      * @return ilustración actualizada
      */
     @PutMapping("/{illustrationId}")
@@ -114,8 +117,9 @@ public class IllustrationRestController {
 
     /**
      * Elimina una ilustración por su identificador.
+     *
      * @param illustrationId identificador de la ilustración
-     * @param request petición HTTP
+     * @param request        petición HTTP
      * @return ilustración eliminada
      */
     @DeleteMapping("/{illustrationId}")

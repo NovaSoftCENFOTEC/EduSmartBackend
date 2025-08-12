@@ -8,6 +8,7 @@ public class AnswerUpdateRequest {
 
     /**
      * Obtiene el identificador de la nueva opción seleccionada.
+     *
      * @return id de la opción
      */
     public Integer getOptionId() {
@@ -16,6 +17,7 @@ public class AnswerUpdateRequest {
 
     /**
      * Establece el identificador de la nueva opción seleccionada.
+     *
      * @param optionId id de la opción
      */
     public void setOptionId(Integer optionId) {

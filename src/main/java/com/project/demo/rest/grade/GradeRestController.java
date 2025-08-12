@@ -2,17 +2,20 @@ package com.project.demo.rest.grade;
 
 import com.project.demo.logic.entity.grade.Grade;
 import com.project.demo.logic.entity.grade.GradeRepository;
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
+import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.taskSubmission.TaskSubmission;
 import com.project.demo.logic.entity.taskSubmission.TaskSubmissionRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
-import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.rest.grade.dto.GradeDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
-import org.springframework.http.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +41,9 @@ public class GradeRestController {
 
     /**
      * Obtiene todas las calificaciones paginadas.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de calificaciones
      */
@@ -68,6 +72,7 @@ public class GradeRestController {
 
     /**
      * Obtiene una calificación por su identificador.
+     *
      * @param gradeId identificador de la calificación
      * @param request petición HTTP
      * @return calificación encontrada
@@ -89,10 +94,11 @@ public class GradeRestController {
 
     /**
      * Obtiene las calificaciones por el identificador de la entrega.
+     *
      * @param submissionId identificador de la entrega
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page         número de página
+     * @param size         tamaño de página
+     * @param request      petición HTTP
      * @return lista de calificaciones de la entrega
      */
     @GetMapping("/submission/{submissionId}")
@@ -121,7 +127,8 @@ public class GradeRestController {
 
     /**
      * Crea una nueva calificación para una entrega de tarea.
-     * @param grade datos de la calificación
+     *
+     * @param grade   datos de la calificación
      * @param request petición HTTP
      * @return calificación creada
      */
@@ -164,9 +171,10 @@ public class GradeRestController {
 
     /**
      * Actualiza una calificación existente.
-     * @param gradeId identificador de la calificación
+     *
+     * @param gradeId  identificador de la calificación
      * @param gradeDto datos actualizados
-     * @param request petición HTTP
+     * @param request  petición HTTP
      * @return calificación actualizada
      */
     @PutMapping("/{gradeId}")
@@ -195,6 +203,7 @@ public class GradeRestController {
 
     /**
      * Elimina una calificación por su identificador.
+     *
      * @param gradeId identificador de la calificación
      * @param request petición HTTP
      * @return resultado de la eliminación
@@ -215,10 +224,11 @@ public class GradeRestController {
 
     /**
      * Obtiene las calificaciones de un estudiante por su identificador.
+     *
      * @param studentId identificador del estudiante
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page      número de página
+     * @param size      tamaño de página
+     * @param request   petición HTTP
      * @return lista de calificaciones del estudiante
      */
     @GetMapping("/student/{studentId}")

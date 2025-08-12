@@ -24,6 +24,7 @@ public class CloudinaryConfig {
 
     /**
      * Crea y configura el bean de Cloudinary.
+     *
      * @return instancia de Cloudinary
      */
     @Bean

@@ -10,10 +10,12 @@ public class GoogleLoginRequestDto {
     /**
      * Constructor por defecto.
      */
-    public GoogleLoginRequestDto() {}
+    public GoogleLoginRequestDto() {
+    }
 
     /**
      * Constructor con el token de Google.
+     *
      * @param idToken token de Google
      */
     public GoogleLoginRequestDto(String idToken) {
@@ -22,6 +24,7 @@ public class GoogleLoginRequestDto {
 
     /**
      * Obtiene el token de Google.
+     *
      * @return idToken
      */
     public String getIdToken() {
@@ -30,6 +33,7 @@ public class GoogleLoginRequestDto {
 
     /**
      * Establece el token de Google.
+     *
      * @param idToken token de Google
      */
     public void setIdToken(String idToken) {

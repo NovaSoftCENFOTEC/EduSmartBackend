@@ -1,5 +1,7 @@
 package com.project.demo.logic.entity.question;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 
 /**
@@ -9,6 +11,7 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
     /**
      * Busca las preguntas asociadas a un cuestionario por su identificador.
+     *
      * @param quizId identificador del cuestionario
      * @return lista de preguntas
      */
@@ -16,6 +19,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     /**
      * Busca las preguntas que contienen un texto específico (ignorando mayúsculas/minúsculas).
+     *
      * @param text texto a buscar
      * @return lista de preguntas
      */

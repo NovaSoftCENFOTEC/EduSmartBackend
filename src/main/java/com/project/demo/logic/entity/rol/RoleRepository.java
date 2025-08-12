@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface RoleRepository extends CrudRepository<Role, Integer> {
     /**
      * Busca un rol por su nombre.
+     *
      * @param name nombre del rol
      * @return rol encontrado (opcional)
      */

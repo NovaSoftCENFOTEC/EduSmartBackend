@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface StoryRepository extends JpaRepository<Story, Long> {
     /**
      * Busca las historias asociadas a un curso por su identificador.
+     *
      * @param courseId identificador del curso
      * @param pageable paginación
      * @return página de historias

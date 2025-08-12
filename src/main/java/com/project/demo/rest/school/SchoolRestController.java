@@ -29,8 +29,9 @@ public class SchoolRestController {
 
     /**
      * Obtiene todas las escuelas paginadas.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de escuelas
      */
@@ -41,7 +42,7 @@ public class SchoolRestController {
             @RequestParam(defaultValue = "10") int size,
             HttpServletRequest request) {
 
-        Pageable pageable = PageRequest.of(page-1, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         Page<School> schoolPage = schoolRepository.findAll(pageable);
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(schoolPage.getTotalPages());
@@ -55,8 +56,9 @@ public class SchoolRestController {
 
     /**
      * Obtiene una escuela por su identificador.
+     *
      * @param schoolId identificador de la escuela
-     * @param request petición HTTP
+     * @param request  petición HTTP
      * @return escuela encontrada
      */
     @GetMapping("/{schoolId}")
@@ -79,7 +81,8 @@ public class SchoolRestController {
 
     /**
      * Crea una nueva escuela.
-     * @param school datos de la escuela
+     *
+     * @param school  datos de la escuela
      * @param request petición HTTP
      * @return escuela creada
      */
@@ -93,9 +96,10 @@ public class SchoolRestController {
 
     /**
      * Actualiza los datos de una escuela existente.
+     *
      * @param schoolId identificador de la escuela
-     * @param school datos actualizados
-     * @param request petición HTTP
+     * @param school   datos actualizados
+     * @param request  petición HTTP
      * @return escuela actualizada
      */
     @PutMapping("/{schoolId}")
@@ -117,8 +121,9 @@ public class SchoolRestController {
 
     /**
      * Elimina una escuela por su identificador.
+     *
      * @param schoolId identificador de la escuela
-     * @param request petición HTTP
+     * @param request  petición HTTP
      * @return resultado de la eliminación
      */
     @DeleteMapping("/{schoolId}")

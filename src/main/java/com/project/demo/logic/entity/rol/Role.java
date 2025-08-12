@@ -35,6 +35,7 @@ public class Role {
 
     /**
      * Obtiene el identificador único del rol.
+     *
      * @return id del rol
      */
     public Integer getId() {
@@ -43,6 +44,7 @@ public class Role {
 
     /**
      * Establece el identificador único del rol.
+     *
      * @param id identificador del rol
      */
     public void setId(Integer id) {
@@ -51,6 +53,7 @@ public class Role {
 
     /**
      * Obtiene el nombre del rol.
+     *
      * @return nombre del rol
      */
     public RoleEnum getName() {
@@ -59,6 +62,7 @@ public class Role {
 
     /**
      * Establece el nombre del rol.
+     *
      * @param name nombre del rol
      */
     public void setName(RoleEnum name) {
@@ -67,6 +71,7 @@ public class Role {
 
     /**
      * Obtiene la descripción del rol.
+     *
      * @return descripción
      */
     public String getDescription() {
@@ -75,6 +80,7 @@ public class Role {
 
     /**
      * Establece la descripción del rol.
+     *
      * @param description descripción
      */
     public void setDescription(String description) {
@@ -83,6 +89,7 @@ public class Role {
 
     /**
      * Obtiene la fecha de creación del rol.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -91,6 +98,7 @@ public class Role {
 
     /**
      * Establece la fecha de creación del rol.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {
@@ -99,6 +107,7 @@ public class Role {
 
     /**
      * Obtiene la fecha de actualización del rol.
+     *
      * @return fecha de actualización
      */
     public Date getUpdatedAt() {
@@ -107,6 +116,7 @@ public class Role {
 
     /**
      * Establece la fecha de actualización del rol.
+     *
      * @param updatedAt fecha de actualización
      */
     public void setUpdatedAt(Date updatedAt) {

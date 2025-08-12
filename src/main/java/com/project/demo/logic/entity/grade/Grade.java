@@ -38,14 +38,16 @@ public class Grade {
     /**
      * Constructor por defecto.
      */
-    public Grade() {}
+    public Grade() {
+    }
 
     /**
      * Constructor con parámetros.
-     * @param grade nota asignada
+     *
+     * @param grade         nota asignada
      * @param justification justificación de la calificación
-     * @param submission entrega de la tarea
-     * @param teacher profesor que califica
+     * @param submission    entrega de la tarea
+     * @param teacher       profesor que califica
      */
     public Grade(Double grade, String justification, TaskSubmission submission, User teacher) {
         this.grade = grade;
@@ -56,6 +58,7 @@ public class Grade {
 
     /**
      * Obtiene el identificador único de la calificación.
+     *
      * @return id de la calificación
      */
     public Long getId() {
@@ -64,6 +67,7 @@ public class Grade {
 
     /**
      * Establece el identificador único de la calificación.
+     *
      * @param id identificador de la calificación
      */
     public void setId(Long id) {
@@ -72,6 +76,7 @@ public class Grade {
 
     /**
      * Obtiene la nota asignada.
+     *
      * @return nota
      */
     public Double getGrade() {
@@ -80,6 +85,7 @@ public class Grade {
 
     /**
      * Establece la nota asignada.
+     *
      * @param grade nota
      */
     public void setGrade(Double grade) {
@@ -88,6 +94,7 @@ public class Grade {
 
     /**
      * Obtiene la justificación de la calificación.
+     *
      * @return justificación
      */
     public String getJustification() {
@@ -96,6 +103,7 @@ public class Grade {
 
     /**
      * Establece la justificación de la calificación.
+     *
      * @param justification justificación
      */
     public void setJustification(String justification) {
@@ -104,6 +112,7 @@ public class Grade {
 
     /**
      * Obtiene la fecha en que se realizó la calificación.
+     *
      * @return fecha de calificación
      */
     public LocalDateTime getGradedAt() {
@@ -112,6 +121,7 @@ public class Grade {
 
     /**
      * Establece la fecha en que se realizó la calificación.
+     *
      * @param gradedAt fecha de calificación
      */
     public void setGradedAt(LocalDateTime gradedAt) {
@@ -120,6 +130,7 @@ public class Grade {
 
     /**
      * Obtiene la entrega de tarea asociada.
+     *
      * @return entrega de tarea
      */
     public TaskSubmission getSubmission() {
@@ -128,6 +139,7 @@ public class Grade {
 
     /**
      * Establece la entrega de tarea asociada.
+     *
      * @param submission entrega de tarea
      */
     public void setSubmission(TaskSubmission submission) {
@@ -136,6 +148,7 @@ public class Grade {
 
     /**
      * Obtiene el profesor que realizó la calificación.
+     *
      * @return profesor
      */
     public User getTeacher() {
@@ -144,6 +157,7 @@ public class Grade {
 
     /**
      * Establece el profesor que realizó la calificación.
+     *
      * @param teacher profesor
      */
     public void setTeacher(User teacher) {

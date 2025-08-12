@@ -22,14 +22,16 @@ public class QuizService {
 
     /**
      * Obtiene todos los cuestionarios.
+     *
      * @return lista de cuestionarios
      */
-    public List<Quiz> getAllQuizzes(){
+    public List<Quiz> getAllQuizzes() {
         return quizRepository.findAll();
     }
 
     /**
      * Obtiene un cuestionario por su identificador.
+     *
      * @param id identificador del cuestionario
      * @return cuestionario (opcional)
      */
@@ -39,8 +41,9 @@ public class QuizService {
 
     /**
      * Crea un nuevo cuestionario asociado a una historia.
+     *
      * @param storyId identificador de la historia
-     * @param quiz datos del cuestionario
+     * @param quiz    datos del cuestionario
      * @return cuestionario creado (opcional)
      */
     public Optional<Quiz> createQuiz(Integer storyId, Quiz quiz) {
@@ -52,7 +55,8 @@ public class QuizService {
 
     /**
      * Actualiza los datos de un cuestionario existente.
-     * @param id identificador del cuestionario
+     *
+     * @param id          identificador del cuestionario
      * @param quizDetails datos actualizados
      * @return cuestionario actualizado (opcional)
      */
@@ -67,6 +71,7 @@ public class QuizService {
 
     /**
      * Elimina un cuestionario por su identificador.
+     *
      * @param id identificador del cuestionario
      * @return cuestionario eliminado (opcional)
      */
@@ -79,6 +84,7 @@ public class QuizService {
 
     /**
      * Obtiene los cuestionarios asociados a una historia.
+     *
      * @param storyId identificador de la historia
      * @return lista de cuestionarios
      */

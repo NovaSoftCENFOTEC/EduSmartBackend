@@ -57,10 +57,11 @@ public class TeacherRestController {
 
     /**
      * Obtiene los profesores asociados a una escuela.
+     *
      * @param schoolId identificador de la escuela
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page     número de página
+     * @param size     tamaño de página
+     * @param request  petición HTTP
      * @return lista de profesores de la escuela
      */
     @GetMapping("/school/{schoolId}/teachers")
@@ -75,7 +76,7 @@ public class TeacherRestController {
             Optional<Role> foundRole = roleRepository.findByName(RoleEnum.valueOf("TEACHER"));
             if (foundRole.isPresent()) {
 
-                Pageable pageable = PageRequest.of(page-1, size);
+                Pageable pageable = PageRequest.of(page - 1, size);
                 Page<User> userPage = userRepository.findBySchoolIdAndRoleId(schoolId, foundRole.get().getId(), pageable);
                 Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
                 meta.setTotalPages(userPage.getTotalPages());
@@ -97,9 +98,10 @@ public class TeacherRestController {
 
     /**
      * Crea un nuevo profesor asociado a una escuela.
-     * @param schoolId identificador de la escuela
+     *
+     * @param schoolId       identificador de la escuela
      * @param newTeacherUser datos del profesor
-     * @param request petición HTTP
+     * @param request        petición HTTP
      * @return profesor creado
      */
     @PostMapping("/school/{schoolId}")

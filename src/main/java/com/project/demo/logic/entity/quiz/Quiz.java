@@ -2,6 +2,7 @@ package com.project.demo.logic.entity.quiz;
 
 import com.project.demo.logic.entity.story.Story;
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 /**
@@ -38,11 +39,13 @@ public class Quiz {
     /**
      * Constructor por defecto.
      */
-    public Quiz() {}
+    public Quiz() {
+    }
 
     /**
      * Constructor con título y descripción.
-     * @param title título del cuestionario
+     *
+     * @param title       título del cuestionario
      * @param description descripción del cuestionario
      */
     public Quiz(String title, String description) {
@@ -52,6 +55,7 @@ public class Quiz {
 
     /**
      * Obtiene el identificador único del cuestionario.
+     *
      * @return id del cuestionario
      */
     public Integer getId() {
@@ -60,6 +64,7 @@ public class Quiz {
 
     /**
      * Establece el identificador único del cuestionario.
+     *
      * @param id identificador del cuestionario
      */
     public void setId(Integer id) {
@@ -68,6 +73,7 @@ public class Quiz {
 
     /**
      * Obtiene el título del cuestionario.
+     *
      * @return título
      */
     public String getTitle() {
@@ -76,6 +82,7 @@ public class Quiz {
 
     /**
      * Establece el título del cuestionario.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -84,6 +91,7 @@ public class Quiz {
 
     /**
      * Obtiene la descripción del cuestionario.
+     *
      * @return descripción
      */
     public String getDescription() {
@@ -92,6 +100,7 @@ public class Quiz {
 
     /**
      * Establece la descripción del cuestionario.
+     *
      * @param description descripción
      */
     public void setDescription(String description) {
@@ -100,6 +109,7 @@ public class Quiz {
 
     /**
      * Obtiene la fecha de entrega del cuestionario.
+     *
      * @return fecha de entrega
      */
     public LocalDateTime getDueDate() {
@@ -108,6 +118,7 @@ public class Quiz {
 
     /**
      * Establece la fecha de entrega del cuestionario.
+     *
      * @param dueDate fecha de entrega
      */
     public void setDueDate(LocalDateTime dueDate) {
@@ -116,6 +127,7 @@ public class Quiz {
 
     /**
      * Obtiene la historia asociada al cuestionario.
+     *
      * @return historia
      */
     public Story getStory() {
@@ -124,6 +136,7 @@ public class Quiz {
 
     /**
      * Establece la historia asociada al cuestionario.
+     *
      * @param story historia
      */
     public void setStory(Story story) {
@@ -132,6 +145,7 @@ public class Quiz {
 
     /**
      * Indica si el cuestionario debe generarse automáticamente con IA.
+     *
      * @return true si se genera con IA, false en caso contrario
      */
     public boolean isGenerateWithAI() {
@@ -140,6 +154,7 @@ public class Quiz {
 
     /**
      * Establece si el cuestionario debe generarse automáticamente con IA.
+     *
      * @param generateWithAI true para generar con IA
      */
     public void setGenerateWithAI(boolean generateWithAI) {
@@ -148,6 +163,7 @@ public class Quiz {
 
     /**
      * Obtiene el número de preguntas a generar automáticamente.
+     *
      * @return número de preguntas
      */
     public int getNumberOfQuestions() {
@@ -156,6 +172,7 @@ public class Quiz {
 
     /**
      * Establece el número de preguntas a generar automáticamente.
+     *
      * @param numberOfQuestions número de preguntas
      */
     public void setNumberOfQuestions(int numberOfQuestions) {

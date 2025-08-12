@@ -27,6 +27,7 @@ public class ApplicationConfiguration {
 
     /**
      * Proporciona el servicio de detalles de usuario.
+     *
      * @return UserDetailsService
      */
     @Bean
@@ -37,6 +38,7 @@ public class ApplicationConfiguration {
 
     /**
      * Proporciona el codificador de contraseñas.
+     *
      * @return BCryptPasswordEncoder
      */
     @Bean
@@ -46,6 +48,7 @@ public class ApplicationConfiguration {
 
     /**
      * Proporciona el administrador de autenticación.
+     *
      * @param config configuración de autenticación
      * @return AuthenticationManager
      * @throws Exception si ocurre un error
@@ -57,6 +60,7 @@ public class ApplicationConfiguration {
 
     /**
      * Proporciona el proveedor de autenticación.
+     *
      * @return AuthenticationProvider
      */
     @Bean

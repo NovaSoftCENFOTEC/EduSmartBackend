@@ -1,5 +1,7 @@
 package com.project.demo.logic.entity.submission;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +13,8 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
     /**
      * Busca una entrega por el identificador del cuestionario y del estudiante.
-     * @param quizId identificador del cuestionario
+     *
+     * @param quizId    identificador del cuestionario
      * @param studentId identificador del estudiante
      * @return entrega encontrada (opcional)
      */
@@ -19,6 +22,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
     /**
      * Busca las entregas por el identificador del cuestionario.
+     *
      * @param quizId identificador del cuestionario
      * @return lista de entregas
      */
@@ -26,6 +30,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
     /**
      * Busca las entregas por el identificador del estudiante.
+     *
      * @param studentId identificador del estudiante
      * @return lista de entregas
      */

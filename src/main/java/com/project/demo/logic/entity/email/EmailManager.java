@@ -20,9 +20,10 @@ public class EmailManager {
 
     /**
      * Envía un correo electrónico con el asunto y cuerpo especificados.
+     *
      * @param toEmail dirección de correo del destinatario
      * @param subject asunto del correo
-     * @param body cuerpo del correo
+     * @param body    cuerpo del correo
      */
     public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();

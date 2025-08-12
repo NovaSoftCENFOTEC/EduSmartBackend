@@ -37,18 +37,19 @@ public class StoryRestController {
 
     /**
      * Obtiene las historias asociadas a un curso.
+     *
      * @param courseId identificador del curso
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page     número de página
+     * @param size     tamaño de página
+     * @param request  petición HTTP
      * @return lista de historias del curso
      */
     @GetMapping("/course/{courseId}/stories")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getStoriesByCourse(@PathVariable Long courseId,
-                                                  @RequestParam(defaultValue = "1") int page,
-                                                  @RequestParam(defaultValue = "10") int size,
-                                                  HttpServletRequest request) {
+                                                @RequestParam(defaultValue = "1") int page,
+                                                @RequestParam(defaultValue = "10") int size,
+                                                HttpServletRequest request) {
 
         Optional<Course> foundCourse = courseRepository.findById(courseId);
         if (foundCourse.isPresent()) {
@@ -70,9 +71,10 @@ public class StoryRestController {
 
     /**
      * Crea una nueva historia asociada a un curso.
+     *
      * @param courseId identificador del curso
-     * @param story datos de la historia
-     * @param request petición HTTP
+     * @param story    datos de la historia
+     * @param request  petición HTTP
      * @return historia creada
      */
     @PostMapping("/course/{courseId}")
@@ -100,8 +102,9 @@ public class StoryRestController {
 
     /**
      * Actualiza los datos de una historia existente.
+     *
      * @param storyId identificador de la historia
-     * @param story datos actualizados
+     * @param story   datos actualizados
      * @param request petición HTTP
      * @return historia actualizada
      */
@@ -133,6 +136,7 @@ public class StoryRestController {
 
     /**
      * Elimina una historia por su identificador.
+     *
      * @param storyId identificador de la historia
      * @param request petición HTTP
      * @return resultado de la eliminación

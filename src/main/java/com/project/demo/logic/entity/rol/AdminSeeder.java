@@ -27,7 +27,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     public AdminSeeder(
             RoleRepository roleRepository,
-            UserRepository  userRepository,
+            UserRepository userRepository,
             SchoolRepository schoolRepository,
             PasswordEncoder passwordEncoder
     ) {
@@ -40,6 +40,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
     /**
      * Método que se ejecuta al iniciar el contexto de la aplicación.
      * Crea el usuario Super Administrador si no existe.
+     *
      * @param contextRefreshedEvent evento de inicio de contexto
      */
     @Override

@@ -40,13 +40,14 @@ public class Assignment {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la tarea
-     * @param title título de la tarea
+     *
+     * @param id          identificador de la tarea
+     * @param title       título de la tarea
      * @param description descripción de la tarea
-     * @param type tipo de tarea
-     * @param dueDate fecha de entrega
-     * @param createdAt fecha de creación
-     * @param group grupo asociado
+     * @param type        tipo de tarea
+     * @param dueDate     fecha de entrega
+     * @param createdAt   fecha de creación
+     * @param group       grupo asociado
      */
     public Assignment(long id, String title, String description, String type, LocalDate dueDate, LocalDate createdAt, Group group) {
         this.id = id;
@@ -60,6 +61,7 @@ public class Assignment {
 
     /**
      * Obtiene el identificador único de la tarea.
+     *
      * @return id de la tarea
      */
     public long getId() {
@@ -68,6 +70,7 @@ public class Assignment {
 
     /**
      * Establece el identificador único de la tarea.
+     *
      * @param id identificador de la tarea
      */
     public void setId(long id) {
@@ -76,6 +79,7 @@ public class Assignment {
 
     /**
      * Obtiene el título de la tarea.
+     *
      * @return título
      */
     public String getTitle() {
@@ -84,6 +88,7 @@ public class Assignment {
 
     /**
      * Establece el título de la tarea.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -92,6 +97,7 @@ public class Assignment {
 
     /**
      * Obtiene la descripción de la tarea.
+     *
      * @return descripción
      */
     public String getDescription() {
@@ -100,6 +106,7 @@ public class Assignment {
 
     /**
      * Establece la descripción de la tarea.
+     *
      * @param description descripción
      */
     public void setDescription(String description) {
@@ -108,6 +115,7 @@ public class Assignment {
 
     /**
      * Obtiene el tipo de tarea.
+     *
      * @return tipo
      */
     public String getType() {
@@ -116,6 +124,7 @@ public class Assignment {
 
     /**
      * Establece el tipo de tarea.
+     *
      * @param type tipo
      */
     public void setType(String type) {
@@ -124,6 +133,7 @@ public class Assignment {
 
     /**
      * Obtiene la fecha de entrega de la tarea.
+     *
      * @return fecha de entrega
      */
     public LocalDate getDueDate() {
@@ -132,6 +142,7 @@ public class Assignment {
 
     /**
      * Establece la fecha de entrega de la tarea.
+     *
      * @param dueDate fecha de entrega
      */
     public void setDueDate(LocalDate dueDate) {
@@ -140,6 +151,7 @@ public class Assignment {
 
     /**
      * Obtiene la fecha de creación de la tarea.
+     *
      * @return fecha de creación
      */
     public LocalDate getCreatedAt() {
@@ -148,6 +160,7 @@ public class Assignment {
 
     /**
      * Establece la fecha de creación de la tarea.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(LocalDate createdAt) {
@@ -156,6 +169,7 @@ public class Assignment {
 
     /**
      * Obtiene el grupo asociado a la tarea.
+     *
      * @return grupo
      */
     public Group getGroup() {
@@ -164,6 +178,7 @@ public class Assignment {
 
     /**
      * Establece el grupo asociado a la tarea.
+     *
      * @param group grupo
      */
     public void setGroup(Group group) {

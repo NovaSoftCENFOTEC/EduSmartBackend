@@ -31,9 +31,10 @@ public class School {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la escuela
-     * @param name nombre de la escuela
-     * @param domain dominio de la escuela
+     *
+     * @param id        identificador de la escuela
+     * @param name      nombre de la escuela
+     * @param domain    dominio de la escuela
      * @param createdAt fecha de creación
      */
     public School(long id, String name, String domain, Date createdAt) {
@@ -45,6 +46,7 @@ public class School {
 
     /**
      * Obtiene el identificador único de la escuela.
+     *
      * @return id de la escuela
      */
     public long getId() {
@@ -53,6 +55,7 @@ public class School {
 
     /**
      * Establece el identificador único de la escuela.
+     *
      * @param id identificador de la escuela
      */
     public void setId(long id) {
@@ -61,6 +64,7 @@ public class School {
 
     /**
      * Obtiene el nombre de la escuela.
+     *
      * @return nombre
      */
     public String getName() {
@@ -69,6 +73,7 @@ public class School {
 
     /**
      * Establece el nombre de la escuela.
+     *
      * @param name nombre
      */
     public void setName(String name) {
@@ -77,6 +82,7 @@ public class School {
 
     /**
      * Obtiene el dominio de la escuela.
+     *
      * @return dominio
      */
     public String getDomain() {
@@ -85,6 +91,7 @@ public class School {
 
     /**
      * Establece el dominio de la escuela.
+     *
      * @param domain dominio
      */
     public void setDomain(String domain) {
@@ -93,6 +100,7 @@ public class School {
 
     /**
      * Obtiene la fecha de creación de la escuela.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -101,6 +109,7 @@ public class School {
 
     /**
      * Establece la fecha de creación de la escuela.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {

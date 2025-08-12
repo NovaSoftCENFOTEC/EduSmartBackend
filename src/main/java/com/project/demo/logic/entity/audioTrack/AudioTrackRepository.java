@@ -14,7 +14,8 @@ import org.springframework.stereotype.Repository;
 public interface AudioTrackRepository extends JpaRepository<AudioTrack, Long> {
     /**
      * Busca pistas de audio por el identificador de la historia.
-     * @param storyId identificador de la historia
+     *
+     * @param storyId  identificador de la historia
      * @param pageable paginación
      * @return página de pistas de audio
      */
@@ -22,7 +23,8 @@ public interface AudioTrackRepository extends JpaRepository<AudioTrack, Long> {
 
     /**
      * Busca una pista de audio por historia y tipo de voz.
-     * @param story historia
+     *
+     * @param story         historia
      * @param voiceTypeEnum tipo de voz
      * @return pista de audio encontrada
      */

@@ -30,6 +30,7 @@ public class AuthenticationService {
 
     /**
      * Autentica a un usuario con las credenciales proporcionadas.
+     *
      * @param input usuario con email y contraseña
      * @return usuario autenticado
      */

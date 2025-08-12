@@ -15,6 +15,7 @@ public class CorsConfig {
 
     /**
      * Configura el filtro CORS permitiendo origen, métodos y headers específicos.
+     *
      * @return filtro CORS configurado
      */
     @Bean

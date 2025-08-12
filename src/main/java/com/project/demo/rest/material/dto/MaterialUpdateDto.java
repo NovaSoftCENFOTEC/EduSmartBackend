@@ -19,6 +19,7 @@ public class MaterialUpdateDto {
 
     /**
      * Obtiene el nombre del material.
+     *
      * @return nombre
      */
     public String getName() {
@@ -27,6 +28,7 @@ public class MaterialUpdateDto {
 
     /**
      * Establece el nombre del material.
+     *
      * @param name nombre
      */
     public void setName(String name) {
@@ -35,6 +37,7 @@ public class MaterialUpdateDto {
 
     /**
      * Obtiene la URL del archivo del material.
+     *
      * @return URL del archivo
      */
     public String getFileUrl() {
@@ -43,6 +46,7 @@ public class MaterialUpdateDto {
 
     /**
      * Establece la URL del archivo del material.
+     *
      * @param fileUrl URL del archivo
      */
     public void setFileUrl(String fileUrl) {
@@ -51,6 +55,7 @@ public class MaterialUpdateDto {
 
     /**
      * Obtiene el identificador del curso asociado.
+     *
      * @return id del curso
      */
     public Long getCourseId() {
@@ -59,6 +64,7 @@ public class MaterialUpdateDto {
 
     /**
      * Establece el identificador del curso asociado.
+     *
      * @param courseId id del curso
      */
     public void setCourseId(Long courseId) {
@@ -67,6 +73,7 @@ public class MaterialUpdateDto {
 
     /**
      * Obtiene el identificador del profesor asociado.
+     *
      * @return id del profesor
      */
     public Long getTeacherId() {
@@ -75,6 +82,7 @@ public class MaterialUpdateDto {
 
     /**
      * Establece el identificador del profesor asociado.
+     *
      * @param teacherId id del profesor
      */
     public void setTeacherId(Long teacherId) {

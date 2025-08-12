@@ -1,10 +1,10 @@
 package com.project.demo.rest.quiz;
 
 
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.question.QuestionGenerationService;
 import com.project.demo.logic.entity.quiz.Quiz;
 import com.project.demo.logic.entity.quiz.QuizService;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +31,7 @@ public class QuizController {
 
     /**
      * Obtiene todos los quizzes.
+     *
      * @param request petición HTTP
      * @return lista de quizzes
      */
@@ -44,7 +45,8 @@ public class QuizController {
 
     /**
      * Obtiene un quiz por su identificador.
-     * @param id identificador del quiz
+     *
+     * @param id      identificador del quiz
      * @param request petición HTTP
      * @return quiz encontrado
      */
@@ -63,6 +65,7 @@ public class QuizController {
 
     /**
      * Obtiene los quizzes asociados a una historia.
+     *
      * @param storyId identificador de la historia
      * @param request petición HTTP
      * @return lista de quizzes
@@ -76,8 +79,9 @@ public class QuizController {
 
     /**
      * Crea un nuevo quiz asociado a una historia.
+     *
      * @param storyId identificador de la historia
-     * @param quiz datos del quiz
+     * @param quiz    datos del quiz
      * @param request petición HTTP
      * @return quiz creado
      */
@@ -101,9 +105,10 @@ public class QuizController {
 
     /**
      * Genera preguntas automáticamente para un quiz usando IA.
-     * @param quizId identificador del quiz
+     *
+     * @param quizId            identificador del quiz
      * @param numberOfQuestions número de preguntas a generar
-     * @param request petición HTTP
+     * @param request           petición HTTP
      * @return resultado de la generación
      */
     @PostMapping("/{quizId}/generate-questions")
@@ -119,9 +124,10 @@ public class QuizController {
 
     /**
      * Actualiza los datos de un quiz existente.
-     * @param id identificador del quiz
+     *
+     * @param id          identificador del quiz
      * @param quizDetails datos actualizados
-     * @param request petición HTTP
+     * @param request     petición HTTP
      * @return quiz actualizado
      */
     @PutMapping("/{id}")
@@ -137,7 +143,8 @@ public class QuizController {
 
     /**
      * Elimina un quiz por su identificador.
-     * @param id identificador del quiz
+     *
+     * @param id      identificador del quiz
      * @param request petición HTTP
      * @return resultado de la eliminación
      */

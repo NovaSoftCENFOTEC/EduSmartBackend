@@ -24,8 +24,9 @@ public class CloudinaryService {
 
     /**
      * Sube un archivo de audio a Cloudinary y retorna la URL segura.
+     *
      * @param fileBytes arreglo de bytes del archivo
-     * @param fileName nombre del archivo (debe ser .mp3 o .wav)
+     * @param fileName  nombre del archivo (debe ser .mp3 o .wav)
      * @return URL segura del archivo subido
      * @throws IOException si ocurre un error al subir el archivo
      */

@@ -1,12 +1,15 @@
 package com.project.demo.rest.chatBot;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
@@ -18,28 +21,25 @@ import java.util.*;
 @RequestMapping("/api/chat")
 public class ChatController {
 
-    private final RestTemplate restTemplate = new RestTemplate();
-
-    @Value("${lmstudio.api.url}")
-    private String lmStudioApiUrl;
-
     private static final String MODEL_NAME = "local-model";
     private static final double TEMPERATURE = 0.7;
-
     private static final String SYSTEM_PROMPT =
             "Eres un asistente experto y especializado en la **historia de Costa Rica**. Tu propósito es responder preguntas de forma precisa, didáctica y clara, utilizando un lenguaje sencillo. " +
                     "Debes enfocarte exclusivamente en eventos, personajes, periodos y aspectos relevantes de la historia costarricense. " +
                     "**NO** debes responder sobre política actual, religión, entretenimiento, deportes, chismes, teorías de conspiración, temas personales o cualquier asunto que no esté directamente relacionado con la historia de Costa Rica. " +
                     "Si una pregunta no se relaciona con la historia de Costa Rica, responde amablemente que solo puedes proporcionar información sobre ese tema y sugiere que te pregunten algo al respecto.";
-
     private static final Set<String> GREETINGS = Set.of("hola", "saludos", "buenas");
     private static final String GREETING_RESPONSE = "¡Hola! ¿En qué puedo ayudarte hoy sobre la historia de Costa Rica?";
     private static final String ERROR_EMPTY_MESSAGE = "Message cannot be empty";
     private static final String ERROR_MODEL_RESPONSE = "No se pudo obtener una respuesta válida del modelo.";
     private static final String ERROR_LMSTUDIO_COMM = "Error comunicándose con LM Studio: ";
+    private final RestTemplate restTemplate = new RestTemplate();
+    @Value("${lmstudio.api.url}")
+    private String lmStudioApiUrl;
 
     /**
      * Envía un mensaje al chatbot y retorna la respuesta.
+     *
      * @param request mapa con el mensaje del usuario
      * @return respuesta del chatbot
      */

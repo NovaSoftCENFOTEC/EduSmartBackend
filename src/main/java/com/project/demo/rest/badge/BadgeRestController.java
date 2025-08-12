@@ -36,8 +36,9 @@ public class BadgeRestController {
 
     /**
      * Obtiene todas las insignias paginadas.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de insignias
      */
@@ -67,10 +68,11 @@ public class BadgeRestController {
 
     /**
      * Obtiene las insignias de un estudiante.
+     *
      * @param studentId identificador del estudiante
-     * @param page número de página
-     * @param size tamaño de página
-     * @param request petición HTTP
+     * @param page      número de página
+     * @param size      tamaño de página
+     * @param request   petición HTTP
      * @return lista de insignias del estudiante
      */
     @GetMapping("/student/{studentId}")
@@ -98,6 +100,7 @@ public class BadgeRestController {
 
     /**
      * Obtiene una insignia por su identificador.
+     *
      * @param badgeId identificador de la insignia
      * @param request petición HTTP
      * @return insignia encontrada
@@ -118,7 +121,8 @@ public class BadgeRestController {
 
     /**
      * Crea una nueva insignia.
-     * @param badge datos de la insignia
+     *
+     * @param badge   datos de la insignia
      * @param request petición HTTP
      * @return insignia creada
      */
@@ -133,9 +137,10 @@ public class BadgeRestController {
 
     /**
      * Actualiza una insignia existente.
-     * @param badgeId identificador de la insignia
+     *
+     * @param badgeId      identificador de la insignia
      * @param updatedBadge datos actualizados
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return insignia actualizada
      */
     @PutMapping("/{badgeId}")
@@ -163,6 +168,7 @@ public class BadgeRestController {
 
     /**
      * Elimina una insignia por su identificador.
+     *
      * @param badgeId identificador de la insignia
      * @param request petición HTTP
      * @return resultado de la eliminación
@@ -182,9 +188,10 @@ public class BadgeRestController {
 
     /**
      * Remueve una insignia de un estudiante.
-     * @param badgeId identificador de la insignia
+     *
+     * @param badgeId   identificador de la insignia
      * @param studentId identificador del estudiante
-     * @param request petición HTTP
+     * @param request   petición HTTP
      * @return insignia actualizada
      */
     @DeleteMapping("/{badgeId}/students/{studentId}")
@@ -221,9 +228,10 @@ public class BadgeRestController {
 
     /**
      * Asigna una insignia a un estudiante.
-     * @param badgeId identificador de la insignia
+     *
+     * @param badgeId   identificador de la insignia
      * @param studentId identificador del estudiante
-     * @param request petición HTTP
+     * @param request   petición HTTP
      * @return insignia actualizada
      */
     @PostMapping("/{badgeId}/students/{studentId}")

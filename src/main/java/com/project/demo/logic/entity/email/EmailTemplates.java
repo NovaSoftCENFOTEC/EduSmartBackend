@@ -8,8 +8,9 @@ public class EmailTemplates {
 
     /**
      * Genera el cuerpo del correo para una contraseña temporal.
-     * @param name nombre del usuario
-     * @param email correo del usuario
+     *
+     * @param name     nombre del usuario
+     * @param email    correo del usuario
      * @param password contraseña temporal
      * @param loginUrl URL de inicio de sesión
      * @return cuerpo del correo
@@ -25,8 +26,9 @@ public class EmailTemplates {
 
     /**
      * Genera el cuerpo del correo para una nueva cuenta.
-     * @param name nombre del usuario
-     * @param email correo del usuario
+     *
+     * @param name     nombre del usuario
+     * @param email    correo del usuario
      * @param password contraseña inicial
      * @param loginUrl URL de inicio de sesión
      * @return cuerpo del correo

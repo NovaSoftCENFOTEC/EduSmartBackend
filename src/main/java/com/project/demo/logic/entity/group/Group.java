@@ -25,9 +25,9 @@ public class Group {
 
     @ManyToMany
     @JoinTable(
-        name = "group_student",
-        joinColumns = @JoinColumn(name = "group_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
+            name = "group_student",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> students = new HashSet<>();
 
@@ -43,11 +43,12 @@ public class Group {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador del grupo
-     * @param name nombre del grupo
-     * @param course curso asociado
+     *
+     * @param id       identificador del grupo
+     * @param name     nombre del grupo
+     * @param course   curso asociado
      * @param students conjunto de estudiantes
-     * @param teacher profesor asignado
+     * @param teacher  profesor asignado
      */
     public Group(long id, String name, Course course, Set<User> students, User teacher) {
         this.id = id;
@@ -59,6 +60,7 @@ public class Group {
 
     /**
      * Obtiene el identificador único del grupo.
+     *
      * @return id del grupo
      */
     public long getId() {
@@ -67,6 +69,7 @@ public class Group {
 
     /**
      * Establece el identificador único del grupo.
+     *
      * @param id identificador del grupo
      */
     public void setId(long id) {
@@ -75,6 +78,7 @@ public class Group {
 
     /**
      * Obtiene el nombre del grupo.
+     *
      * @return nombre
      */
     public String getName() {
@@ -83,6 +87,7 @@ public class Group {
 
     /**
      * Establece el nombre del grupo.
+     *
      * @param name nombre
      */
     public void setName(String name) {
@@ -91,6 +96,7 @@ public class Group {
 
     /**
      * Obtiene el curso asociado al grupo.
+     *
      * @return curso
      */
     public Course getCourse() {
@@ -99,6 +105,7 @@ public class Group {
 
     /**
      * Establece el curso asociado al grupo.
+     *
      * @param course curso
      */
     public void setCourse(Course course) {
@@ -107,6 +114,7 @@ public class Group {
 
     /**
      * Obtiene el conjunto de estudiantes del grupo.
+     *
      * @return conjunto de estudiantes
      */
     public Set<User> getStudents() {
@@ -115,6 +123,7 @@ public class Group {
 
     /**
      * Establece el conjunto de estudiantes del grupo.
+     *
      * @param students conjunto de estudiantes
      */
     public void setStudents(Set<User> students) {
@@ -123,6 +132,7 @@ public class Group {
 
     /**
      * Obtiene el profesor asignado al grupo.
+     *
      * @return profesor
      */
     public User getTeacher() {
@@ -131,6 +141,7 @@ public class Group {
 
     /**
      * Establece el profesor asignado al grupo.
+     *
      * @param teacher profesor
      */
     public void setTeacher(User teacher) {

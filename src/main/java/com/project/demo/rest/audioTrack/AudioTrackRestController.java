@@ -3,20 +3,16 @@ package com.project.demo.rest.audioTrack;
 import com.project.demo.logic.entity.audioTrack.AudioTrack;
 import com.project.demo.logic.entity.audioTrack.AudioTrackRepository;
 import com.project.demo.logic.entity.audioTrack.GoogleCloudTTSService;
-import com.project.demo.logic.entity.audioTrack.VoiceTypeEnum;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
 import com.project.demo.logic.entity.story.Story;
 import com.project.demo.logic.entity.story.StoryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +37,10 @@ public class AudioTrackRestController {
 
     /**
      * Obtiene todas las pistas de audio asociadas a una historia.
+     *
      * @param storyId identificador de la historia
-     * @param page número de página
-     * @param size tamaño de página
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return pistas de audio de la historia
      */
@@ -73,9 +70,10 @@ public class AudioTrackRestController {
 
     /**
      * Crea una nueva pista de audio para una historia.
-     * @param storyId identificador de la historia
+     *
+     * @param storyId    identificador de la historia
      * @param audioTrack datos de la pista de audio
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return pista de audio creada
      */
     @PostMapping("/story/{storyId}")
@@ -95,9 +93,10 @@ public class AudioTrackRestController {
 
     /**
      * Actualiza una pista de audio existente.
+     *
      * @param audioTrackId identificador de la pista de audio
-     * @param audioTrack datos actualizados
-     * @param request petición HTTP
+     * @param audioTrack   datos actualizados
+     * @param request      petición HTTP
      * @return pista de audio actualizada
      */
     @PutMapping("/{audioTrackId}")
@@ -122,8 +121,9 @@ public class AudioTrackRestController {
 
     /**
      * Elimina una pista de audio por su identificador.
+     *
      * @param audioTrackId identificador de la pista de audio
-     * @param request petición HTTP
+     * @param request      petición HTTP
      * @return pista de audio eliminada
      */
     @DeleteMapping("/{audioTrackId}")

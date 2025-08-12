@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
     /**
      * Maneja las excepciones de seguridad y otras excepciones generales.
      * Retorna un objeto ProblemDetail con información sobre el error.
+     *
      * @param exception excepción capturada
      * @return detalle del problema con información relevante
      */

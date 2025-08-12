@@ -1,4 +1,5 @@
 package com.project.demo.logic.entity.submission;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.demo.logic.entity.answer.Answer;
 import com.project.demo.logic.entity.quiz.Quiz;
@@ -6,7 +7,6 @@ import com.project.demo.logic.entity.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -37,6 +37,7 @@ public class Submission {
 
     /**
      * Obtiene el identificador único de la entrega.
+     *
      * @return id de la entrega
      */
     public int getId() {
@@ -45,6 +46,7 @@ public class Submission {
 
     /**
      * Establece el identificador único de la entrega.
+     *
      * @param id identificador de la entrega
      */
     public void setId(int id) {
@@ -53,6 +55,7 @@ public class Submission {
 
     /**
      * Obtiene la fecha en que se realizó la entrega.
+     *
      * @return fecha de entrega
      */
     public LocalDateTime getSubmittedAt() {
@@ -61,6 +64,7 @@ public class Submission {
 
     /**
      * Establece la fecha en que se realizó la entrega.
+     *
      * @param submittedAt fecha de entrega
      */
     public void setSubmittedAt(LocalDateTime submittedAt) {
@@ -69,6 +73,7 @@ public class Submission {
 
     /**
      * Obtiene el puntaje obtenido en la entrega.
+     *
      * @return puntaje
      */
     public double getScore() {
@@ -77,6 +82,7 @@ public class Submission {
 
     /**
      * Establece el puntaje obtenido en la entrega.
+     *
      * @param score puntaje
      */
     public void setScore(double score) {
@@ -85,6 +91,7 @@ public class Submission {
 
     /**
      * Obtiene el cuestionario asociado a la entrega.
+     *
      * @return cuestionario
      */
     public Quiz getQuiz() {
@@ -93,6 +100,7 @@ public class Submission {
 
     /**
      * Establece el cuestionario asociado a la entrega.
+     *
      * @param quiz cuestionario
      */
     public void setQuiz(Quiz quiz) {
@@ -101,6 +109,7 @@ public class Submission {
 
     /**
      * Obtiene el estudiante que realizó la entrega.
+     *
      * @return estudiante
      */
     public User getStudent() {
@@ -109,6 +118,7 @@ public class Submission {
 
     /**
      * Establece el estudiante que realizó la entrega.
+     *
      * @param student estudiante
      */
     public void setStudent(User student) {
@@ -117,6 +127,7 @@ public class Submission {
 
     /**
      * Obtiene el conjunto de respuestas asociadas a la entrega.
+     *
      * @return respuestas
      */
     public Set<Answer> getAnswers() {
@@ -125,6 +136,7 @@ public class Submission {
 
     /**
      * Establece el conjunto de respuestas asociadas a la entrega.
+     *
      * @param answers respuestas
      */
     public void setAnswers(Set<Answer> answers) {

@@ -1,4 +1,5 @@
 package com.project.demo.logic.entity.taskSubmission;
+
 import com.project.demo.logic.entity.assignment.Assignment;
 import com.project.demo.logic.entity.user.User;
 import jakarta.persistence.*;
@@ -42,12 +43,13 @@ public class TaskSubmission {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la entrega
-     * @param fileUrl URL del archivo entregado
-     * @param comment comentario del estudiante
+     *
+     * @param id          identificador de la entrega
+     * @param fileUrl     URL del archivo entregado
+     * @param comment     comentario del estudiante
      * @param submittedAt fecha de entrega
-     * @param assignment tarea asociada
-     * @param student estudiante que entrega
+     * @param assignment  tarea asociada
+     * @param student     estudiante que entrega
      */
     public TaskSubmission(Long id, String fileUrl, String comment, LocalDate submittedAt, Assignment assignment, User student) {
         this.id = id;
@@ -60,6 +62,7 @@ public class TaskSubmission {
 
     /**
      * Obtiene el identificador único de la entrega.
+     *
      * @return id de la entrega
      */
     public Long getId() {
@@ -68,6 +71,7 @@ public class TaskSubmission {
 
     /**
      * Establece el identificador único de la entrega.
+     *
      * @param id identificador de la entrega
      */
     public void setId(Long id) {
@@ -76,6 +80,7 @@ public class TaskSubmission {
 
     /**
      * Obtiene la URL del archivo entregado.
+     *
      * @return URL del archivo
      */
     public String getFileUrl() {
@@ -84,6 +89,7 @@ public class TaskSubmission {
 
     /**
      * Establece la URL del archivo entregado.
+     *
      * @param fileUrl URL del archivo
      */
     public void setFileUrl(String fileUrl) {
@@ -92,6 +98,7 @@ public class TaskSubmission {
 
     /**
      * Obtiene el comentario del estudiante.
+     *
      * @return comentario
      */
     public String getComment() {
@@ -100,6 +107,7 @@ public class TaskSubmission {
 
     /**
      * Establece el comentario del estudiante.
+     *
      * @param comment comentario
      */
     public void setComment(String comment) {
@@ -108,6 +116,7 @@ public class TaskSubmission {
 
     /**
      * Obtiene la fecha en que se realizó la entrega.
+     *
      * @return fecha de entrega
      */
     public LocalDate getSubmittedAt() {
@@ -116,6 +125,7 @@ public class TaskSubmission {
 
     /**
      * Establece la fecha en que se realizó la entrega.
+     *
      * @param submittedAt fecha de entrega
      */
     public void setSubmittedAt(LocalDate submittedAt) {
@@ -124,6 +134,7 @@ public class TaskSubmission {
 
     /**
      * Obtiene la tarea asociada a la entrega.
+     *
      * @return tarea
      */
     public Assignment getAssignment() {
@@ -132,6 +143,7 @@ public class TaskSubmission {
 
     /**
      * Establece la tarea asociada a la entrega.
+     *
      * @param assignment tarea
      */
     public void setAssignment(Assignment assignment) {
@@ -140,6 +152,7 @@ public class TaskSubmission {
 
     /**
      * Obtiene el estudiante que realizó la entrega.
+     *
      * @return estudiante
      */
     public User getStudent() {
@@ -148,6 +161,7 @@ public class TaskSubmission {
 
     /**
      * Establece el estudiante que realizó la entrega.
+     *
      * @param student estudiante
      */
     public void setStudent(User student) {

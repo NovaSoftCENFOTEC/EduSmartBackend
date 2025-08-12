@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface MaterialRepository extends JpaRepository<Material, Long> {
     /**
      * Busca los materiales por el identificador del curso.
+     *
      * @param courseId identificador del curso
      * @param pageable paginación
      * @return página de materiales
@@ -21,8 +22,9 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
 
     /**
      * Busca los materiales por el identificador del profesor.
+     *
      * @param teacherId identificador del profesor
-     * @param pageable paginación
+     * @param pageable  paginación
      * @return página de materiales
      */
     Page<Material> findMaterialsByTeacherId(Long teacherId, Pageable pageable);

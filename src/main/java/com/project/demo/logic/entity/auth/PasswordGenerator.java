@@ -15,6 +15,7 @@ public class PasswordGenerator {
 
     /**
      * Genera una contraseña aleatoria de la longitud especificada.
+     *
      * @param length longitud de la contraseña
      * @return contraseña generada
      */

@@ -1,10 +1,10 @@
 package com.project.demo.rest.option;
 
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.option.Option;
 import com.project.demo.logic.entity.option.OptionRepository;
 import com.project.demo.logic.entity.question.Question;
 import com.project.demo.logic.entity.question.QuestionRepository;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +31,9 @@ public class OptionRestController {
 
     /**
      * Obtiene las opciones asociadas a una pregunta.
+     *
      * @param questionId identificador de la pregunta
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return lista de opciones
      */
     @GetMapping("/question/{questionId}")
@@ -44,7 +45,8 @@ public class OptionRestController {
 
     /**
      * Obtiene una opción por su identificador.
-     * @param id identificador de la opción
+     *
+     * @param id      identificador de la opción
      * @param request petición HTTP
      * @return opción encontrada
      */
@@ -61,8 +63,9 @@ public class OptionRestController {
 
     /**
      * Obtiene las opciones asociadas a una pregunta para estudiantes.
+     *
      * @param questionId identificador de la pregunta
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return lista de opciones
      */
     @GetMapping("/question/{questionId}/student")
@@ -74,9 +77,10 @@ public class OptionRestController {
 
     /**
      * Crea una nueva opción para una pregunta.
+     *
      * @param questionId identificador de la pregunta
-     * @param option datos de la opción
-     * @param request petición HTTP
+     * @param option     datos de la opción
+     * @param request    petición HTTP
      * @return opción creada
      */
     @PostMapping("/question/{questionId}")
@@ -94,9 +98,10 @@ public class OptionRestController {
 
     /**
      * Actualiza los datos de una opción existente.
-     * @param id identificador de la opción
+     *
+     * @param id            identificador de la opción
      * @param optionDetails datos actualizados
-     * @param request petición HTTP
+     * @param request       petición HTTP
      * @return opción actualizada
      */
     @PutMapping("/{id}")
@@ -116,7 +121,8 @@ public class OptionRestController {
 
     /**
      * Elimina una opción por su identificador.
-     * @param id identificador de la opción
+     *
+     * @param id      identificador de la opción
      * @param request petición HTTP
      * @return resultado de la eliminación
      */

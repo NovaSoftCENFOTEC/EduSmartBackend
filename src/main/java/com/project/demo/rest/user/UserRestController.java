@@ -48,8 +48,9 @@ public class UserRestController {
 
     /**
      * Obtiene todos los usuarios paginados.
-     * @param page número de página
-     * @param size tamaño de página
+     *
+     * @param page    número de página
+     * @param size    tamaño de página
      * @param request petición HTTP
      * @return lista de usuarios
      */
@@ -74,7 +75,8 @@ public class UserRestController {
 
     /**
      * Crea un nuevo usuario.
-     * @param user datos del usuario
+     *
+     * @param user    datos del usuario
      * @param request petición HTTP
      * @return usuario creado
      */
@@ -89,8 +91,9 @@ public class UserRestController {
 
     /**
      * Actualiza los datos de un usuario.
-     * @param userId identificador del usuario
-     * @param user datos actualizados
+     *
+     * @param userId  identificador del usuario
+     * @param user    datos actualizados
      * @param request petición HTTP
      * @return usuario actualizado
      */
@@ -114,8 +117,9 @@ public class UserRestController {
 
     /**
      * Actualiza los datos de un usuario por un administrador.
-     * @param userId identificador del usuario
-     * @param user datos actualizados
+     *
+     * @param userId  identificador del usuario
+     * @param user    datos actualizados
      * @param request petición HTTP
      * @return usuario actualizado
      */
@@ -139,8 +143,9 @@ public class UserRestController {
 
     /**
      * Actualiza la contraseña de un usuario.
-     * @param userId identificador del usuario
-     * @param user datos con la nueva contraseña
+     *
+     * @param userId  identificador del usuario
+     * @param user    datos con la nueva contraseña
      * @param request petición HTTP
      * @return usuario actualizado
      */
@@ -163,8 +168,9 @@ public class UserRestController {
 
     /**
      * Recupera la contraseña de un usuario y envía una temporal por correo.
+     *
      * @param userEmail correo del usuario
-     * @param request petición HTTP
+     * @param request   petición HTTP
      * @return usuario actualizado
      */
     @PutMapping("/password-recovery/{userEmail}")
@@ -190,7 +196,8 @@ public class UserRestController {
 
     /**
      * Elimina un usuario por su identificador.
-     * @param userId identificador del usuario
+     *
+     * @param userId  identificador del usuario
      * @param request petición HTTP
      * @return resultado de la eliminación
      */
@@ -210,6 +217,7 @@ public class UserRestController {
 
     /**
      * Obtiene el usuario autenticado actual.
+     *
      * @return usuario autenticado
      */
     @GetMapping("/me")
@@ -221,7 +229,8 @@ public class UserRestController {
 
     /**
      * Obtiene un usuario por su identificador.
-     * @param userId identificador del usuario
+     *
+     * @param userId  identificador del usuario
      * @param request petición HTTP
      * @return usuario encontrado
      */

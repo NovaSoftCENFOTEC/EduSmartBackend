@@ -7,8 +7,8 @@ import com.google.cloud.texttospeech.v1.*;
 import com.google.protobuf.ByteString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,15 +20,14 @@ import java.io.IOException;
 public class GoogleCloudTTSService {
 
     private static final Logger logger = LoggerFactory.getLogger(GoogleCloudTTSService.class);
-
+    private final static String LANGUAGE_CODE = "es-US";
     @Value("${gcp.credentials.location}")
     private Resource credentialsResource;
 
-    private final static String LANGUAGE_CODE = "es-US";
-
     /**
      * Convierte un texto en un archivo MP3 usando Google Cloud TTS.
-     * @param text texto a convertir
+     *
+     * @param text      texto a convertir
      * @param voiceType tipo de voz a utilizar
      * @return arreglo de bytes del archivo MP3 generado
      * @throws IOException si ocurre un error durante la conversión

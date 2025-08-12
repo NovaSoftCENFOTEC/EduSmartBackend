@@ -24,6 +24,7 @@ public class StoryAudioTrackService {
 
     /**
      * Genera y guarda las pistas de audio (masculina y femenina) para una historia.
+     *
      * @param story historia para la que se generan las pistas
      * @throws Exception si ocurre un error en la generación o guardado
      */
@@ -55,6 +56,7 @@ public class StoryAudioTrackService {
 
     /**
      * Actualiza las pistas de audio (masculina y femenina) para una historia.
+     *
      * @param story historia para la que se actualizan las pistas
      * @throws Exception si ocurre un error en la actualización
      */
@@ -85,6 +87,7 @@ public class StoryAudioTrackService {
 
     /**
      * Elimina las pistas de audio (masculina y femenina) asociadas a una historia.
+     *
      * @param story historia para la que se eliminan las pistas
      */
     public void deleteAudioTracksForStory(Story story) {

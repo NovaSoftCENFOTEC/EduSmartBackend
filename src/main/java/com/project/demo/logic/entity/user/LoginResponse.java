@@ -13,6 +13,7 @@ public class LoginResponse {
 
     /**
      * Obtiene el token de autenticación.
+     *
      * @return token
      */
     public String getToken() {
@@ -21,6 +22,7 @@ public class LoginResponse {
 
     /**
      * Establece el token de autenticación.
+     *
      * @param token token
      */
     public void setToken(String token) {
@@ -29,6 +31,7 @@ public class LoginResponse {
 
     /**
      * Obtiene el tiempo de expiración del token.
+     *
      * @return tiempo de expiración en segundos
      */
     public long getExpiresIn() {
@@ -37,6 +40,7 @@ public class LoginResponse {
 
     /**
      * Establece el tiempo de expiración del token.
+     *
      * @param expiresIn tiempo de expiración en segundos
      */
     public void setExpiresIn(long expiresIn) {
@@ -45,6 +49,7 @@ public class LoginResponse {
 
     /**
      * Obtiene el usuario autenticado.
+     *
      * @return usuario autenticado
      */
     public User getAuthUser() {
@@ -53,6 +58,7 @@ public class LoginResponse {
 
     /**
      * Establece el usuario autenticado.
+     *
      * @param authUser usuario autenticado
      */
     public void setAuthUser(User authUser) {

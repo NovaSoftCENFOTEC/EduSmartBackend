@@ -1,8 +1,10 @@
 package com.project.demo.logic.entity.question;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.demo.logic.entity.option.Option;
 import com.project.demo.logic.entity.quiz.Quiz;
 import jakarta.persistence.*;
+
 import java.util.Set;
 
 /**
@@ -28,6 +30,7 @@ public class Question {
 
     /**
      * Obtiene el identificador único de la pregunta.
+     *
      * @return id de la pregunta
      */
     public int getId() {
@@ -36,6 +39,7 @@ public class Question {
 
     /**
      * Establece el identificador único de la pregunta.
+     *
      * @param id identificador de la pregunta
      */
     public void setId(int id) {
@@ -44,6 +48,7 @@ public class Question {
 
     /**
      * Obtiene el conjunto de opciones de la pregunta.
+     *
      * @return conjunto de opciones
      */
     public Set<Option> getOptions() {
@@ -52,6 +57,7 @@ public class Question {
 
     /**
      * Establece el conjunto de opciones de la pregunta.
+     *
      * @param options conjunto de opciones
      */
     public void setOptions(Set<Option> options) {
@@ -60,6 +66,7 @@ public class Question {
 
     /**
      * Obtiene el texto de la pregunta.
+     *
      * @return texto de la pregunta
      */
     public String getText() {
@@ -68,6 +75,7 @@ public class Question {
 
     /**
      * Establece el texto de la pregunta.
+     *
      * @param text texto de la pregunta
      */
     public void setText(String text) {
@@ -76,6 +84,7 @@ public class Question {
 
     /**
      * Obtiene el cuestionario asociado a la pregunta.
+     *
      * @return cuestionario
      */
     public Quiz getQuiz() {
@@ -84,6 +93,7 @@ public class Question {
 
     /**
      * Establece el cuestionario asociado a la pregunta.
+     *
      * @param quiz cuestionario
      */
     public void setQuiz(Quiz quiz) {

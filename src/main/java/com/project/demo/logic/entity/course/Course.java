@@ -32,11 +32,12 @@ public class Course {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador del curso
-     * @param code código único del curso
-     * @param title título del curso
+     *
+     * @param id          identificador del curso
+     * @param code        código único del curso
+     * @param title       título del curso
      * @param description descripción del curso
-     * @param createdAt fecha de creación
+     * @param createdAt   fecha de creación
      */
     public Course(long id, String code, String title, String description, Date createdAt) {
         this.id = id;
@@ -48,6 +49,7 @@ public class Course {
 
     /**
      * Obtiene el identificador único del curso.
+     *
      * @return id del curso
      */
     public long getId() {
@@ -56,6 +58,7 @@ public class Course {
 
     /**
      * Establece el identificador único del curso.
+     *
      * @param id identificador del curso
      */
     public void setId(long id) {
@@ -64,6 +67,7 @@ public class Course {
 
     /**
      * Obtiene el código único del curso.
+     *
      * @return código del curso
      */
     public String getCode() {
@@ -72,6 +76,7 @@ public class Course {
 
     /**
      * Establece el código único del curso.
+     *
      * @param code código del curso
      */
     public void setCode(String code) {
@@ -80,6 +85,7 @@ public class Course {
 
     /**
      * Obtiene el título del curso.
+     *
      * @return título
      */
     public String getTitle() {
@@ -88,6 +94,7 @@ public class Course {
 
     /**
      * Establece el título del curso.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -96,6 +103,7 @@ public class Course {
 
     /**
      * Obtiene la descripción del curso.
+     *
      * @return descripción
      */
     public String getDescription() {
@@ -104,6 +112,7 @@ public class Course {
 
     /**
      * Establece la descripción del curso.
+     *
      * @param description descripción
      */
     public void setDescription(String description) {
@@ -112,6 +121,7 @@ public class Course {
 
     /**
      * Obtiene la fecha de creación del curso.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -120,6 +130,7 @@ public class Course {
 
     /**
      * Establece la fecha de creación del curso.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {

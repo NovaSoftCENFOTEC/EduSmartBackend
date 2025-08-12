@@ -22,15 +22,15 @@ import java.util.regex.Pattern;
 @Service
 public class GeminiService {
 
+    private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
+    private final RestTemplate restTemplate = new RestTemplate();
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
-    private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
-
     /**
      * Genera preguntas de opción múltiple basadas en el contenido educativo proporcionado.
-     * @param storyContent contenido educativo
+     *
+     * @param storyContent      contenido educativo
      * @param numberOfQuestions número de preguntas a generar
      * @return preguntas en formato JSON
      */

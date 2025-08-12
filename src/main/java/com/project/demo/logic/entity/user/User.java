@@ -1,18 +1,17 @@
 package com.project.demo.logic.entity.user;
-import com.project.demo.logic.entity.badge.Badge;
+
 import com.project.demo.logic.entity.rol.Role;
 import com.project.demo.logic.entity.school.School;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Representa un usuario dentro de la plataforma.
@@ -22,6 +21,8 @@ import java.util.Set;
 @Table(name = "user")
 @Entity
 public class User implements UserDetails {
+    @Column(name = "needs_password_change", nullable = false)
+    boolean needsPasswordChange = false;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,27 +30,16 @@ public class User implements UserDetails {
     private String lastname;
     @Column(unique = true, length = 100, nullable = false)
     private String email;
-
     @Column(nullable = false)
     private String password;
-
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
-
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
-
     @Column(name = "profile_picture")
     private String profilePic;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());
-        return List.of(authority);
-    }
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
@@ -58,14 +48,19 @@ public class User implements UserDetails {
     @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
     private School school;
 
-    @Column(name = "needs_password_change", nullable = false)
-    boolean needsPasswordChange = false;
-
-    // Constructors
     /**
      * Constructor por defecto.
      */
-    public User() {}
+    public User() {
+    }
+
+    // Constructors
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());
+        return List.of(authority);
+    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -94,6 +89,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene el identificador único del usuario.
+     *
      * @return id del usuario
      */
     public Long getId() {
@@ -102,6 +98,7 @@ public class User implements UserDetails {
 
     /**
      * Establece el identificador único del usuario.
+     *
      * @param id identificador del usuario
      */
     public void setId(Long id) {
@@ -110,6 +107,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene el nombre del usuario.
+     *
      * @return nombre
      */
     public String getName() {
@@ -118,6 +116,7 @@ public class User implements UserDetails {
 
     /**
      * Establece el nombre del usuario.
+     *
      * @param name nombre
      */
     public void setName(String name) {
@@ -126,6 +125,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene el apellido del usuario.
+     *
      * @return apellido
      */
     public String getLastname() {
@@ -134,6 +134,7 @@ public class User implements UserDetails {
 
     /**
      * Establece el apellido del usuario.
+     *
      * @param lastname apellido
      */
     public void setLastname(String lastname) {
@@ -142,6 +143,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene el correo electrónico del usuario.
+     *
      * @return correo electrónico
      */
     public String getEmail() {
@@ -150,6 +152,7 @@ public class User implements UserDetails {
 
     /**
      * Establece el correo electrónico del usuario.
+     *
      * @param email correo electrónico
      */
     public void setEmail(String email) {
@@ -158,6 +161,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene la contraseña del usuario.
+     *
      * @return contraseña
      */
     @Override
@@ -167,6 +171,7 @@ public class User implements UserDetails {
 
     /**
      * Establece la contraseña del usuario.
+     *
      * @param password contraseña
      */
     public void setPassword(String password) {
@@ -175,6 +180,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene la fecha de creación del usuario.
+     *
      * @return fecha de creación
      */
     public Date getCreatedAt() {
@@ -183,6 +189,7 @@ public class User implements UserDetails {
 
     /**
      * Establece la fecha de creación del usuario.
+     *
      * @param createdAt fecha de creación
      */
     public void setCreatedAt(Date createdAt) {
@@ -191,6 +198,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene la fecha de actualización del usuario.
+     *
      * @return fecha de actualización
      */
     public Date getUpdatedAt() {
@@ -199,6 +207,7 @@ public class User implements UserDetails {
 
     /**
      * Establece la fecha de actualización del usuario.
+     *
      * @param updatedAt fecha de actualización
      */
     public void setUpdatedAt(Date updatedAt) {
@@ -207,6 +216,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene la URL de la foto de perfil del usuario.
+     *
      * @return URL de la foto de perfil
      */
     public String getProfilePic() {
@@ -215,6 +225,7 @@ public class User implements UserDetails {
 
     /**
      * Establece la URL de la foto de perfil del usuario.
+     *
      * @param profilePic URL de la foto de perfil
      */
     public void setProfilePic(String profilePic) {
@@ -223,6 +234,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene el rol del usuario.
+     *
      * @return rol
      */
     public Role getRole() {
@@ -231,6 +243,7 @@ public class User implements UserDetails {
 
     /**
      * Establece el rol del usuario.
+     *
      * @param role rol
      * @return instancia actual de User
      */
@@ -241,6 +254,7 @@ public class User implements UserDetails {
 
     /**
      * Obtiene la escuela asociada al usuario.
+     *
      * @return escuela
      */
     public School getSchool() {
@@ -249,6 +263,7 @@ public class User implements UserDetails {
 
     /**
      * Establece la escuela asociada al usuario.
+     *
      * @param school escuela
      */
     public void setSchool(School school) {
@@ -257,6 +272,7 @@ public class User implements UserDetails {
 
     /**
      * Indica si el usuario necesita cambiar la contraseña.
+     *
      * @return true si necesita cambiarla, false en caso contrario
      */
     public boolean isNeedsPasswordChange() {
@@ -265,6 +281,7 @@ public class User implements UserDetails {
 
     /**
      * Establece si el usuario necesita cambiar la contraseña.
+     *
      * @param needsPasswordChange true si necesita cambiarla
      */
     public void setNeedsPasswordChange(boolean needsPasswordChange) {

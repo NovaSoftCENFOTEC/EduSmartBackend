@@ -30,21 +30,16 @@ import java.util.Optional;
 public class AuthRestController {
 
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private GoogleAuthService googleAuthService;
-
-
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private GoogleAuthService googleAuthService;
 
     public AuthRestController(JwtService jwtService, AuthenticationService authenticationService) {
         this.jwtService = jwtService;
@@ -53,6 +48,7 @@ public class AuthRestController {
 
     /**
      * Autentica a un usuario con email y contraseña.
+     *
      * @param user usuario con credenciales
      * @return respuesta con token y datos del usuario
      */
@@ -75,31 +71,33 @@ public class AuthRestController {
 
     /**
      * Autentica a un usuario usando Google.
+     *
      * @param request DTO con el token de Google
      * @return respuesta con token y datos del usuario
      */
     @PostMapping("/google-login")
-        public ResponseEntity<?> authenticateGoogleUser(@RequestBody GoogleLoginRequestDto request) {
-            try {
-                User authenticatedUser = googleAuthService.authenticateGoogleUser(request.getIdToken());
-                String jwtToken = jwtService.generateToken(authenticatedUser);
+    public ResponseEntity<?> authenticateGoogleUser(@RequestBody GoogleLoginRequestDto request) {
+        try {
+            User authenticatedUser = googleAuthService.authenticateGoogleUser(request.getIdToken());
+            String jwtToken = jwtService.generateToken(authenticatedUser);
 
-                LoginResponse loginResponse = new LoginResponse();
-                loginResponse.setToken(jwtToken);
-                loginResponse.setExpiresIn(jwtService.getExpirationTime());
-                loginResponse.setAuthUser(authenticatedUser);
+            LoginResponse loginResponse = new LoginResponse();
+            loginResponse.setToken(jwtToken);
+            loginResponse.setExpiresIn(jwtService.getExpirationTime());
+            loginResponse.setAuthUser(authenticatedUser);
 
-                Optional<User> foundedUser = userRepository.findByEmail(authenticatedUser.getEmail());
-                foundedUser.ifPresent(loginResponse::setAuthUser);
+            Optional<User> foundedUser = userRepository.findByEmail(authenticatedUser.getEmail());
+            foundedUser.ifPresent(loginResponse::setAuthUser);
 
-                return ResponseEntity.ok(loginResponse);
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ID Token invalido o usuario no encontrado. Por favor, verifica el token.");
-            }
+            return ResponseEntity.ok(loginResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ID Token invalido o usuario no encontrado. Por favor, verifica el token.");
         }
+    }
 
     /**
      * Registra un nuevo usuario como estudiante.
+     *
      * @param user datos del usuario
      * @return usuario registrado
      */

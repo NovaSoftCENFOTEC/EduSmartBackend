@@ -13,6 +13,7 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     /**
      * Busca todas las respuestas asociadas a una entrega específica.
+     *
      * @param submissionId identificador de la entrega
      * @return lista de respuestas
      */
@@ -20,14 +21,16 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     /**
      * Busca una respuesta por entrega y pregunta.
+     *
      * @param submissionId identificador de la entrega
-     * @param questionId identificador de la pregunta
+     * @param questionId   identificador de la pregunta
      * @return respuesta encontrada (opcional)
      */
     Optional<Answer> findBySubmissionIdAndQuestionId(Integer submissionId, Integer questionId);
 
     /**
      * Busca todas las respuestas asociadas a una pregunta específica.
+     *
      * @param questionId identificador de la pregunta
      * @return lista de respuestas
      */

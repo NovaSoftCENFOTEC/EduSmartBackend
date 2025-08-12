@@ -37,11 +37,12 @@ public class Badge {
 
     /**
      * Constructor con todos los parámetros.
-     * @param id identificador de la insignia
-     * @param title título de la insignia
+     *
+     * @param id          identificador de la insignia
+     * @param title       título de la insignia
      * @param description descripción de la insignia
-     * @param iconUrl URL del icono
-     * @param students conjunto de estudiantes que poseen la insignia
+     * @param iconUrl     URL del icono
+     * @param students    conjunto de estudiantes que poseen la insignia
      */
     public Badge(Long id, String title, String description, String iconUrl, Set<User> students) {
         this.id = id;
@@ -53,6 +54,7 @@ public class Badge {
 
     /**
      * Obtiene el identificador único de la insignia.
+     *
      * @return id de la insignia
      */
     public Long getId() {
@@ -61,6 +63,7 @@ public class Badge {
 
     /**
      * Establece el identificador único de la insignia.
+     *
      * @param id identificador de la insignia
      */
     public void setId(Long id) {
@@ -69,6 +72,7 @@ public class Badge {
 
     /**
      * Obtiene el título de la insignia.
+     *
      * @return título
      */
     public String getTitle() {
@@ -77,6 +81,7 @@ public class Badge {
 
     /**
      * Establece el título de la insignia.
+     *
      * @param title título
      */
     public void setTitle(String title) {
@@ -85,6 +90,7 @@ public class Badge {
 
     /**
      * Obtiene la descripción de la insignia.
+     *
      * @return descripción
      */
     public String getDescription() {
@@ -93,6 +99,7 @@ public class Badge {
 
     /**
      * Establece la descripción de la insignia.
+     *
      * @param description descripción
      */
     public void setDescription(String description) {
@@ -101,6 +108,7 @@ public class Badge {
 
     /**
      * Obtiene la URL del icono de la insignia.
+     *
      * @return URL del icono
      */
     public String getIconUrl() {
@@ -109,6 +117,7 @@ public class Badge {
 
     /**
      * Establece la URL del icono de la insignia.
+     *
      * @param iconUrl URL del icono
      */
     public void setIconUrl(String iconUrl) {
@@ -117,6 +126,7 @@ public class Badge {
 
     /**
      * Obtiene el conjunto de estudiantes que poseen la insignia.
+     *
      * @return conjunto de estudiantes
      */
     public Set<User> getStudents() {
@@ -125,6 +135,7 @@ public class Badge {
 
     /**
      * Establece el conjunto de estudiantes que poseen la insignia.
+     *
      * @param students conjunto de estudiantes
      */
     public void setStudents(Set<User> students) {

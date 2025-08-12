@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,20 +26,19 @@ import java.util.regex.Pattern;
 @Service
 public class DeepSeekService {
 
-    @Value("${lmstudio.url:http://localhost:1234}")
-    private String lmStudioUrl;
-
     private static final double TEMPERATURE = 0.3;
     private static final int MAX_TOKENS = 1500;
     private static final boolean STREAM = false;
-
+    private static final Logger logger = LoggerFactory.getLogger(DeepSeekService.class);
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private static final Logger logger = LoggerFactory.getLogger(DeepSeekService.class);
+    @Value("${lmstudio.url:http://localhost:1234}")
+    private String lmStudioUrl;
 
     /**
      * Genera preguntas de opción múltiple basadas en el contenido educativo proporcionado.
-     * @param storyContent contenido educativo
+     *
+     * @param storyContent      contenido educativo
      * @param numberOfQuestions número de preguntas a generar
      * @return preguntas en formato JSON
      */
@@ -120,6 +122,7 @@ public class DeepSeekService {
 
     /**
      * Limpia y valida el texto JSON generado por DeepSeek.
+     *
      * @param jsonText texto JSON a limpiar
      * @return JSON limpio y validado, o null si hay error
      */

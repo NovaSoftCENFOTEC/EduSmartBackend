@@ -1,4 +1,5 @@
 package com.project.demo.logic.entity.option;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.demo.logic.entity.question.Question;
 import jakarta.persistence.*;
@@ -26,6 +27,7 @@ public class Option {
 
     /**
      * Obtiene el identificador único de la opción.
+     *
      * @return id de la opción
      */
     public int getId() {
@@ -34,6 +36,7 @@ public class Option {
 
     /**
      * Establece el identificador único de la opción.
+     *
      * @param id identificador de la opción
      */
     public void setId(int id) {
@@ -42,6 +45,7 @@ public class Option {
 
     /**
      * Obtiene el texto de la opción.
+     *
      * @return texto de la opción
      */
     public String getText() {
@@ -50,6 +54,7 @@ public class Option {
 
     /**
      * Establece el texto de la opción.
+     *
      * @param text texto de la opción
      */
     public void setText(String text) {
@@ -58,6 +63,7 @@ public class Option {
 
     /**
      * Indica si la opción es la respuesta correcta.
+     *
      * @return true si es correcta, false en caso contrario
      */
     public boolean isCorrect() {
@@ -66,6 +72,7 @@ public class Option {
 
     /**
      * Establece si la opción es la respuesta correcta.
+     *
      * @param correct true si es correcta, false en caso contrario
      */
     public void setCorrect(boolean correct) {
@@ -74,6 +81,7 @@ public class Option {
 
     /**
      * Obtiene la pregunta asociada a la opción.
+     *
      * @return pregunta
      */
     public Question getQuestion() {
@@ -82,6 +90,7 @@ public class Option {
 
     /**
      * Establece la pregunta asociada a la opción.
+     *
      * @param question pregunta
      */
     public void setQuestion(Question question) {

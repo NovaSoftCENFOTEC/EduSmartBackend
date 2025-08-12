@@ -1,6 +1,7 @@
 package com.project.demo.rest.taskSubmission.dto;
 
 import com.project.demo.logic.entity.taskSubmission.TaskSubmission;
+
 import java.time.LocalDate;
 
 /**
@@ -18,15 +19,17 @@ public class TaskSubmissionDTO {
     /**
      * Constructor por defecto.
      */
-    public TaskSubmissionDTO() {}
+    public TaskSubmissionDTO() {
+    }
 
     /**
      * Constructor con todos los parámetros.
-     * @param fileUrl URL del archivo entregado
-     * @param comment comentario del estudiante
-     * @param submittedAt fecha de entrega
+     *
+     * @param fileUrl      URL del archivo entregado
+     * @param comment      comentario del estudiante
+     * @param submittedAt  fecha de entrega
      * @param assignmentId identificador de la asignación
-     * @param studentId identificador del estudiante
+     * @param studentId    identificador del estudiante
      */
     public TaskSubmissionDTO(String fileUrl, String comment, LocalDate submittedAt, Long assignmentId, Long studentId) {
         this.fileUrl = fileUrl;
@@ -38,6 +41,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Crea un TaskSubmissionDTO a partir de una entidad TaskSubmission.
+     *
      * @param submission entidad TaskSubmission
      * @return TaskSubmissionDTO
      */
@@ -55,6 +59,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Obtiene el identificador de la entrega.
+     *
      * @return id
      */
     public Long getId() {
@@ -63,6 +68,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Establece el identificador de la entrega.
+     *
      * @param id identificador
      */
     public void setId(Long id) {
@@ -71,6 +77,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Obtiene la URL del archivo entregado.
+     *
      * @return URL del archivo
      */
     public String getFileUrl() {
@@ -79,6 +86,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Establece la URL del archivo entregado.
+     *
      * @param fileUrl URL del archivo
      */
     public void setFileUrl(String fileUrl) {
@@ -87,6 +95,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Obtiene el comentario del estudiante.
+     *
      * @return comentario
      */
     public String getComment() {
@@ -95,6 +104,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Establece el comentario del estudiante.
+     *
      * @param comment comentario
      */
     public void setComment(String comment) {
@@ -103,6 +113,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Obtiene la fecha de entrega.
+     *
      * @return fecha de entrega
      */
     public LocalDate getSubmittedAt() {
@@ -111,6 +122,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Establece la fecha de entrega.
+     *
      * @param submittedAt fecha de entrega
      */
     public void setSubmittedAt(LocalDate submittedAt) {
@@ -119,6 +131,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Obtiene el identificador de la asignación.
+     *
      * @return id de la asignación
      */
     public Long getAssignmentId() {
@@ -127,6 +140,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Establece el identificador de la asignación.
+     *
      * @param assignmentId id de la asignación
      */
     public void setAssignmentId(Long assignmentId) {
@@ -135,6 +149,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Obtiene el identificador del estudiante.
+     *
      * @return id del estudiante
      */
     public Long getStudentId() {
@@ -143,6 +158,7 @@ public class TaskSubmissionDTO {
 
     /**
      * Establece el identificador del estudiante.
+     *
      * @param studentId id del estudiante
      */
     public void setStudentId(Long studentId) {

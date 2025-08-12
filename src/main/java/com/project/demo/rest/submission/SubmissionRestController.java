@@ -1,11 +1,12 @@
 package com.project.demo.rest.submission;
-import com.project.demo.logic.entity.submission.Submission;
-import com.project.demo.logic.entity.submission.SubmissionRepository;
+
+import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.quiz.Quiz;
 import com.project.demo.logic.entity.quiz.QuizRepository;
+import com.project.demo.logic.entity.submission.Submission;
+import com.project.demo.logic.entity.submission.SubmissionRepository;
 import com.project.demo.logic.entity.user.User;
 import com.project.demo.logic.entity.user.UserRepository;
-import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +37,8 @@ public class SubmissionRestController {
 
     /**
      * Obtiene las entregas asociadas a un quiz.
-     * @param quizId identificador del quiz
+     *
+     * @param quizId  identificador del quiz
      * @param request petición HTTP
      * @return lista de entregas
      */
@@ -50,7 +51,8 @@ public class SubmissionRestController {
 
     /**
      * Obtiene una entrega por su identificador.
-     * @param id identificador de la entrega
+     *
+     * @param id      identificador de la entrega
      * @param request petición HTTP
      * @return entrega encontrada
      */
@@ -67,10 +69,11 @@ public class SubmissionRestController {
 
     /**
      * Crea una nueva entrega para un quiz y estudiante.
-     * @param quizId identificador del quiz
-     * @param studentId identificador del estudiante
+     *
+     * @param quizId     identificador del quiz
+     * @param studentId  identificador del estudiante
      * @param submission datos de la entrega (opcional)
-     * @param request petición HTTP
+     * @param request    petición HTTP
      * @return entrega creada
      */
     @PostMapping("/quiz/{quizId}/student/{studentId}")
@@ -108,9 +111,10 @@ public class SubmissionRestController {
 
     /**
      * Actualiza los datos de una entrega existente.
-     * @param id identificador de la entrega
+     *
+     * @param id                identificador de la entrega
      * @param submissionDetails datos actualizados
-     * @param request petición HTTP
+     * @param request           petición HTTP
      * @return entrega actualizada
      */
     @PutMapping("/{id}")
@@ -129,7 +133,8 @@ public class SubmissionRestController {
 
     /**
      * Elimina una entrega por su identificador.
-     * @param id identificador de la entrega
+     *
+     * @param id      identificador de la entrega
      * @param request petición HTTP
      * @return resultado de la eliminación
      */
@@ -147,8 +152,9 @@ public class SubmissionRestController {
 
     /**
      * Obtiene las entregas asociadas a un estudiante.
+     *
      * @param studentId identificador del estudiante
-     * @param request petición HTTP
+     * @param request   petición HTTP
      * @return lista de entregas del estudiante
      */
     @GetMapping("/student/{studentId}")

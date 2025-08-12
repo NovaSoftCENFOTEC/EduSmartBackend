@@ -14,8 +14,9 @@ public class Meta {
 
     /**
      * Constructor con método y URL.
+     *
      * @param method método HTTP
-     * @param url URL de la petición
+     * @param url    URL de la petición
      */
     public Meta(String method, String url) {
         this.method = method;
@@ -24,6 +25,7 @@ public class Meta {
 
     /**
      * Obtiene el método HTTP.
+     *
      * @return método
      */
     public String getMethod() {
@@ -32,6 +34,7 @@ public class Meta {
 
     /**
      * Establece el método HTTP.
+     *
      * @param method método
      */
     public void setMethod(String method) {
@@ -40,6 +43,7 @@ public class Meta {
 
     /**
      * Obtiene la URL de la petición.
+     *
      * @return URL
      */
     public String getUrl() {
@@ -48,6 +52,7 @@ public class Meta {
 
     /**
      * Establece la URL de la petición.
+     *
      * @param url URL
      */
     public void setUrl(String url) {
@@ -56,6 +61,7 @@ public class Meta {
 
     /**
      * Obtiene el número total de páginas.
+     *
      * @return total de páginas
      */
     public int getTotalPages() {
@@ -64,6 +70,7 @@ public class Meta {
 
     /**
      * Establece el número total de páginas.
+     *
      * @param totalPages total de páginas
      */
     public void setTotalPages(int totalPages) {
@@ -72,6 +79,7 @@ public class Meta {
 
     /**
      * Obtiene el número total de elementos.
+     *
      * @return total de elementos
      */
     public long getTotalElements() {
@@ -80,6 +88,7 @@ public class Meta {
 
     /**
      * Establece el número total de elementos.
+     *
      * @param totalElements total de elementos
      */
     public void setTotalElements(long totalElements) {
@@ -88,6 +97,7 @@ public class Meta {
 
     /**
      * Obtiene el número de página actual.
+     *
      * @return número de página
      */
     public int getPageNumber() {
@@ -96,6 +106,7 @@ public class Meta {
 
     /**
      * Establece el número de página actual.
+     *
      * @param pageNumber número de página
      */
     public void setPageNumber(int pageNumber) {
@@ -104,6 +115,7 @@ public class Meta {
 
     /**
      * Obtiene el tamaño de página.
+     *
      * @return tamaño de página
      */
     public int getPageSize() {
@@ -112,6 +124,7 @@ public class Meta {
 
     /**
      * Establece el tamaño de página.
+     *
      * @param pageSize tamaño de página
      */
     public void setPageSize(int pageSize) {

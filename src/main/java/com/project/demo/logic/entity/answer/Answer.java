@@ -31,6 +31,7 @@ public class Answer {
 
     /**
      * Obtiene el identificador único de la respuesta.
+     *
      * @return id de la respuesta
      */
     public Long getId() {
@@ -39,6 +40,7 @@ public class Answer {
 
     /**
      * Establece el identificador único de la respuesta.
+     *
      * @param id identificador de la respuesta
      */
     public void setId(Long id) {
@@ -47,6 +49,7 @@ public class Answer {
 
     /**
      * Obtiene la entrega asociada a la respuesta.
+     *
      * @return entrega
      */
     public Submission getSubmission() {
@@ -55,6 +58,7 @@ public class Answer {
 
     /**
      * Establece la entrega asociada a la respuesta.
+     *
      * @param submission entrega
      */
     public void setSubmission(Submission submission) {
@@ -63,6 +67,7 @@ public class Answer {
 
     /**
      * Obtiene la pregunta asociada a la respuesta.
+     *
      * @return pregunta
      */
     public Question getQuestion() {
@@ -71,6 +76,7 @@ public class Answer {
 
     /**
      * Establece la pregunta asociada a la respuesta.
+     *
      * @param question pregunta
      */
     public void setQuestion(Question question) {
@@ -79,6 +85,7 @@ public class Answer {
 
     /**
      * Obtiene la opción seleccionada en la respuesta.
+     *
      * @return opción seleccionada
      */
     public Option getSelectedOption() {
@@ -87,6 +94,7 @@ public class Answer {
 
     /**
      * Establece la opción seleccionada en la respuesta.
+     *
      * @param selectedOption opción seleccionada
      */
     public void setSelectedOption(Option selectedOption) {
