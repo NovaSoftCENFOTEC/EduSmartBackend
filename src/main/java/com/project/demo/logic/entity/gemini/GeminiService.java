@@ -1,5 +1,7 @@
 package com.project.demo.logic.entity.gemini;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,9 +12,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * Servicio para la generación de preguntas de opción múltiple usando Gemini.
+ * Envía el contenido educativo y recibe preguntas en formato JSON.
+ */
 @Service
 public class GeminiService {
 
@@ -20,10 +26,17 @@ public class GeminiService {
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
+    private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
 
+    /**
+     * Genera preguntas de opción múltiple basadas en el contenido educativo proporcionado.
+     * @param storyContent contenido educativo
+     * @param numberOfQuestions número de preguntas a generar
+     * @return preguntas en formato JSON
+     */
     public String generateQuizQuestions(String storyContent, int numberOfQuestions) {
         try {
-            System.out.println("Iniciando generación de preguntas con Gemini...");
+            logger.info("Iniciando generación de preguntas con Gemini...");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -59,7 +72,7 @@ public class GeminiService {
             ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
             String responseBody = response.getBody();
-            System.out.println("Respuesta de Gemini: " + responseBody);
+            logger.info("Respuesta de Gemini: {}", responseBody);
 
             if (responseBody != null && responseBody.contains("\"text\":")) {
                 String pattern = "```json\\s*(.*?)\\s*```";
@@ -69,16 +82,15 @@ public class GeminiService {
                 if (matcher.find()) {
                     String extractedText = matcher.group(1);
                     extractedText = extractedText.replace("\\n", "\n").replace("\\\"", "\"");
-                    System.out.println("Texto extraído con regex: " + extractedText);
+                    logger.info("Texto extraído con regex: {}", extractedText);
                     return extractedText;
                 }
             }
 
-            System.out.println("No se pudo extraer texto de la respuesta");
+            logger.error("No se pudo extraer texto de la respuesta de Gemini");
             return responseBody;
         } catch (Exception e) {
-            System.err.println("Error completo: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error generando preguntas con Gemini: {}", e.getMessage());
             throw new RuntimeException("Error generando preguntas con Gemini: " + e.getMessage(), e);
         }
     }

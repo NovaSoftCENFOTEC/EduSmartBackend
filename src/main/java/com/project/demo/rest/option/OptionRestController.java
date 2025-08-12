@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de opciones de preguntas.
+ * Permite crear, consultar, actualizar y eliminar opciones asociadas a preguntas.
+ */
 @RestController
 @RequestMapping("/options")
 public class OptionRestController {
@@ -25,13 +29,25 @@ public class OptionRestController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    /**
+     * Obtiene las opciones asociadas a una pregunta.
+     * @param questionId identificador de la pregunta
+     * @param request petición HTTP
+     * @return lista de opciones
+     */
     @GetMapping("/question/{questionId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getOptionsByQuestion(@PathVariable Integer questionId, HttpServletRequest request) {
         List<Option> options = optionRepository.findByQuestionId(questionId);
         return new GlobalResponseHandler().handleResponse("Opciones obtenidas correctamente", options, HttpStatus.OK, request);
     }
 
+    /**
+     * Obtiene una opción por su identificador.
+     * @param id identificador de la opción
+     * @param request petición HTTP
+     * @return opción encontrada
+     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getOptionById(@PathVariable Integer id, HttpServletRequest request) {
@@ -43,6 +59,26 @@ public class OptionRestController {
         }
     }
 
+    /**
+     * Obtiene las opciones asociadas a una pregunta para estudiantes.
+     * @param questionId identificador de la pregunta
+     * @param request petición HTTP
+     * @return lista de opciones
+     */
+    @GetMapping("/question/{questionId}/student")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getOptionsByQuestionForStudent(@PathVariable Integer questionId, HttpServletRequest request) {
+        List<Option> options = optionRepository.findByQuestionId(questionId);
+        return new GlobalResponseHandler().handleResponse("Opciones obtenidas correctamente", options, HttpStatus.OK, request);
+    }
+
+    /**
+     * Crea una nueva opción para una pregunta.
+     * @param questionId identificador de la pregunta
+     * @param option datos de la opción
+     * @param request petición HTTP
+     * @return opción creada
+     */
     @PostMapping("/question/{questionId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createOption(@PathVariable Integer questionId, @RequestBody Option option, HttpServletRequest request) {
@@ -56,6 +92,13 @@ public class OptionRestController {
         }
     }
 
+    /**
+     * Actualiza los datos de una opción existente.
+     * @param id identificador de la opción
+     * @param optionDetails datos actualizados
+     * @param request petición HTTP
+     * @return opción actualizada
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateOption(@PathVariable Integer id, @RequestBody Option optionDetails, HttpServletRequest request) {
@@ -71,6 +114,12 @@ public class OptionRestController {
         }
     }
 
+    /**
+     * Elimina una opción por su identificador.
+     * @param id identificador de la opción
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteOption(@PathVariable Integer id, HttpServletRequest request) {

@@ -1,16 +1,29 @@
 package com.project.demo.logic.entity.email;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio para el envío de correos electrónicos.
+ * Utiliza JavaMailSender para enviar mensajes simples.
+ */
 @Service
 public class EmailManager {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmailManager.class);
     @Autowired
     private JavaMailSender mailSender;
 
+    /**
+     * Envía un correo electrónico con el asunto y cuerpo especificados.
+     * @param toEmail dirección de correo del destinatario
+     * @param subject asunto del correo
+     * @param body cuerpo del correo
+     */
     public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
@@ -19,11 +32,10 @@ public class EmailManager {
 
         try {
             mailSender.send(message);
-            System.out.println("Email sent successfully to " + toEmail);
+            logger.info("Correo enviado a: {}", toEmail);
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error sending email: " + e.getMessage());
+            logger.error("Error al enviar correo a {}: {}", toEmail, e.getMessage());
         }
     }
 

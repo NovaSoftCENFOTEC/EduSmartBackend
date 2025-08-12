@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para autenticación de usuarios.
+ * Permite iniciar sesión, registro y autenticación con Google.
+ */
 @RequestMapping("/auth")
 @RestController
 public class AuthRestController {
@@ -47,6 +51,11 @@ public class AuthRestController {
         this.authenticationService = authenticationService;
     }
 
+    /**
+     * Autentica a un usuario con email y contraseña.
+     * @param user usuario con credenciales
+     * @return respuesta con token y datos del usuario
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody User user) {
         User authenticatedUser = authenticationService.authenticate(user);
@@ -64,6 +73,11 @@ public class AuthRestController {
         return ResponseEntity.ok(loginResponse);
     }
 
+    /**
+     * Autentica a un usuario usando Google.
+     * @param request DTO con el token de Google
+     * @return respuesta con token y datos del usuario
+     */
     @PostMapping("/google-login")
         public ResponseEntity<?> authenticateGoogleUser(@RequestBody GoogleLoginRequestDto request) {
             try {
@@ -84,6 +98,11 @@ public class AuthRestController {
             }
         }
 
+    /**
+     * Registra un nuevo usuario como estudiante.
+     * @param user datos del usuario
+     * @return usuario registrado
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());

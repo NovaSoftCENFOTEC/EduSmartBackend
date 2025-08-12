@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de ilustraciones.
+ * Permite crear, consultar, actualizar y eliminar ilustraciones asociadas a historias.
+ */
 @RestController
 @RequestMapping("/illustrations")
 public class IllustrationRestController {
@@ -27,6 +31,14 @@ public class IllustrationRestController {
     @Autowired
     private StoryRepository storyRepository;
 
+    /**
+     * Obtiene todas las ilustraciones asociadas a una historia.
+     * @param storyId identificador de la historia
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return ilustraciones de la historia
+     */
     @GetMapping("/story/{storyId}/illustrations")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getIllustrationsByStory(@PathVariable Long storyId,
@@ -51,6 +63,13 @@ public class IllustrationRestController {
         }
     }
 
+    /**
+     * Crea una nueva ilustración para una historia.
+     * @param storyId identificador de la historia
+     * @param illustration datos de la ilustración
+     * @param request petición HTTP
+     * @return ilustración creada
+     */
     @PostMapping("/story/{storyId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addIllustration(@PathVariable Long storyId, @RequestBody Illustration illustration, HttpServletRequest request) {
@@ -66,6 +85,13 @@ public class IllustrationRestController {
         }
     }
 
+    /**
+     * Actualiza una ilustración existente.
+     * @param illustrationId identificador de la ilustración
+     * @param illustration datos actualizados
+     * @param request petición HTTP
+     * @return ilustración actualizada
+     */
     @PutMapping("/{illustrationId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateIllustration(@PathVariable Long illustrationId, @RequestBody Illustration illustration, HttpServletRequest request) {
@@ -86,6 +112,12 @@ public class IllustrationRestController {
         }
     }
 
+    /**
+     * Elimina una ilustración por su identificador.
+     * @param illustrationId identificador de la ilustración
+     * @param request petición HTTP
+     * @return ilustración eliminada
+     */
     @DeleteMapping("/{illustrationId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteIllustration(@PathVariable Long illustrationId, HttpServletRequest request) {
