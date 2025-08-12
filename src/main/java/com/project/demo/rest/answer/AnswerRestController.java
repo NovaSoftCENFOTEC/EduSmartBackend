@@ -1,4 +1,5 @@
 package com.project.demo.rest.answer;
+
 import com.project.demo.logic.entity.answer.Answer;
 import com.project.demo.logic.entity.answer.AnswerRepository;
 import com.project.demo.logic.entity.submission.Submission;
@@ -23,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de respuestas de cuestionarios.
+ * Permite crear, consultar, actualizar y eliminar respuestas.
+ */
 @RestController
 @RequestMapping("/answers")
 public class AnswerRestController {
@@ -39,6 +44,12 @@ public class AnswerRestController {
     @Autowired
     private OptionRepository optionRepository;
 
+    /**
+     * Obtiene todas las respuestas asociadas a una entrega.
+     * @param submissionId identificador de la entrega
+     * @param request petición HTTP
+     * @return respuestas de la entrega
+     */
     @GetMapping("/submission/{submissionId}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAnswersBySubmission(@PathVariable Integer submissionId, HttpServletRequest request) {
@@ -46,6 +57,12 @@ public class AnswerRestController {
         return new GlobalResponseHandler().handleResponse("Respuestas obtenidas correctamente", answers, HttpStatus.OK, request);
     }
 
+    /**
+     * Obtiene una respuesta por su identificador.
+     * @param id identificador de la respuesta
+     * @param request petición HTTP
+     * @return respuesta encontrada
+     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAnswerById(@PathVariable Long id, HttpServletRequest request) {
@@ -57,6 +74,14 @@ public class AnswerRestController {
         }
     }
 
+    /**
+     * Crea una nueva respuesta para una pregunta en una entrega.
+     * @param submissionId identificador de la entrega
+     * @param questionId identificador de la pregunta
+     * @param optionId identificador de la opción seleccionada
+     * @param request petición HTTP
+     * @return respuesta creada
+     */
     @PostMapping("/submission/{submissionId}/question/{questionId}/option/{optionId}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createAnswer(@PathVariable Integer submissionId,
@@ -92,6 +117,13 @@ public class AnswerRestController {
         return new GlobalResponseHandler().handleResponse("Respuesta creada con éxito", answer, HttpStatus.OK, request);
     }
 
+    /**
+     * Crea respuestas en bloque para una entrega.
+     * @param submissionId identificador de la entrega
+     * @param answerRequests lista de respuestas
+     * @param request petición HTTP
+     * @return respuestas creadas
+     */
     @PostMapping("/submission/{submissionId}/bulk")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createBulkAnswers(@PathVariable Integer submissionId,
@@ -125,6 +157,13 @@ public class AnswerRestController {
         return new GlobalResponseHandler().handleResponse("Respuestas creadas con éxito", createdAnswers, HttpStatus.OK, request);
     }
 
+    /**
+     * Actualiza la opción seleccionada de una respuesta.
+     * @param id identificador de la respuesta
+     * @param updateRequest datos de actualización
+     * @param request petición HTTP
+     * @return respuesta actualizada
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateAnswer(@PathVariable Long id,
@@ -146,6 +185,12 @@ public class AnswerRestController {
         }
     }
 
+    /**
+     * Elimina una respuesta por su identificador.
+     * @param id identificador de la respuesta
+     * @param request petición HTTP
+     * @return respuesta eliminada
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteAnswer(@PathVariable Long id, HttpServletRequest request) {
@@ -158,6 +203,12 @@ public class AnswerRestController {
         }
     }
 
+    /**
+     * Obtiene todas las respuestas asociadas a una pregunta.
+     * @param questionId identificador de la pregunta
+     * @param request petición HTTP
+     * @return respuestas de la pregunta
+     */
     @GetMapping("/question/{questionId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAnswersByQuestion(@PathVariable Integer questionId, HttpServletRequest request) {
@@ -165,6 +216,12 @@ public class AnswerRestController {
         return new GlobalResponseHandler().handleResponse("Respuestas de la pregunta obtenidas correctamente", answers, HttpStatus.OK, request);
     }
 
+    /**
+     * Obtiene los resultados de una entrega, incluyendo el puntaje y respuestas.
+     * @param submissionId identificador de la entrega
+     * @param request petición HTTP
+     * @return resultados de la entrega
+     */
     @GetMapping("/submission/{submissionId}/results")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getSubmissionResults(@PathVariable Integer submissionId, HttpServletRequest request) {
@@ -194,7 +251,7 @@ public class AnswerRestController {
         }
 
         double score = totalQuestions > 0 ? (double) correctAnswers / totalQuestions * 100 : 0;
-        
+
         SubmissionResultDto submissionResult = new SubmissionResultDto(
                 totalQuestions,
                 correctAnswers,

@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Controlador REST para la gestión de insignias.
+ * Permite crear, consultar, actualizar, eliminar y asignar insignias a estudiantes.
+ */
 @RestController
 @RequestMapping("/badges")
 public class BadgeRestController {
@@ -30,6 +34,13 @@ public class BadgeRestController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Obtiene todas las insignias paginadas.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de insignias
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAll(
@@ -54,6 +65,14 @@ public class BadgeRestController {
                 badgesDto, HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene las insignias de un estudiante.
+     * @param studentId identificador del estudiante
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de insignias del estudiante
+     */
     @GetMapping("/student/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getBadgesByStudent(@PathVariable Long studentId,
@@ -77,6 +96,12 @@ public class BadgeRestController {
                 badgesDto, HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene una insignia por su identificador.
+     * @param badgeId identificador de la insignia
+     * @param request petición HTTP
+     * @return insignia encontrada
+     */
     @GetMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getBadgeById(@PathVariable Long badgeId, HttpServletRequest request) {
@@ -91,6 +116,12 @@ public class BadgeRestController {
         }
     }
 
+    /**
+     * Crea una nueva insignia.
+     * @param badge datos de la insignia
+     * @param request petición HTTP
+     * @return insignia creada
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createBadge(@RequestBody Badge badge, HttpServletRequest request) {
@@ -100,6 +131,13 @@ public class BadgeRestController {
                 badgeDto, HttpStatus.CREATED, request);
     }
 
+    /**
+     * Actualiza una insignia existente.
+     * @param badgeId identificador de la insignia
+     * @param updatedBadge datos actualizados
+     * @param request petición HTTP
+     * @return insignia actualizada
+     */
     @PutMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateBadge(@PathVariable Long badgeId,
@@ -123,6 +161,12 @@ public class BadgeRestController {
                 badgeDto, HttpStatus.OK, request);
     }
 
+    /**
+     * Elimina una insignia por su identificador.
+     * @param badgeId identificador de la insignia
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{badgeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteBadge(@PathVariable Long badgeId, HttpServletRequest request) {
@@ -136,6 +180,13 @@ public class BadgeRestController {
                 null, HttpStatus.OK, request);
     }
 
+    /**
+     * Remueve una insignia de un estudiante.
+     * @param badgeId identificador de la insignia
+     * @param studentId identificador del estudiante
+     * @param request petición HTTP
+     * @return insignia actualizada
+     */
     @DeleteMapping("/{badgeId}/students/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> removeBadgeFromStudent(@PathVariable Long badgeId,
@@ -168,6 +219,13 @@ public class BadgeRestController {
                 badgeDto, HttpStatus.OK, request);
     }
 
+    /**
+     * Asigna una insignia a un estudiante.
+     * @param badgeId identificador de la insignia
+     * @param studentId identificador del estudiante
+     * @param request petición HTTP
+     * @return insignia actualizada
+     */
     @PostMapping("/{badgeId}/students/{studentId}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> assignBadgeToStudent(@PathVariable Long badgeId,

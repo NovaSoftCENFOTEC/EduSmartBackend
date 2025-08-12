@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de asignaciones.
+ * Permite crear, consultar, actualizar y eliminar tareas.
+ */
 @RestController
 @RequestMapping("/assignments")
 public class AssignmentRestController {
@@ -33,6 +37,13 @@ public class AssignmentRestController {
     @Autowired
     private CourseRepository courseRepository;
 
+    /**
+     * Obtiene todas las asignaciones paginadas.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de asignaciones
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAllAssignments(
@@ -53,6 +64,12 @@ public class AssignmentRestController {
                 assignmentPage.getContent(), HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene una asignación por su identificador.
+     * @param assignmentId identificador de la asignación
+     * @param request petición HTTP
+     * @return asignación encontrada
+     */
     @GetMapping("/{assignmentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAssignmentById(@PathVariable Long assignmentId, HttpServletRequest request) {
@@ -67,6 +84,15 @@ public class AssignmentRestController {
                     HttpStatus.NOT_FOUND, request);
         }
     }
+
+    /**
+     * Obtiene las asignaciones de un grupo específico.
+     * @param groupId identificador del grupo
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de asignaciones del grupo
+     */
     @GetMapping("/group/{groupId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAssignmentsByGroupId(@PathVariable Long groupId,
@@ -92,6 +118,12 @@ public class AssignmentRestController {
                 assignmentPage.getContent(), HttpStatus.OK, meta);
     }
 
+    /**
+     * Crea una nueva asignación.
+     * @param assignment datos de la asignación
+     * @param request petición HTTP
+     * @return asignación creada
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> createAssignment(@RequestBody Assignment assignment, HttpServletRequest request) {
@@ -107,6 +139,13 @@ public class AssignmentRestController {
         }
     }
 
+    /**
+     * Crea una nueva asignación para un grupo específico.
+     * @param groupId identificador del grupo
+     * @param assignment datos de la asignación
+     * @param request petición HTTP
+     * @return asignación creada en el grupo
+     */
     @PostMapping("/group/{groupId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> createAssignmentForGroup(@PathVariable Long groupId,
@@ -126,6 +165,13 @@ public class AssignmentRestController {
         }
     }
 
+    /**
+     * Actualiza una asignación existente.
+     * @param assignmentId identificador de la asignación
+     * @param assignment datos actualizados
+     * @param request petición HTTP
+     * @return asignación actualizada
+     */
     @PutMapping("/{assignmentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateAssignment(@PathVariable Long assignmentId,
@@ -150,6 +196,12 @@ public class AssignmentRestController {
         }
     }
 
+    /**
+     * Elimina una asignación por su identificador.
+     * @param assignmentId identificador de la asignación
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{assignmentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteAssignment(@PathVariable Long assignmentId, HttpServletRequest request) {

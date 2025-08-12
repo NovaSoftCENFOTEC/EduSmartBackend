@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * Seeder para crear el usuario Super Administrador al iniciar la aplicación.
+ */
 @Order(3)
 @Component
 public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
@@ -34,11 +37,19 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Método que se ejecuta al iniciar el contexto de la aplicación.
+     * Crea el usuario Super Administrador si no existe.
+     * @param contextRefreshedEvent evento de inicio de contexto
+     */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         this.createSuperAdministrator();
     }
 
+    /**
+     * Crea el usuario Super Administrador en la base de datos si no existe.
+     */
     private void createSuperAdministrator() {
         User superAdmin = new User();
         superAdmin.setName("Super");

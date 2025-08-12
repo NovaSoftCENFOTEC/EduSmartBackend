@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de estudiantes.
+ * Permite consultar y crear estudiantes asociados a escuelas.
+ */
 @RequestMapping("/students")
 @RestController
 public class StudentRestController {
@@ -51,6 +55,14 @@ public class StudentRestController {
     @Autowired
     private EmailManager emailManager;
 
+    /**
+     * Obtiene los estudiantes asociados a una escuela.
+     * @param schoolId identificador de la escuela
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de estudiantes de la escuela
+     */
     @GetMapping("/school/{schoolId}/students")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> getStudentsBySchoolId(@PathVariable Long schoolId,
@@ -83,6 +95,13 @@ public class StudentRestController {
         }
     }
 
+    /**
+     * Crea un nuevo estudiante asociado a una escuela.
+     * @param schoolId identificador de la escuela
+     * @param newStudentUser datos del estudiante
+     * @param request petición HTTP
+     * @return estudiante creado
+     */
     @PostMapping("/school/{schoolId}")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> createStudent(@PathVariable Long schoolId, @RequestBody User newStudentUser, HttpServletRequest request) {

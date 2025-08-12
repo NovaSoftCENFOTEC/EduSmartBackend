@@ -20,6 +20,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Controlador REST para la gestión de entregas de tareas.
+ * Permite crear, consultar, actualizar y eliminar entregas asociadas a asignaciones y estudiantes.
+ */
 @RestController
 @RequestMapping("/task-submissions")
 public class TaskSubmissionRestController {
@@ -33,6 +37,13 @@ public class TaskSubmissionRestController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Obtiene todas las entregas de tareas paginadas.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de entregas de tareas
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAllTaskSubmissions(
@@ -57,6 +68,12 @@ public class TaskSubmissionRestController {
                 dtos, HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene una entrega de tarea por su identificador.
+     * @param submissionId identificador de la entrega
+     * @param request petición HTTP
+     * @return entrega encontrada
+     */
     @GetMapping("/{submissionId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getTaskSubmissionById(@PathVariable Long submissionId, HttpServletRequest request) {
@@ -72,6 +89,14 @@ public class TaskSubmissionRestController {
         }
     }
 
+    /**
+     * Obtiene las entregas de tareas asociadas a una asignación.
+     * @param assignmentId identificador de la asignación
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de entregas de la asignación
+     */
     @GetMapping("/assignment/{assignmentId}")
     @PreAuthorize("hasAnyRole('TEACHER','STUDENT')")
     public ResponseEntity<?> getByAssignmentId(@PathVariable Long assignmentId,
@@ -96,6 +121,14 @@ public class TaskSubmissionRestController {
                 dtos, HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene las entregas de tareas asociadas a un estudiante.
+     * @param studentId identificador del estudiante
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de entregas del estudiante
+     */
     @GetMapping("/student/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getByStudentId(@PathVariable Long studentId,
@@ -120,6 +153,12 @@ public class TaskSubmissionRestController {
                 dtos, HttpStatus.OK, meta);
     }
 
+    /**
+     * Crea una nueva entrega de tarea.
+     * @param submissionDTO datos de la entrega
+     * @param request petición HTTP
+     * @return entrega creada
+     */
     @PostMapping
     @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<?> createTaskSubmission(@RequestBody TaskSubmissionDTO submissionDTO, HttpServletRequest request) {
@@ -152,6 +191,13 @@ public class TaskSubmissionRestController {
                 savedDto, HttpStatus.CREATED, request);
     }
 
+    /**
+     * Actualiza los datos de una entrega de tarea existente.
+     * @param submissionId identificador de la entrega
+     * @param submissionDTO datos actualizados
+     * @param request petición HTTP
+     * @return entrega actualizada
+     */
     @PutMapping("/{submissionId}")
     @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<?> updateTaskSubmission(@PathVariable Long submissionId,
@@ -177,6 +223,12 @@ public class TaskSubmissionRestController {
                 updatedDto, HttpStatus.OK, request);
     }
 
+    /**
+     * Elimina una entrega de tarea por su identificador.
+     * @param submissionId identificador de la entrega
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{submissionId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> deleteTaskSubmission(@PathVariable Long submissionId, HttpServletRequest request) {
@@ -191,5 +243,3 @@ public class TaskSubmissionRestController {
         }
     }
 }
-
-

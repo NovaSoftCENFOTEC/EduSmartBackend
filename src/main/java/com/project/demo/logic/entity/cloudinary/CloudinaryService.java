@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Servicio para la gestión de archivos en Cloudinary.
+ * Permite subir archivos de audio y obtener la URL segura.
+ */
 @Service
 public class CloudinaryService {
 
@@ -18,6 +22,13 @@ public class CloudinaryService {
     @Autowired
     private Cloudinary cloudinary;
 
+    /**
+     * Sube un archivo de audio a Cloudinary y retorna la URL segura.
+     * @param fileBytes arreglo de bytes del archivo
+     * @param fileName nombre del archivo (debe ser .mp3 o .wav)
+     * @return URL segura del archivo subido
+     * @throws IOException si ocurre un error al subir el archivo
+     */
     public String uploadAudio(byte[] fileBytes, String fileName) throws IOException {
         logger.info("Iniciando la subida del archivo a Cloudinary: {}", fileName);
 

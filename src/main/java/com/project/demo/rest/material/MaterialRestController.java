@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de materiales educativos.
+ * Permite crear, consultar, actualizar y eliminar materiales asociados a cursos y profesores.
+ */
 @RestController
 @RequestMapping("/materials")
 public class MaterialRestController {
@@ -33,6 +37,14 @@ public class MaterialRestController {
     @Autowired
     private CourseRepository courseRepository;
 
+    /**
+     * Obtiene los materiales asociados a un curso.
+     * @param courseId identificador del curso
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de materiales del curso
+     */
     @GetMapping("/course/{courseId}/materials")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getMaterialsByCourse(@PathVariable Long courseId,
@@ -58,6 +70,14 @@ public class MaterialRestController {
         }
     }
 
+    /**
+     * Obtiene los materiales asociados a un profesor.
+     * @param teacherId identificador del profesor
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de materiales del profesor
+     */
     @GetMapping("/teacher/{teacherId}/materials")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getMaterialsByTeacher(@PathVariable Long teacherId,
@@ -83,6 +103,14 @@ public class MaterialRestController {
         }
     }
 
+    /**
+     * Crea un nuevo material asociado a un curso y profesor.
+     * @param courseId identificador del curso
+     * @param teacherId identificador del profesor
+     * @param material datos del material
+     * @param request petición HTTP
+     * @return material creado
+     */
     @PostMapping("/course/{courseId}/teacher/{teacherId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addMaterial(@PathVariable Long courseId,
@@ -110,6 +138,13 @@ public class MaterialRestController {
         }
     }
 
+    /**
+     * Actualiza los datos de un material existente.
+     * @param materialId identificador del material
+     * @param materialDto datos actualizados
+     * @param request petición HTTP
+     * @return material actualizado
+     */
     @PutMapping("/{materialId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateMaterial(@PathVariable Long materialId, @RequestBody MaterialUpdateDto materialDto, HttpServletRequest request) {
@@ -140,6 +175,12 @@ public class MaterialRestController {
         }
     }
 
+    /**
+     * Elimina un material por su identificador.
+     * @param materialId identificador del material
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{materialId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteMaterial(@PathVariable Long materialId, HttpServletRequest request) {

@@ -16,6 +16,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Servicio para la generación de preguntas de opción múltiple usando DeepSeek.
+ * Envía el contenido educativo y recibe preguntas en formato JSON.
+ */
 @Service
 public class DeepSeekService {
 
@@ -30,6 +34,12 @@ public class DeepSeekService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger logger = LoggerFactory.getLogger(DeepSeekService.class);
 
+    /**
+     * Genera preguntas de opción múltiple basadas en el contenido educativo proporcionado.
+     * @param storyContent contenido educativo
+     * @param numberOfQuestions número de preguntas a generar
+     * @return preguntas en formato JSON
+     */
     public String generateQuizQuestions(String storyContent, int numberOfQuestions) {
         try {
             logger.info("Iniciando generación de preguntas con DeepSeek...");
@@ -108,6 +118,11 @@ public class DeepSeekService {
         }
     }
 
+    /**
+     * Limpia y valida el texto JSON generado por DeepSeek.
+     * @param jsonText texto JSON a limpiar
+     * @return JSON limpio y validado, o null si hay error
+     */
     private String cleanAndValidateJson(String jsonText) {
         try {
             jsonText = jsonText.trim();
