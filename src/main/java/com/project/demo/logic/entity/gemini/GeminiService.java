@@ -12,9 +12,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * Servicio para la generación de preguntas de opción múltiple usando Gemini.
+ * Envía el contenido educativo y recibe preguntas en formato JSON.
+ */
 @Service
 public class GeminiService {
 
@@ -24,6 +28,12 @@ public class GeminiService {
     private final RestTemplate restTemplate = new RestTemplate();
     private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
 
+    /**
+     * Genera preguntas de opción múltiple basadas en el contenido educativo proporcionado.
+     * @param storyContent contenido educativo
+     * @param numberOfQuestions número de preguntas a generar
+     * @return preguntas en formato JSON
+     */
     public String generateQuizQuestions(String storyContent, int numberOfQuestions) {
         try {
             logger.info("Iniciando generación de preguntas con Gemini...");

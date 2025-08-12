@@ -10,8 +10,18 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * Manejador global de excepciones para la aplicación.
+ * Captura y procesa diferentes tipos de excepciones, retornando detalles del problema.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    /**
+     * Maneja las excepciones de seguridad y otras excepciones generales.
+     * Retorna un objeto ProblemDetail con información sobre el error.
+     * @param exception excepción capturada
+     * @return detalle del problema con información relevante
+     */
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleSecurityException(Exception exception) {
         ProblemDetail errorDetail = null;

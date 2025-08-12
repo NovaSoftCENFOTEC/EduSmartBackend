@@ -8,6 +8,9 @@ import com.project.demo.logic.entity.cloudinary.CloudinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio para la generación, actualización y eliminación de pistas de audio asociadas a una historia.
+ */
 @Service
 public class StoryAudioTrackService {
     @Autowired
@@ -19,6 +22,11 @@ public class StoryAudioTrackService {
     @Autowired
     private AudioTrackRepository audioTrackRepository;
 
+    /**
+     * Genera y guarda las pistas de audio (masculina y femenina) para una historia.
+     * @param story historia para la que se generan las pistas
+     * @throws Exception si ocurre un error en la generación o guardado
+     */
     public void generateAndSaveAudioTracksForStory(Story story) throws Exception {
         String content = story.getContent();
         Long storyId = story.getId();
@@ -45,6 +53,11 @@ public class StoryAudioTrackService {
         audioTrackRepository.save(femaleTrack);
     }
 
+    /**
+     * Actualiza las pistas de audio (masculina y femenina) para una historia.
+     * @param story historia para la que se actualizan las pistas
+     * @throws Exception si ocurre un error en la actualización
+     */
     public void updateAudioTracksForStory(Story story) throws Exception {
         String content = story.getContent();
         Long storyId = story.getId();
@@ -70,6 +83,10 @@ public class StoryAudioTrackService {
         }
     }
 
+    /**
+     * Elimina las pistas de audio (masculina y femenina) asociadas a una historia.
+     * @param story historia para la que se eliminan las pistas
+     */
     public void deleteAudioTracksForStory(Story story) {
         AudioTrack maleTrack = audioTrackRepository.findByStoryAndVoiceType(story, VoiceTypeEnum.MALE);
         AudioTrack femaleTrack = audioTrackRepository.findByStoryAndVoiceType(story, VoiceTypeEnum.FEMALE);

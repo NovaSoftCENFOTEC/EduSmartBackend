@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio para la generación automática de preguntas y opciones usando IA.
+ */
 @Service
 public class QuestionGenerationService {
 
@@ -25,6 +28,11 @@ public class QuestionGenerationService {
 
     private static final Logger logger = LoggerFactory.getLogger(QuestionGenerationService.class);
 
+    /**
+     * Genera preguntas y opciones para un cuestionario usando IA.
+     * @param quiz cuestionario al que se agregarán las preguntas
+     * @param numberOfQuestions número de preguntas a generar
+     */
     public void generateQuestionsWithAI(Quiz quiz, int numberOfQuestions) {
         try {
             String storyContent = quiz.getStory().getContent();

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * Servicio para convertir texto en audio utilizando Google Cloud Text-to-Speech.
+ */
 @Service
 public class GoogleCloudTTSService {
 
@@ -23,6 +26,13 @@ public class GoogleCloudTTSService {
 
     private final static String LANGUAGE_CODE = "es-US";
 
+    /**
+     * Convierte un texto en un archivo MP3 usando Google Cloud TTS.
+     * @param text texto a convertir
+     * @param voiceType tipo de voz a utilizar
+     * @return arreglo de bytes del archivo MP3 generado
+     * @throws IOException si ocurre un error durante la conversión
+     */
     public byte[] convertTextToMp3(String text, VoiceTypeEnum voiceType) throws IOException {
         logger.info("Empezando la conversión de texto a MP3 con Google Cloud TTS");
         GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsResource.getInputStream());
