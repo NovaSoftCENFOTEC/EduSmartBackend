@@ -1,4 +1,5 @@
 package com.project.demo.rest.question;
+
 import com.project.demo.logic.entity.question.Question;
 import com.project.demo.logic.entity.question.QuestionRepository;
 import com.project.demo.logic.entity.quiz.Quiz;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de preguntas de cuestionarios.
+ * Permite crear, consultar, actualizar y eliminar preguntas asociadas a quizzes.
+ */
 @RestController
 @RequestMapping("/questions")
 public class QuestionRestController {
@@ -24,15 +29,27 @@ public class QuestionRestController {
     @Autowired
     private QuizRepository quizRepository;
 
+    /**
+     * Obtiene las preguntas asociadas a un quiz.
+     * @param quizId identificador del quiz
+     * @param request petición HTTP
+     * @return lista de preguntas
+     */
     @GetMapping("/quiz/{quizId}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuestionsByQuiz(@PathVariable Integer quizId, HttpServletRequest request) {
         List<Question> questions = questionRepository.findByQuizId(quizId);
         return new GlobalResponseHandler().handleResponse("Preguntas obtenidas correctamente", questions, HttpStatus.OK, request);
     }
 
+    /**
+     * Obtiene una pregunta por su identificador.
+     * @param id identificador de la pregunta
+     * @param request petición HTTP
+     * @return pregunta encontrada
+     */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuestionById(@PathVariable Integer id, HttpServletRequest request) {
         Optional<Question> question = questionRepository.findById(id);
         if (question.isPresent()) {
@@ -42,6 +59,26 @@ public class QuestionRestController {
         }
     }
 
+    /**
+     * Obtiene las preguntas asociadas a un quiz para estudiantes.
+     * @param quizId identificador del quiz
+     * @param request petición HTTP
+     * @return lista de preguntas
+     */
+    @GetMapping("/quiz/{quizId}/student")
+    @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getQuestionsByQuizForStudent(@PathVariable Integer quizId, HttpServletRequest request) {
+        List<Question> questions = questionRepository.findByQuizId(quizId);
+        return new GlobalResponseHandler().handleResponse("Preguntas obtenidas correctamente", questions, HttpStatus.OK, request);
+    }
+
+    /**
+     * Crea una nueva pregunta para un quiz.
+     * @param quizId identificador del quiz
+     * @param question datos de la pregunta
+     * @param request petición HTTP
+     * @return pregunta creada
+     */
     @PostMapping("/quiz/{quizId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createQuestion(@PathVariable Integer quizId, @RequestBody Question question, HttpServletRequest request) {
@@ -55,6 +92,13 @@ public class QuestionRestController {
         }
     }
 
+    /**
+     * Actualiza los datos de una pregunta existente.
+     * @param id identificador de la pregunta
+     * @param questionDetails datos actualizados
+     * @param request petición HTTP
+     * @return pregunta actualizada
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateQuestion(@PathVariable Integer id, @RequestBody Question questionDetails, HttpServletRequest request) {
@@ -69,6 +113,12 @@ public class QuestionRestController {
         }
     }
 
+    /**
+     * Elimina una pregunta por su identificador.
+     * @param id identificador de la pregunta
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteQuestion(@PathVariable Integer id, HttpServletRequest request) {

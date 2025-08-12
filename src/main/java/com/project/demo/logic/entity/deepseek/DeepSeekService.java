@@ -2,6 +2,8 @@ package com.project.demo.logic.entity.deepseek;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -14,18 +16,33 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Servicio para la generación de preguntas de opción múltiple usando DeepSeek.
+ * Envía el contenido educativo y recibe preguntas en formato JSON.
+ */
 @Service
 public class DeepSeekService {
 
     @Value("${lmstudio.url:http://localhost:1234}")
     private String lmStudioUrl;
 
+    private static final double TEMPERATURE = 0.3;
+    private static final int MAX_TOKENS = 1500;
+    private static final boolean STREAM = false;
+
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger logger = LoggerFactory.getLogger(DeepSeekService.class);
 
+    /**
+     * Genera preguntas de opción múltiple basadas en el contenido educativo proporcionado.
+     * @param storyContent contenido educativo
+     * @param numberOfQuestions número de preguntas a generar
+     * @return preguntas en formato JSON
+     */
     public String generateQuizQuestions(String storyContent, int numberOfQuestions) {
         try {
-            System.out.println("Iniciando generación de preguntas con DeepSeek...");
+            logger.info("Iniciando generación de preguntas con DeepSeek...");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -60,16 +77,16 @@ public class DeepSeekService {
 
             Map<String, Object> requestBody = new HashMap<>();
             requestBody.put("messages", messages);
-            requestBody.put("temperature", 0.3);
-            requestBody.put("max_tokens", 1500);
-            requestBody.put("stream", false);
+            requestBody.put("temperature", TEMPERATURE);
+            requestBody.put("max_tokens", MAX_TOKENS);
+            requestBody.put("stream", STREAM);
 
             String url = lmStudioUrl + "/v1/chat/completions";
             HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
             ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
             String responseBody = response.getBody();
-            System.out.println("Respuesta de DeepSeek: " + responseBody);
+            logger.info("Respuesta de DeepSeek: {}", responseBody);
 
             if (responseBody != null && responseBody.contains("\"content\":")) {
                 JsonNode responseJson = objectMapper.readTree(responseBody);
@@ -82,7 +99,7 @@ public class DeepSeekService {
                 if (matcher.find()) {
                     String extractedText = matcher.group(1);
                     extractedText = extractedText.replace("\\n", "\n").replace("\\\"", "\"");
-                    System.out.println("Texto extraído con regex: " + extractedText);
+                    logger.info("Texto extraído con regex: {}", extractedText);
 
                     String cleanedJson = cleanAndValidateJson(extractedText);
                     if (cleanedJson != null) {
@@ -93,15 +110,19 @@ public class DeepSeekService {
                 return content;
             }
 
-            System.out.println("No se pudo extraer texto de la respuesta");
+            logger.error("No se pudo extraer texto de la respuesta de DeepSeek");
             return responseBody;
         } catch (Exception e) {
-            System.err.println("Error completo: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error generando preguntas con DeepSeek: {}", e.getMessage());
             throw new RuntimeException("Error generando preguntas con DeepSeek: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Limpia y valida el texto JSON generado por DeepSeek.
+     * @param jsonText texto JSON a limpiar
+     * @return JSON limpio y validado, o null si hay error
+     */
     private String cleanAndValidateJson(String jsonText) {
         try {
             jsonText = jsonText.trim();
@@ -179,14 +200,14 @@ public class DeepSeekService {
                     }
                 }
                 if (correctCount != 1) {
-                    System.out.println("Advertencia: Pregunta no tiene exactamente una opción correcta");
+                    logger.warn("Advertencia: Pregunta no tiene exactamente una opción correcta");
                 }
             }
 
             return result;
 
         } catch (Exception e) {
-            System.out.println("Error limpiando JSON: " + e.getMessage());
+            logger.error("Error limpiando JSON: {}", e.getMessage());
             return null;
         }
     }

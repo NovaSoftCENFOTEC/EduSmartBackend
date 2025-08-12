@@ -7,6 +7,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio para la autenticación de usuarios.
+ */
 @Service
 public class AuthenticationService {
     private final UserRepository userRepository;
@@ -25,7 +28,11 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+    /**
+     * Autentica a un usuario con las credenciales proporcionadas.
+     * @param input usuario con email y contraseña
+     * @return usuario autenticado
+     */
     public User authenticate(User input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

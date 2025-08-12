@@ -16,6 +16,10 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.Optional;
 
+/**
+ * Servicio para la autenticación de usuarios mediante Google.
+ * Verifica el token de Google y retorna el usuario autenticado si existe en la base de datos.
+ */
 @Service
 public class GoogleAuthService {
 
@@ -25,6 +29,13 @@ public class GoogleAuthService {
     @Value("${google.client-id}")
     private String googleClientId;
 
+    /**
+     * Autentica a un usuario usando el token de Google.
+     * @param idTokenString token de Google proporcionado por el cliente
+     * @return usuario autenticado si existe en la base de datos
+     * @throws GeneralSecurityException si ocurre un error de seguridad
+     * @throws IOException si ocurre un error de entrada/salida
+     */
     public User authenticateGoogleUser(String idTokenString) throws GeneralSecurityException, IOException {
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
                 .setAudience(Collections.singletonList(googleClientId))

@@ -20,9 +20,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de grupos.
+ * Permite crear, consultar, actualizar y eliminar grupos, así como gestionar estudiantes en grupos.
+ */
 @RestController
 @RequestMapping("/groups")
 public class GroupRestController {
+
     @Autowired
     private GroupRepository groupRepository;
 
@@ -32,6 +37,13 @@ public class GroupRestController {
     @Autowired
     private CourseRepository courseRepository;
 
+    /**
+     * Obtiene todos los grupos paginados.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de grupos
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAll(
@@ -41,6 +53,7 @@ public class GroupRestController {
 
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Group> groupPage = groupRepository.findAll(pageable);
+
         Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
         meta.setTotalPages(groupPage.getTotalPages());
         meta.setTotalElements(groupPage.getTotalElements());
@@ -51,6 +64,42 @@ public class GroupRestController {
                 groupPage.getContent(), HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene un grupo junto con sus estudiantes por su identificador.
+     * @param groupId identificador del grupo
+     * @param request petición HTTP
+     * @return grupo encontrado
+     */
+    @GetMapping("/{groupId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
+    public ResponseEntity<?> getGroupWithStudents(@PathVariable Long groupId,
+                                                  HttpServletRequest request) {
+
+        Optional<Group> foundGroup = groupRepository.findWithStudentsById(groupId);
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+
+        if (foundGroup.isPresent()) {
+            meta.setTotalElements(1);
+            meta.setPageNumber(1);
+            meta.setPageSize(1);
+            meta.setTotalPages(1);
+
+            return new GlobalResponseHandler().handleResponse("Grupo obtenido con éxito",
+                    foundGroup.get(), HttpStatus.OK, meta);
+        } else {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+    /**
+     * Obtiene los grupos asociados a un curso.
+     * @param courseId identificador del curso
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de grupos del curso
+     */
     @GetMapping("/course/{courseId}/groups")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getGroupsByCourse(@PathVariable Long courseId,
@@ -62,6 +111,7 @@ public class GroupRestController {
         if (foundCourse.isPresent()) {
             Pageable pageable = PageRequest.of(page - 1, size);
             Page<Group> groupPage = groupRepository.findGroupsByCourseId(courseId, pageable);
+
             Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
             meta.setTotalPages(groupPage.getTotalPages());
             meta.setTotalElements(groupPage.getTotalElements());
@@ -76,6 +126,14 @@ public class GroupRestController {
         }
     }
 
+    /**
+     * Obtiene los grupos asociados a un docente.
+     * @param teacherId identificador del docente
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de grupos del docente
+     */
     @GetMapping("/teacher/{teacherId}/groups")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getGroupsByTeacher(@PathVariable Long teacherId,
@@ -87,6 +145,7 @@ public class GroupRestController {
         if (foundTeacher.isPresent()) {
             Pageable pageable = PageRequest.of(page - 1, size);
             Page<Group> groupPage = groupRepository.findGroupsByTeacherId(teacherId, pageable);
+
             Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
             meta.setTotalPages(groupPage.getTotalPages());
             meta.setTotalElements(groupPage.getTotalElements());
@@ -101,6 +160,14 @@ public class GroupRestController {
         }
     }
 
+    /**
+     * Crea un nuevo grupo asociado a un curso y docente.
+     * @param courseId identificador del curso
+     * @param teacherId identificador del docente
+     * @param group datos del grupo
+     * @param request petición HTTP
+     * @return grupo creado
+     */
     @PostMapping("/course/{courseId}/teacher/{teacherId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addGroup(@PathVariable Long courseId,
@@ -114,7 +181,6 @@ public class GroupRestController {
             Optional<User> foundTeacher = userRepository.findById(teacherId);
             if (foundTeacher.isPresent()) {
                 group.setTeacher(foundTeacher.get());
-
                 groupRepository.save(group);
             } else {
                 return new GlobalResponseHandler().handleResponse("Docente " + teacherId + " no encontrado",
@@ -128,6 +194,13 @@ public class GroupRestController {
                 group, HttpStatus.OK, request);
     }
 
+    /**
+     * Añade un estudiante a un grupo.
+     * @param groupId identificador del grupo
+     * @param studentId identificador del estudiante
+     * @param request petición HTTP
+     * @return grupo actualizado
+     */
     @PostMapping("/{groupId}/students/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addStudentToGroup(@PathVariable Long groupId,
@@ -153,7 +226,13 @@ public class GroupRestController {
         }
     }
 
-
+    /**
+     * Actualiza los datos de un grupo.
+     * @param groupId identificador del grupo
+     * @param group datos actualizados
+     * @param request petición HTTP
+     * @return grupo actualizado
+     */
     @PutMapping("/{groupId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateGroup(@PathVariable Long groupId, @RequestBody Group group, HttpServletRequest request) {
@@ -173,6 +252,12 @@ public class GroupRestController {
         }
     }
 
+    /**
+     * Elimina un grupo por su identificador.
+     * @param groupId identificador del grupo
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{groupId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteGroup(@PathVariable Long groupId, HttpServletRequest request) {
@@ -187,6 +272,13 @@ public class GroupRestController {
         }
     }
 
+    /**
+     * Elimina un estudiante de un grupo.
+     * @param groupId identificador del grupo
+     * @param studentId identificador del estudiante
+     * @param request petición HTTP
+     * @return grupo actualizado
+     */
     @DeleteMapping("/{groupId}/students/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> removeStudentFromGroup(@PathVariable Long groupId,
@@ -206,6 +298,62 @@ public class GroupRestController {
                 return new GlobalResponseHandler().handleResponse("Estudiante " + studentId + " no encontrado",
                         HttpStatus.NOT_FOUND, request);
             }
+        } else {
+            return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
+                    HttpStatus.NOT_FOUND, request);
+        }
+    }
+
+    /**
+     * Obtiene los grupos asociados a un estudiante.
+     * @param studentId identificador del estudiante
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de grupos del estudiante
+     */
+    @GetMapping("/student/{studentId}/groups")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> getGroupsByStudent(@PathVariable Long studentId,
+                                                @RequestParam(defaultValue = "1") int page,
+                                                @RequestParam(defaultValue = "10") int size,
+                                                HttpServletRequest request) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Group> groupPage = groupRepository.findGroupsByStudentId(studentId, pageable);
+
+        Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+        meta.setTotalPages(groupPage.getTotalPages());
+        meta.setTotalElements(groupPage.getTotalElements());
+        meta.setPageNumber(groupPage.getNumber() + 1);
+        meta.setPageSize(groupPage.getSize());
+
+        return new GlobalResponseHandler().handleResponse("Grupos del estudiante obtenidos con éxito",
+                groupPage.getContent(), HttpStatus.OK, meta);
+    }
+
+    /**
+     * Obtiene el curso asociado a un grupo.
+     * @param groupId identificador del grupo
+     * @param request petición HTTP
+     * @return curso del grupo
+     */
+    @GetMapping("/{groupId}/course")
+    public ResponseEntity<?> getCourseByGroup(@PathVariable Long groupId,
+                                              HttpServletRequest request) {
+
+        Optional<Group> foundGroup = groupRepository.findById(groupId);
+        if (foundGroup.isPresent()) {
+            Course course = foundGroup.get().getCourse();
+
+            Meta meta = new Meta(request.getMethod(), request.getRequestURL().toString());
+            meta.setTotalElements(1);
+            meta.setPageNumber(1);
+            meta.setPageSize(1);
+            meta.setTotalPages(1);
+
+            return new GlobalResponseHandler().handleResponse("Curso del grupo obtenido con éxito",
+                    course, HttpStatus.OK, meta);
         } else {
             return new GlobalResponseHandler().handleResponse("Grupo " + groupId + " no encontrado",
                     HttpStatus.NOT_FOUND, request);

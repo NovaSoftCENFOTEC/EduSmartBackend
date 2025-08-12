@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Seeder para cargar los roles básicos en la base de datos al iniciar la aplicación.
+ */
 @Order(1)
 @Component
 public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
@@ -19,11 +22,19 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
         this.roleRepository = roleRepository;
     }
 
+    /**
+     * Método que se ejecuta al iniciar el contexto de la aplicación.
+     * Carga los roles si no existen.
+     * @param contextRefreshedEvent evento de inicio de contexto
+     */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         this.loadRoles();
     }
 
+    /**
+     * Carga los roles básicos en la base de datos si no existen.
+     */
     private void loadRoles() {
         RoleEnum[] roleNames = new RoleEnum[] { RoleEnum.STUDENT, RoleEnum.TEACHER, RoleEnum.SUPER_ADMIN };
         Map<RoleEnum, String> roleDescriptionMap = Map.of(
