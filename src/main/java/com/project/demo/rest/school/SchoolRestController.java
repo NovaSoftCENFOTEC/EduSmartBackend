@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de escuelas.
+ * Permite crear, consultar, actualizar y eliminar escuelas.
+ */
 @RestController
 @RequestMapping("/schools")
 public class SchoolRestController {
@@ -23,6 +27,13 @@ public class SchoolRestController {
     @Autowired
     private SchoolRepository schoolRepository;
 
+    /**
+     * Obtiene todas las escuelas paginadas.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de escuelas
+     */
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> getAll(
@@ -42,6 +53,12 @@ public class SchoolRestController {
                 schoolPage.getContent(), HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene una escuela por su identificador.
+     * @param schoolId identificador de la escuela
+     * @param request petición HTTP
+     * @return escuela encontrada
+     */
     @GetMapping("/{schoolId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> getSchoolById(@PathVariable Long schoolId, HttpServletRequest request) {
@@ -60,7 +77,12 @@ public class SchoolRestController {
         }
     }
 
-
+    /**
+     * Crea una nueva escuela.
+     * @param school datos de la escuela
+     * @param request petición HTTP
+     * @return escuela creada
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> addSchool(@RequestBody School school, HttpServletRequest request) {
@@ -69,6 +91,13 @@ public class SchoolRestController {
                 school, HttpStatus.OK, request);
     }
 
+    /**
+     * Actualiza los datos de una escuela existente.
+     * @param schoolId identificador de la escuela
+     * @param school datos actualizados
+     * @param request petición HTTP
+     * @return escuela actualizada
+     */
     @PutMapping("/{schoolId}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> updateSchool(@PathVariable Long schoolId, @RequestBody School school, HttpServletRequest request) {
@@ -86,6 +115,12 @@ public class SchoolRestController {
         }
     }
 
+    /**
+     * Elimina una escuela por su identificador.
+     * @param schoolId identificador de la escuela
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{schoolId}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> deleteSchool(@PathVariable Long schoolId, HttpServletRequest request) {

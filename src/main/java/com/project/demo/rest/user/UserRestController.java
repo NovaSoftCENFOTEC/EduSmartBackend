@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de usuarios.
+ * Permite crear, consultar, actualizar, eliminar usuarios y gestionar contraseñas.
+ */
 @RestController
 @RequestMapping("/users")
 public class UserRestController {
@@ -42,6 +46,13 @@ public class UserRestController {
     @Autowired
     private EmailManager emailManager;
 
+    /**
+     * Obtiene todos los usuarios paginados.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de usuarios
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> getAll(
@@ -61,6 +72,12 @@ public class UserRestController {
                 userPage.getContent(), HttpStatus.OK, meta);
     }
 
+    /**
+     * Crea un nuevo usuario.
+     * @param user datos del usuario
+     * @param request petición HTTP
+     * @return usuario creado
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<?> addUser(@RequestBody User user, HttpServletRequest request) {
@@ -70,6 +87,13 @@ public class UserRestController {
                 user, HttpStatus.OK, request);
     }
 
+    /**
+     * Actualiza los datos de un usuario.
+     * @param userId identificador del usuario
+     * @param user datos actualizados
+     * @param request petición HTTP
+     * @return usuario actualizado
+     */
     @PutMapping("/{userId}")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
@@ -88,6 +112,13 @@ public class UserRestController {
         }
     }
 
+    /**
+     * Actualiza los datos de un usuario por un administrador.
+     * @param userId identificador del usuario
+     * @param user datos actualizados
+     * @param request petición HTTP
+     * @return usuario actualizado
+     */
     @PutMapping("/administrative/{userId}")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> updateUserByAdmin(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
@@ -106,6 +137,13 @@ public class UserRestController {
         }
     }
 
+    /**
+     * Actualiza la contraseña de un usuario.
+     * @param userId identificador del usuario
+     * @param user datos con la nueva contraseña
+     * @param request petición HTTP
+     * @return usuario actualizado
+     */
     @PutMapping("/password/{userId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> updatePassword(@PathVariable Long userId, @RequestBody User user, HttpServletRequest request) {
@@ -123,6 +161,12 @@ public class UserRestController {
         }
     }
 
+    /**
+     * Recupera la contraseña de un usuario y envía una temporal por correo.
+     * @param userEmail correo del usuario
+     * @param request petición HTTP
+     * @return usuario actualizado
+     */
     @PutMapping("/password-recovery/{userEmail}")
     public ResponseEntity<?> updatePasswordRecovery(@PathVariable String userEmail, HttpServletRequest request) {
         Optional<User> foundUser = userRepository.findByEmail(userEmail);
@@ -144,7 +188,12 @@ public class UserRestController {
         }
     }
 
-
+    /**
+     * Elimina un usuario por su identificador.
+     * @param userId identificador del usuario
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{userId}")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId, HttpServletRequest request) {
@@ -159,6 +208,10 @@ public class UserRestController {
         }
     }
 
+    /**
+     * Obtiene el usuario autenticado actual.
+     * @return usuario autenticado
+     */
     @GetMapping("/me")
     @PreAuthorize("isAuthenticated()")
     public User authenticatedUser() {
@@ -166,6 +219,12 @@ public class UserRestController {
         return (User) authentication.getPrincipal();
     }
 
+    /**
+     * Obtiene un usuario por su identificador.
+     * @param userId identificador del usuario
+     * @param request petición HTTP
+     * @return usuario encontrado
+     */
     @GetMapping("/{userId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> getUserById(@PathVariable Long userId, HttpServletRequest request) {

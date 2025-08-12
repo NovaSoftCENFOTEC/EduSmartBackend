@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Controlador REST para la gestión de calificaciones.
+ * Permite crear, consultar, actualizar y eliminar calificaciones de entregas de tareas.
+ */
 @RestController
 @RequestMapping("/grades")
 public class GradeRestController {
@@ -32,6 +36,13 @@ public class GradeRestController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Obtiene todas las calificaciones paginadas.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de calificaciones
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getAllGrades(@RequestParam(defaultValue = "1") int page,
@@ -55,6 +66,12 @@ public class GradeRestController {
                 gradeDtos, HttpStatus.OK, meta);
     }
 
+    /**
+     * Obtiene una calificación por su identificador.
+     * @param gradeId identificador de la calificación
+     * @param request petición HTTP
+     * @return calificación encontrada
+     */
     @GetMapping("/{gradeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getGradeById(@PathVariable Long gradeId, HttpServletRequest request) {
@@ -70,6 +87,14 @@ public class GradeRestController {
         }
     }
 
+    /**
+     * Obtiene las calificaciones por el identificador de la entrega.
+     * @param submissionId identificador de la entrega
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de calificaciones de la entrega
+     */
     @GetMapping("/submission/{submissionId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getBySubmissionId(@PathVariable Long submissionId,
@@ -94,6 +119,12 @@ public class GradeRestController {
                 gradeDtos, HttpStatus.OK, meta);
     }
 
+    /**
+     * Crea una nueva calificación para una entrega de tarea.
+     * @param grade datos de la calificación
+     * @param request petición HTTP
+     * @return calificación creada
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> createGrade(@RequestBody Grade grade, HttpServletRequest request) {
@@ -131,7 +162,13 @@ public class GradeRestController {
                 dto, HttpStatus.CREATED, request);
     }
 
-
+    /**
+     * Actualiza una calificación existente.
+     * @param gradeId identificador de la calificación
+     * @param gradeDto datos actualizados
+     * @param request petición HTTP
+     * @return calificación actualizada
+     */
     @PutMapping("/{gradeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> updateGrade(@PathVariable Long gradeId,
@@ -156,6 +193,12 @@ public class GradeRestController {
                 dto, HttpStatus.OK, request);
     }
 
+    /**
+     * Elimina una calificación por su identificador.
+     * @param gradeId identificador de la calificación
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{gradeId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> deleteGrade(@PathVariable Long gradeId, HttpServletRequest request) {
@@ -170,6 +213,14 @@ public class GradeRestController {
         }
     }
 
+    /**
+     * Obtiene las calificaciones de un estudiante por su identificador.
+     * @param studentId identificador del estudiante
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de calificaciones del estudiante
+     */
     @GetMapping("/student/{studentId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN', 'STUDENT')")
     public ResponseEntity<?> getGradesByStudentId(@PathVariable Long studentId,

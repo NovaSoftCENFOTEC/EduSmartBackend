@@ -18,6 +18,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de entregas de cuestionarios.
+ * Permite crear, consultar, actualizar y eliminar entregas asociadas a quizzes y estudiantes.
+ */
 @RestController
 @RequestMapping("/submissions")
 public class SubmissionRestController {
@@ -31,6 +35,12 @@ public class SubmissionRestController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Obtiene las entregas asociadas a un quiz.
+     * @param quizId identificador del quiz
+     * @param request petición HTTP
+     * @return lista de entregas
+     */
     @GetMapping("/quiz/{quizId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getSubmissionsByQuiz(@PathVariable Integer quizId, HttpServletRequest request) {
@@ -38,6 +48,12 @@ public class SubmissionRestController {
         return new GlobalResponseHandler().handleResponse("Submissions obtenidas correctamente", submissions, HttpStatus.OK, request);
     }
 
+    /**
+     * Obtiene una entrega por su identificador.
+     * @param id identificador de la entrega
+     * @param request petición HTTP
+     * @return entrega encontrada
+     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getSubmissionById(@PathVariable Integer id, HttpServletRequest request) {
@@ -49,6 +65,14 @@ public class SubmissionRestController {
         }
     }
 
+    /**
+     * Crea una nueva entrega para un quiz y estudiante.
+     * @param quizId identificador del quiz
+     * @param studentId identificador del estudiante
+     * @param submission datos de la entrega (opcional)
+     * @param request petición HTTP
+     * @return entrega creada
+     */
     @PostMapping("/quiz/{quizId}/student/{studentId}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createSubmission(@PathVariable Integer quizId, @PathVariable Integer studentId,
@@ -82,6 +106,13 @@ public class SubmissionRestController {
         return new GlobalResponseHandler().handleResponse("Submission creada con éxito", newSubmission, HttpStatus.OK, request);
     }
 
+    /**
+     * Actualiza los datos de una entrega existente.
+     * @param id identificador de la entrega
+     * @param submissionDetails datos actualizados
+     * @param request petición HTTP
+     * @return entrega actualizada
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateSubmission(@PathVariable Integer id, @RequestBody Submission submissionDetails, HttpServletRequest request) {
@@ -96,6 +127,12 @@ public class SubmissionRestController {
         }
     }
 
+    /**
+     * Elimina una entrega por su identificador.
+     * @param id identificador de la entrega
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteSubmission(@PathVariable Integer id, HttpServletRequest request) {
@@ -108,6 +145,12 @@ public class SubmissionRestController {
         }
     }
 
+    /**
+     * Obtiene las entregas asociadas a un estudiante.
+     * @param studentId identificador del estudiante
+     * @param request petición HTTP
+     * @return lista de entregas del estudiante
+     */
     @GetMapping("/student/{studentId}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getSubmissionsByStudent(@PathVariable Integer studentId, HttpServletRequest request) {

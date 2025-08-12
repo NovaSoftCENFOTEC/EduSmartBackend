@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de quizzes.
+ * Permite crear, consultar, actualizar, eliminar quizzes y generar preguntas automáticamente.
+ */
 @RestController
 @RequestMapping("/quizzes")
 public class QuizController {
@@ -25,6 +29,11 @@ public class QuizController {
     @Autowired
     private QuestionGenerationService questionGenerationService;
 
+    /**
+     * Obtiene todos los quizzes.
+     * @param request petición HTTP
+     * @return lista de quizzes
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAllQuizzes(HttpServletRequest request) {
@@ -33,6 +42,12 @@ public class QuizController {
                 request);
     }
 
+    /**
+     * Obtiene un quiz por su identificador.
+     * @param id identificador del quiz
+     * @param request petición HTTP
+     * @return quiz encontrado
+     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuizById(@PathVariable Integer id, HttpServletRequest request) {
@@ -46,6 +61,12 @@ public class QuizController {
         }
     }
 
+    /**
+     * Obtiene los quizzes asociados a una historia.
+     * @param storyId identificador de la historia
+     * @param request petición HTTP
+     * @return lista de quizzes
+     */
     @GetMapping("/story/{storyId}/quizzes")
     @PreAuthorize("hasAnyRole('STUDENT', 'TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getQuizzesByStory(@PathVariable Integer storyId, HttpServletRequest request) {
@@ -53,6 +74,13 @@ public class QuizController {
         return new GlobalResponseHandler().handleResponse("Quizzes obtenidos correctamente", quizzes, HttpStatus.OK, request);
     }
 
+    /**
+     * Crea un nuevo quiz asociado a una historia.
+     * @param storyId identificador de la historia
+     * @param quiz datos del quiz
+     * @param request petición HTTP
+     * @return quiz creado
+     */
     @PostMapping("/story/{storyId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> createQuiz(@PathVariable Integer storyId, @RequestBody Quiz quiz, HttpServletRequest request) {
@@ -71,6 +99,13 @@ public class QuizController {
         }
     }
 
+    /**
+     * Genera preguntas automáticamente para un quiz usando IA.
+     * @param quizId identificador del quiz
+     * @param numberOfQuestions número de preguntas a generar
+     * @param request petición HTTP
+     * @return resultado de la generación
+     */
     @PostMapping("/{quizId}/generate-questions")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> generateQuestionsForQuiz(@PathVariable Integer quizId, @RequestParam int numberOfQuestions, HttpServletRequest request) {
@@ -82,6 +117,13 @@ public class QuizController {
         return new GlobalResponseHandler().handleResponse("Preguntas generadas con éxito", HttpStatus.OK, request);
     }
 
+    /**
+     * Actualiza los datos de un quiz existente.
+     * @param id identificador del quiz
+     * @param quizDetails datos actualizados
+     * @param request petición HTTP
+     * @return quiz actualizado
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateQuiz(@PathVariable Integer id, @RequestBody Quiz quizDetails, HttpServletRequest request) {
@@ -93,6 +135,12 @@ public class QuizController {
         }
     }
 
+    /**
+     * Elimina un quiz por su identificador.
+     * @param id identificador del quiz
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteQuiz(@PathVariable Integer id, HttpServletRequest request) {

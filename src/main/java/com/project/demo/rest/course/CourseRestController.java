@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de cursos.
+ * Permite crear, consultar, actualizar y eliminar cursos.
+ */
 @RestController
 @RequestMapping("/courses")
 public class CourseRestController {
@@ -23,6 +27,13 @@ public class CourseRestController {
     @Autowired
     private CourseRepository courseRepository;
 
+    /**
+     * Obtiene todos los cursos paginados.
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de cursos
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getAll(
@@ -42,6 +53,12 @@ public class CourseRestController {
                 coursePage.getContent(), HttpStatus.OK, meta);
     }
 
+    /**
+     * Crea un nuevo curso.
+     * @param course datos del curso
+     * @param request petición HTTP
+     * @return curso creado
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addCourse(@RequestBody Course course, HttpServletRequest request) {
@@ -50,6 +67,13 @@ public class CourseRestController {
                 course, HttpStatus.OK, request);
     }
 
+    /**
+     * Actualiza un curso existente.
+     * @param courseId identificador del curso
+     * @param course datos actualizados
+     * @param request petición HTTP
+     * @return curso actualizado
+     */
     @PutMapping("/{courseId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateCourse(@PathVariable Long courseId, @RequestBody Course course, HttpServletRequest request) {
@@ -69,6 +93,12 @@ public class CourseRestController {
         }
     }
 
+    /**
+     * Elimina un curso por su identificador.
+     * @param courseId identificador del curso
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{courseId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteCourse(@PathVariable Long courseId, HttpServletRequest request) {

@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de historias educativas.
+ * Permite crear, consultar, actualizar y eliminar historias asociadas a cursos.
+ */
 @RestController
 @RequestMapping("/stories")
 public class StoryRestController {
@@ -31,6 +35,14 @@ public class StoryRestController {
     @Autowired
     private StoryAudioTrackService storyAudioTrackService;
 
+    /**
+     * Obtiene las historias asociadas a un curso.
+     * @param courseId identificador del curso
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de historias del curso
+     */
     @GetMapping("/course/{courseId}/stories")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> getStoriesByCourse(@PathVariable Long courseId,
@@ -56,6 +68,13 @@ public class StoryRestController {
         }
     }
 
+    /**
+     * Crea una nueva historia asociada a un curso.
+     * @param courseId identificador del curso
+     * @param story datos de la historia
+     * @param request petición HTTP
+     * @return historia creada
+     */
     @PostMapping("/course/{courseId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> addStory(@PathVariable Long courseId, @RequestBody Story story, HttpServletRequest request) {
@@ -79,6 +98,13 @@ public class StoryRestController {
         }
     }
 
+    /**
+     * Actualiza los datos de una historia existente.
+     * @param storyId identificador de la historia
+     * @param story datos actualizados
+     * @param request petición HTTP
+     * @return historia actualizada
+     */
     @PutMapping("/{storyId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> updateStory(@PathVariable Long storyId, @RequestBody Story story, HttpServletRequest request) {
@@ -105,6 +131,12 @@ public class StoryRestController {
         }
     }
 
+    /**
+     * Elimina una historia por su identificador.
+     * @param storyId identificador de la historia
+     * @param request petición HTTP
+     * @return resultado de la eliminación
+     */
     @DeleteMapping("/{storyId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'SUPER_ADMIN')")
     public ResponseEntity<?> deleteStory(@PathVariable Long storyId, HttpServletRequest request) {

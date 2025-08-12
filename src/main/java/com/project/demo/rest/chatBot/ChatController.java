@@ -10,6 +10,10 @@ import org.springframework.http.MediaType;
 
 import java.util.*;
 
+/**
+ * Controlador REST para el chatbot especializado en historia de Costa Rica.
+ * Envía mensajes al modelo LM Studio y retorna la respuesta.
+ */
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
@@ -19,6 +23,11 @@ public class ChatController {
     @Value("${lmstudio.api.url}")
     private String lmStudioApiUrl;
 
+    /**
+     * Envía un mensaje al chatbot y retorna la respuesta.
+     * @param request mapa con el mensaje del usuario
+     * @return respuesta del chatbot
+     */
     @PostMapping
     public ResponseEntity<Map<String, String>> sendMessage(@RequestBody Map<String, String> request) {
         String userMessage = request.get("message");

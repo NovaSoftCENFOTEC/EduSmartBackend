@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador REST para la gestión de profesores.
+ * Permite consultar y crear profesores asociados a escuelas.
+ */
 @RequestMapping("/teachers")
 @RestController
 public class TeacherRestController {
@@ -51,6 +55,14 @@ public class TeacherRestController {
     @Autowired
     private EmailManager emailManager;
 
+    /**
+     * Obtiene los profesores asociados a una escuela.
+     * @param schoolId identificador de la escuela
+     * @param page número de página
+     * @param size tamaño de página
+     * @param request petición HTTP
+     * @return lista de profesores de la escuela
+     */
     @GetMapping("/school/{schoolId}/teachers")
     @PreAuthorize("hasAnyRole('TEACHER','SUPER_ADMIN')")
     public ResponseEntity<?> getTeachersBySchoolId(@PathVariable Long schoolId,
@@ -83,6 +95,13 @@ public class TeacherRestController {
         }
     }
 
+    /**
+     * Crea un nuevo profesor asociado a una escuela.
+     * @param schoolId identificador de la escuela
+     * @param newTeacherUser datos del profesor
+     * @param request petición HTTP
+     * @return profesor creado
+     */
     @PostMapping("/school/{schoolId}")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     public ResponseEntity<?> createTeacher(@PathVariable Long schoolId, @RequestBody User newTeacherUser, HttpServletRequest request) {
